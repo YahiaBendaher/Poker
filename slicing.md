@@ -5,9 +5,9 @@
 | **Phase 1 : Logique de comparaison des valeurs numériques** | | | | | | | |
 | 1 | Prendre 2 valeurs et retourner la plus haute | Toute l'équipe | Entrée : 5, 8 -> Sortie : 8 | F | | | |
 | 2 | Gérer l'égalité entre 2 valeurs | Elyes | Entrée : 7, 7 -> Sortie : "Égalité" | F | | | |
-| 3 | Trouver la carte la plus haute dans une main de 2 cartes | Amacine | Créer une main avec [5, 9] -> Afficher : Main: [5, 9] | F | | | |
-| 4 | Comparer deux mains de 2 cartes sur leur meilleure carte | Rafia et Elyes | M1=[5,8], M2=[3,9] -> Sortie : "Main 2 gagne" | F | | | |
-| 5 | Départager deux mains de 2 cartes avec le "kicker" | Amacine | M1=[5,9], M2=[7,9] -> Sortie : "Main 2 gagne" | F | | | |
+| 3 | Trouver la carte la plus haute dans une main de 2 cartes | Yahia | Créer une main avec [5, 9] -> Afficher : Main: [5, 9] | F | | | |
+| 4 | Comparer deux mains de 2 cartes sur leur meilleure carte | Rafia et Amacine | M1=[5,8], M2=[3,9] -> Sortie : "Main 2 gagne" | F | | | |
+| 5 | Départager deux mains de 2 cartes avec le "kicker" | Elyes | M1=[5,9], M2=[7,9] -> Sortie : "Main 2 gagne" | F | | | |
 | 6 | Étendre la comparaison "carte haute" à 5 cartes | Toute l'équipe | M1=[2,5,8,10,14], M2=[3,6,7,11,13] -> "Main 1 gagne" | PF | | | |
 | **Phase 2 : Introduction progressive de la Paire** | | | | | | | |
 | 7 | Détecter une paire dans une main de 2 cartes | Yahia | Entrée : [7, 7] -> Sortie : "Paire de 7" | F | | | |
