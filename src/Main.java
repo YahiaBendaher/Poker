@@ -13,7 +13,7 @@ public class Main {
         } else if (valeur1 < valeur2) {
             System.out.println("La valeur la plus haute est : " + valeur2);
         } else {
-            System.out.println("Egalité");
+            System.out.println(" C'est une égalité");
         }
         scanner.close();
     }
