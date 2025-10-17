@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/dojo-poker-25-26-fise-25-26-poker-team-f-se.iml" filepath="$PROJECT_DIR$/dojo-poker-25-26-fise-25-26-poker-team-f-se.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/dojo-poker-25-26-fise-25-26-poker-team-f-se.iml" filepath="$PROJECT_DIR$/.idea/dojo-poker-25-26-fise-25-26-poker-team-f-se.iml" />
+>>>>>>> e22c33bc37e9fcc2624a2d5729a2bd32dcc86d16
     </modules>
   </component>
 </project>
