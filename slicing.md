@@ -5,17 +5,16 @@
 | **Phase 1 : Logique de comparaison des valeurs numériques** | | | | | | | |
 | 1 | Prendre 2 valeurs et retourner la plus haute | Toute l'équipe | Entrée : 5, 8 -> Sortie : 8 | F | | | |
 | 2 | Gérer l'égalité entre 2 valeurs | Elyes | Entrée : 7, 7 -> Sortie : "Égalité" | F | | | |
-| 3 | Trouver la carte la plus haute dans une main de 2 cartes | Yahia | Créer une main avec [5, 9] -> Afficher : Main: [5, 9] | F | | | |
-| 4 | Comparer deux mains de 2 cartes sur leur meilleure carte | Rafia et Amacine | M1=[5,8], M2=[3,9] -> Sortie : "Main 2 gagne" | F | | | |
-| 5 | Départager deux mains de 2 cartes avec le "kicker" | Elyes | M1=[5,9], M2=[7,9] -> Sortie : "Main 2 gagne" | F | | | |
-| 6 | Étendre la comparaison "carte haute" à 5 cartes | Toute l'équipe | M1=[2,5,8,10,14], M2=[3,6,7,11,13] -> "Main 1 gagne" | PF | | | |
+| 3 | Trouver la carte la plus haute dans une main de 2 cartes | Elyes | Créer une main avec [5, 9] -> Afficher : Main: [5, 9] | F | | | |
+| 4 | Comparer deux mains de 2 cartes sur leur meilleure carte | Amacine | M1=[5,8], M2=[3,9] -> Sortie : "Main 2 gagne" | F | | | |
+| 5 | Départager deux mains de 2 cartes avec le "kicker" | Yahia | M1=[5,9], M2=[7,9] -> Sortie : "Main 2 gagne" | F | | | |
+| 6 | Étendre la comparaison "carte haute" à 5 cartes | Rafia | M1=[2,5,8,10,14], M2=[3,6,7,11,13] -> "Main 1 gagne" | PF | | | |
 | **Phase 2 : Introduction progressive de la Paire** | | | | | | | |
 | 7 | Détecter une paire dans une main de 2 cartes | Yahia | Entrée : [7, 7] -> Sortie : "Paire de 7" | F | | | |
-| 8 | Détecter une paire dans une main de 3 cartes | Rafia | Entrée : [2, 7, 7] -> Sortie : "Paire de 7" | F | | | |
-| 9 | Détecter une paire dans une main de 5 cartes | Elyes | Entrée : [9, 4, 11, 4, 13] -> Sortie : "Paire de 4" | F | | | |
+| 9 | Détecter une paire dans une main de 5 cartes | Rafia | Entrée : [9, 4, 11, 4, 13] -> Sortie : "Paire de 4" | F | | | |
 | 10 | Une Paire bat une simple Carte Haute | Amacine | M1=[5,5,2,3,4], M2=[14,12,9,6,8] -> "Main 1 gagne" | F | | | |
-| 11 | Comparer deux Paires de valeurs différentes | Yahia et Elyes | M1=[8,8,2,3,5], M2=[6,6,12,9,4] -> "Main 1 gagne" | F | | | |
-| 12 | Comparer les kickers de deux Paires identiques | Rafia et Amacine | M1=[8,8,12,3,2], M2=[8,8,10,9,4] -> "Main 1 gagne" | PF | | | |
+| 11 | Comparer deux Paires de valeurs différentes | Rafia et Amacine| M1=[8,8,2,3,5], M2=[6,6,12,9,4] -> "Main 1 gagne" | F | | | |
+| 12 | Comparer les kickers de deux Paires identiques | Yahia et Elyes  | M1=[8,8,12,3,2], M2=[8,8,10,9,4] -> "Main 1 gagne" | PF | | | |
 | **Phase 3 : Introduction progressive des Deux Paires** | | | | | | | |
 | 13 | Détecter deux paires dans une main de 4 cartes | Yahia | Entrée : [5, 5, 8, 8] -> Sortie : "Deux Paires" | F | | | |
 | 14 | Détecter deux paires dans une main de 5 cartes | Rafia | Entrée : [5, 5, 8, 8, 2] -> Sortie : "Deux Paires" | F | | | |
@@ -33,22 +32,22 @@
 | 24 | Détecter si 5 valeurs sont consécutives (Suite) | Amacine | Entrée : [5, 6, 7, 8, 9] -> Sortie : "Suite" | PF | | | |
 | 25 | Une Suite bat un Brelan | Yahia et Rafia | M1=[5,6,7,8,9], M2=[14,14,14,2,3] -> "Main 1 gagne" | F | | | |
 | **Phase 6 : Intégration des cartes complètes et gestion des erreurs** | | | | | | | |
-| 26 | Représenter une carte (valeur et couleur) et l'afficher | Elyes | Créer carte valeur=A, couleur=Pi -> Afficher "APi" | F | | | |
-| 27 | Lire une main depuis une chaîne de caractères | Amacine | Entrée : "2Tr 6Ca 7Ca 8Tr APi" -> Crée une main de 5 cartes | PF | | | |
-| 28 | [Erreur] Gérer une chaîne avec un nombre incorrect de cartes | Yahia | Entrée : "5Pi 7Co 8Tr 2D" -> Sortie : "Erreur : Une main doit contenir 5 cartes." | F | | | |
-| 29 | [Erreur] Gérer une valeur de carte invalide | Rafia | Entrée : "1Pi 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Valeur '1' invalide." | F | | | |
-| 30 | [Erreur] Gérer une couleur de carte invalide | Elyes | Entrée : "5X 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Couleur 'X' invalide." | F | | | |
+| 26 | Représenter une carte (valeur et couleur) et l'afficher | Yahia | Créer carte valeur=A, couleur=Pi -> Afficher "APi" | F | | | |
+| 27 | Lire une main depuis une chaîne de caractères | Elyes | Entrée : "2Tr 6Ca 7Ca 8Tr APi" -> Crée une main de 5 cartes | PF | | | |
+| 28 | [Erreur] Gérer une chaîne avec un nombre incorrect de cartes | Rafia | Entrée : "5Pi 7Co 8Tr 2D" -> Sortie : "Erreur : Une main doit contenir 5 cartes." | F | | | |
+| 29 | [Erreur] Gérer une valeur de carte invalide | Elyes | Entrée : "1Pi 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Valeur '1' invalide." | F | | | |
+| 30 | [Erreur] Gérer une couleur de carte invalide | Yahia | Entrée : "5X 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Couleur 'X' invalide." | F | | | |
 | 31 | [Erreur] Gérer une main avec des cartes dupliquées | Amacine | Entrée : "5Pi 7Co 8Tr 5Pi 2D" -> Sortie : "Erreur : Carte '5Pi' en double." | PF | | | |
-| 32 | Adapter la détection de Paire avec les objets Carte | Yahia | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F | | | |
+| 32 | Adapter la détection de Paire avec les objets Carte | Elyes | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F | | | |
 | 33 | Adapter la détection de Deux Paires avec les objets Carte | Rafia | Entrée : "5Tr 5Co 8Pi 8Ca 2Tr" -> Sortie : "Deux Paires" | F | | | |
-| 34 | Adapter la détection de Brelan avec les objets Carte | Elyes | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F | | | |
+| 34 | Adapter la détection de Brelan avec les objets Carte | Yahia | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F | | | |
 | 35 | Adapter la détection de Suite avec les objets Carte | Amacine | Entrée : "5Tr 6Co 7Pi 8Ca 9Tr" -> Sortie : "Suite" | PF | | | |
 | **Phase 7 : Introduction progressive de la Couleur** | | | | | | | |
-| 36 | Détecter si 2 cartes ont la même couleur | Yahia | Entrée : ["2Pi", "5Pi"] -> Sortie : "Même couleur" | F | | | |
+| 36 | Détecter si 2 cartes ont la même couleur | Elyes | Entrée : ["2Pi", "5Pi"] -> Sortie : "Même couleur" | F | | | |
 | 37 | Détecter si 3 cartes ont la même couleur | Rafia | Entrée : ["2Pi", "5Pi", "8Pi"] -> Sortie : "Même couleur" | F | | | |
-| 38 | Détecter une Couleur (5 cartes de même couleur) | Elyes | Entrée : "2Pi 5Pi 8Pi JPi APi" -> Sortie : "Couleur" | F | | | |
+| 38 | Détecter une Couleur (5 cartes de même couleur) | Yahia | Entrée : "2Pi 5Pi 8Pi JPi APi" -> Sortie : "Couleur" | F | | | |
 | 39 | Une Couleur bat une Suite | Amacine | M1=["2Pi", ...] (Couleur), M2=["5Tr", ...] (Suite) -> "Main 1 gagne" | F | | | |
-| 40 | Comparer deux Couleurs avec la règle de la carte haute | Yahia | M1=["2Pi", ..., "APi"], M2=["3Co", ...,"RCo"] -> "Main 1 gagne" | F | | | |
+| 40 | Comparer deux Couleurs avec la règle de la carte haute | Elyes | M1=["2Pi", ..., "APi"], M2=["3Co", ...,"RCo"] -> "Main 1 gagne" | F | | | |
 | **Phase 8 : Introduction progressive du Full** | | | | | | | |
 | 41 | Vérifier si une main contient un Brelan | Rafia | (Réutiliser la logique de la slice 37) Entrée : ["5Pi", "5Co", "5Tr", "8Ca", "2Co"] -> Sortie : "Contient Brelan de 5" | F | | | |
 | 42 | Vérifier si les 2 cartes restantes forment une Paire | Elyes | Entrée : ["5Pi", "5Co", "5Tr", "8Ca", "8Co"] -> Isoler ["8Ca", "8Co"] -> Sortie : "Contient Paire de 8" | PF | | | |
