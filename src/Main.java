@@ -33,8 +33,10 @@ public class Main {
         System.out.println("Main2 : " + liste2);
 
         int max1 = Math.max(liste1.get(0).getValeur(), liste1.get(1).getValeur());
-        System.out.println(max1);
+        int min1 = Math.min(liste1.get(0).getValeur(), liste1.get(1).getValeur());
+
         int max2 = Math.max(liste2.get(0).getValeur(), liste2.get(1).getValeur());
+        int min2 = Math.min(liste2.get(0).getValeur(), liste2.get(1).getValeur());
 
 
         if (max1 > max2) {
@@ -44,7 +46,17 @@ public class Main {
             System.out.println("Main 2 gagne");
         }
         else {
-            System.out.println("Égalité");
+            // Les cartes hautes sont égales, on compare les kickers
+            if (min1 > min2) {
+                System.out.println("Main 1 gagne");
+            }
+            else if (min2 > min1) {
+                System.out.println("Main 2 gagne");
+            }
+            else {
+                System.out.println("Egalité");
+            }
+
         }
         sc.close();
     }
