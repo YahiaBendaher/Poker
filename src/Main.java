@@ -7,12 +7,12 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
+    /*
         System.out.println("=== Main 1 ===");
         Hand hand1 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
-            Carte c = new Carte(sc.nextInt());
+            Card c = new Card(sc.nextInt());
             hand1.ajouterCarte(c);
         }
 
@@ -20,7 +20,7 @@ public class Main {
         Hand hand2 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
-            Carte c = new Carte(sc.nextInt());
+            Card c = new Card(sc.nextInt());
             hand2.ajouterCarte(c);
         }
 
@@ -39,22 +39,34 @@ public class Main {
             int max2 = hand2.getMax();
 
             if (max1 > max2) {
-                System.out.println("Main 1 gagne (carte la plus haute : " + max1 + ")");
+                if(i==0) {
+                    System.out.println("Main 1 gagne (carte la plus haute : " + max1 + ")");
+                }else{
+                    System.out.println("Main 1 gagne (Kicker : " + max1 + ")");
+                }
                 resultat = 1;
                 break;
             } else if (max2 > max1) {
-                System.out.println("Main 2 gagne (carte la plus haute : " + max2 + ")");
+                if(i==0){
+                    System.out.println("Main 2 gagne (carte la plus haute : " + max2 + ")");
+                }else{
+                    System.out.println("Main 2 gagne (Kicker : " + max2 + ")");
+                }
                 resultat = 1;
                 break;
             } else {
+                // si max1 == max2 == 0 (deux mains sont vides), on ne peut pas déclarer de vainqueur
+                if(max1 == 0 &&  max2 == 0){
+                    break;
+                }
                 // égalité pour ce round, on retire une fois le max des cartes
-                for (Carte c : hand1.getCartes()) {
+                for (Card c : hand1.getCartes()) {
                     if (c.getValeur() == max1) {
                         c.setValeur(0);
                         break;
                     }
                 }
-                for (Carte c : hand2.getCartes()) {
+                for (Card c : hand2.getCartes()) {
                     if (c.getValeur() == max2) {
                         c.setValeur(0);
                         break;
@@ -66,6 +78,33 @@ public class Main {
         if (resultat == 0) {
             System.out.println("Égalité parfaite !");
         }
+
+     */
+        //   Détection de Paire de 2 cartes
+        List<Card> handPaire2Cartes = new ArrayList<>();
+
+        // On demande 2 cartes pour ce test
+        for (int i = 1; i <= 2; i++) {
+            System.out.print("Entrez la carte " + i + " : ");
+            Card c = new Card(sc.nextInt());
+            handPaire2Cartes.add(c);
+        }
+
+        System.out.print("\nMain : ");
+        for (Card c : handPaire2Cartes) {
+            System.out.print(c.getValeur() + " ");
+        }
+        System.out.println();
+
+        if (handPaire2Cartes.get(0).getValeur() == handPaire2Cartes.get(1).getValeur()) {
+            System.out.println("Résultat : Paire de " + handPaire2Cartes.get(0).getValeur());
+        } else {
+            System.out.println("Résultat : Pas de paire");
+        }
+
+
+
+
         sc.close();
     }
 }
