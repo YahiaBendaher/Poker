@@ -204,6 +204,52 @@ public class PokerRulesTest {
     }
 
 
+    @Test
+    @DisplayName("compareWith: Paire vs Carte Haute → Paire gagne")
+    void testCompareWith_PaireVsCarteHaute() {
+        Hand main1 = PokerRules.createHand(5, 5, 2, 3, 4);  // Paire de 5
+        Hand main2 = PokerRules.createHand(14, 12, 9, 6, 8); // Carte haute As
+
+        assertEquals("Main 1 gagne (Paire : 5)", PokerRules.compareWith(main1, main2));
+    }
+
+    @Test
+    @DisplayName("compareWith: Carte Haute vs Paire → Paire gagne")
+    void testCompareWith_CarteHauteVsPaire() {
+        Hand main1 = PokerRules.createHand(14, 12, 9, 6, 8); // Carte haute As
+        Hand main2 = PokerRules.createHand(10, 10, 2, 3, 4); // Paire de 10
+
+        assertEquals("Main 2 gagne (Paire : 10)", PokerRules.compareWith(main1, main2));
+    }
+
+    @Test
+    @DisplayName("compareWith: Deux paires, paire plus haute gagne")
+    void testCompareWith_DeuxPaires_PairePlusHauteGagne() {
+        Hand main1 = PokerRules.createHand(10, 10, 2, 3, 4); // Paire de 10
+        Hand main2 = PokerRules.createHand(8, 8, 12, 13, 14); // Paire de 8
+
+        assertEquals("Main 1 gagne (Paire plus haute : 10)", PokerRules.compareWith(main1, main2));
+    }
+
+    @Test
+    @DisplayName("compareWith: Même paire → Égalité")
+    void testCompareWith_MemePaire_Egalite() {
+        Hand main1 = PokerRules.createHand(7, 7, 2, 3, 4); // Paire de 7
+        Hand main2 = PokerRules.createHand(7, 7, 5, 6, 8); // Paire de 7
+
+        assertEquals("Égalité (Paires identiques)", PokerRules.compareWith(main1, main2));
+    }
+
+    @Test
+    @DisplayName("compareWith: Aucune paire → compare les cartes hautes")
+    void testCompareWith_AucunePaire_CarteHauteGagne() {
+        Hand main1 = PokerRules.createHand(14, 12, 9, 6, 8); // Carte haute As
+        Hand main2 = PokerRules.createHand(13, 12, 9, 6, 8); // Carte haute Roi
+
+        assertEquals("Main 1 gagne (carte la plus haute : 14)", PokerRules.compareWith(main1, main2));
+    }
+
+
 
 
 

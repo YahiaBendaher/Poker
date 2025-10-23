@@ -114,4 +114,43 @@ public class PokerRules {
         return 0;
     }
 
+    public static boolean hasPair(List<Card> cards) {
+        return getPair(cards) > 0;
+    }
+
+
+    public static Hand createHand(int... values ) {
+        Hand hand = new Hand();
+        for (int val : values) {
+            hand.addCard(new Card(val));
+        }
+        return hand;
+    }
+
+    public static String compareWith(Hand hand1, Hand hand2) {
+        boolean hasPair1 = hasPair(hand1.getCards());
+        boolean hasPair2 = hasPair(hand2.getCards());
+
+        if (hasPair1 && !hasPair2) {
+            int valPaire1 = getPair(hand1.getCards());
+            return "Main 1 gagne (Paire : " + valPaire1 + ")";
+        }
+        if (!hasPair1 && hasPair2) {
+            int valPaire2 = getPair(hand2.getCards());
+            return "Main 2 gagne (Paire : " + valPaire2 + ")";
+        }
+        if (hasPair1 && hasPair2) {
+            int valPaire1 = getPair(hand1.getCards());
+            int valPaire2 = getPair(hand2.getCards());
+
+            if (valPaire1 > valPaire2)
+                return "Main 1 gagne (Paire plus haute : " + valPaire1 + ")";
+            if (valPaire2 > valPaire1)
+                return "Main 2 gagne (Paire plus haute : " + valPaire2 + ")";
+            return "Égalité (Paires identiques)";
+        }
+        return compareHighestCards(hand1, hand2);
+    }
+
+
 }
