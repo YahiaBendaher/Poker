@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+import fr.pns.poker.Card;
+import fr.pns.poker.Hand;
+
 import java.util.Scanner;
 
 public class Main {
@@ -17,10 +18,10 @@ public class Main {
         }
 
         /*System.out.println("\n=== Main 2 ===");
-        Hand hand2 = new Hand();
+        fr.pns.poker.Hand hand2 = new fr.pns.poker.Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
-            Card c = new Card(sc.nextInt());
+            fr.pns.poker.Card c = new fr.pns.poker.Card(sc.nextInt());
             hand2.addCard(c);
         }*/
 
@@ -67,13 +68,13 @@ public class Main {
                     break;
                 }
                 // égalité pour ce round, on retire une fois le max des cartes
-                for (Card c : hand1.getCards()) {
+                for (fr.pns.poker.Card c : hand1.getCards()) {
                     if (c.getValue() == max1) {
                         c.setValue(0);
                         break;
                     }
                 }
-                for (Card c : hand2.getCards()) {
+                for (fr.pns.poker.Card c : hand2.getCards()) {
                     if (c.getValue() == max2) {
                         c.setValue(0);
                         break;
@@ -88,17 +89,17 @@ public class Main {
 
 
         //   Détection de Paire de 2 cartes
-     /*   List<Card> handPaire2Cartes = new ArrayList<>();
+     /*   List<fr.pns.poker.Card> handPaire2Cartes = new ArrayList<>();
 
         // On demande 2 cartes pour ce test
         for (int i = 1; i <= 2; i++) {
             System.out.print("Entrez la carte " + i + " : ");
-            Card c = new Card(sc.nextInt());
+            fr.pns.poker.Card c = new fr.pns.poker.Card(sc.nextInt());
             handPaire2Cartes.add(c);
         }
 
         System.out.print("\nMain : ");
-        for (Card c : handPaire2Cartes) {
+        for (fr.pns.poker.Card c : handPaire2Cartes) {
             System.out.print(c.getValeur() + " ");
         }
         System.out.println();

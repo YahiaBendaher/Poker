@@ -4,13 +4,13 @@ Projet réalisé dans le cadre du **cours PS5 – Projet de développement (Seme
 
 ## Objectif du projet
 
-Développer un programme en **Java** capable de **comparer deux mains de poker** et de déterminer laquelle est la plus forte selon les règles classiques du poker.
+Développer un programme en **Java** capable de **comparer deux mains de fr.pns.poker** et de déterminer laquelle est la plus forte selon les règles classiques du fr.pns.poker.
 
 ---
 
 ## Description du problème
 
-Le programme lit deux mains de poker depuis l’entrée standard et affiche le résultat :
+Le programme lit deux mains de fr.pns.poker depuis l’entrée standard et affiche le résultat :
 - **Main gagnante** (Main 1 ou Main 2) ;
 - ou **égalité**, si les mains sont identiques en force.
 
@@ -50,8 +50,8 @@ Résultat: Main 1 gagne avec carte la plus élevée (As)
 
 ### 1️⃣ Cloner le projet
 ```bash
-git clone https://github.com/pns-si3-projects/dojo-poker-25-26-fise-25-26-poker-team-f-se.git
-cd dojo-poker-25-26-fise-25-26-poker-team-f-se
+git clone https://github.com/pns-si3-projects/dojo-fr.pns.poker-25-26-fise-25-26-fr.pns.poker-team-f-se.git
+cd dojo-fr.pns.poker-25-26-fise-25-26-fr.pns.poker-team-f-se
 ```
 
 ### 2️⃣ Compiler le code

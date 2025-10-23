@@ -1,3 +1,5 @@
+package fr.pns.poker;
+
 public class Card {
     private int value;
 

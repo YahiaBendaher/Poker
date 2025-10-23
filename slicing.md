@@ -11,7 +11,7 @@
 | **Phase 2 : Introduction progressive de la Paire** | | | | |            |          |       |
 | 6 | Détecter une paire dans une main de 2 cartes | Yahia | Entrée : [7, 7] -> Sortie : "Paire de 7" | F | 23/10      | 23/10    | OK    |
 | 7 | Détecter une paire dans une main de 5 cartes | Rafia | Entrée : [9, 4, 11, 4, 13] -> Sortie : "Paire de 4" | F | 23/10      | 23/10    | OK    |
-| 8 | Une Paire bat une simple Card Haute | Amacine | M1=[5,5,2,3,4], M2=[14,12,9,6,8] -> "Main 1 gagne" | F |            |          |       |
+| 8 | Une Paire bat une simple fr.pns.poker.Card Haute | Amacine | M1=[5,5,2,3,4], M2=[14,12,9,6,8] -> "Main 1 gagne" | F |            |          |       |
 | 9 | Comparer deux Paires de valeurs différentes | Rafia et Amacine| M1=[8,8,2,3,5], M2=[6,6,12,9,4] -> "Main 1 gagne" | F |            |          |       |
 | 10 | Comparer les kickers de deux Paires identiques | Yahia et Elyes  | M1=[8,8,12,3,2], M2=[8,8,10,9,4] -> "Main 1 gagne" | PF |            |          |       |
 | **Phase 3 : Introduction progressive des Deux Paires** | | | | |            |          |       |
@@ -36,11 +36,11 @@
 | 26 | [Erreur] Gérer une chaîne avec un nombre incorrect de cartes | Rafia | Entrée : "5Pi 7Co 8Tr 2D" -> Sortie : "Erreur : Une main doit contenir 5 cartes." | F |            |          |       |
 | 27 | [Erreur] Gérer une valeur de carte invalide | Elyes | Entrée : "1Pi 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Valeur '1' invalide." | F |            |          |       |
 | 28 | [Erreur] Gérer une couleur de carte invalide | Yahia | Entrée : "5X 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Couleur 'X' invalide." | F |            |          |       |
-| 29 | [Erreur] Gérer une main avec des cartes dupliquées | Amacine | Entrée : "5Pi 7Co 8Tr 5Pi 2D" -> Sortie : "Erreur : Card '5Pi' en double." | PF |            |          |       |
-| 30 | Adapter la détection de Paire avec les objets Card | Elyes | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F |            |          |       |
-| 31 | Adapter la détection de Deux Paires avec les objets Card | Rafia | Entrée : "5Tr 5Co 8Pi 8Ca 2Tr" -> Sortie : "Deux Paires" | F |            |          |       |
-| 32 | Adapter la détection de Brelan avec les objets Card | Yahia | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F |            |          |       |
-| 33 | Adapter la détection de Suite avec les objets Card | Amacine | Entrée : "5Tr 6Co 7Pi 8Ca 9Tr" -> Sortie : "Suite" | PF |            |          |       |
+| 29 | [Erreur] Gérer une main avec des cartes dupliquées | Amacine | Entrée : "5Pi 7Co 8Tr 5Pi 2D" -> Sortie : "Erreur : fr.pns.poker.Card '5Pi' en double." | PF |            |          |       |
+| 30 | Adapter la détection de Paire avec les objets fr.pns.poker.Card | Elyes | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F |            |          |       |
+| 31 | Adapter la détection de Deux Paires avec les objets fr.pns.poker.Card | Rafia | Entrée : "5Tr 5Co 8Pi 8Ca 2Tr" -> Sortie : "Deux Paires" | F |            |          |       |
+| 32 | Adapter la détection de Brelan avec les objets fr.pns.poker.Card | Yahia | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F |            |          |       |
+| 33 | Adapter la détection de Suite avec les objets fr.pns.poker.Card | Amacine | Entrée : "5Tr 6Co 7Pi 8Ca 9Tr" -> Sortie : "Suite" | PF |            |          |       |
 | **Phase 7 : Introduction progressive de la Couleur** | | | | |            |          |       |
 | 34 | Détecter si 2 cartes ont la même couleur | Elyes | Entrée : ["2Pi", "5Pi"] -> Sortie : "Même couleur" | F |            |          |       |
 | 35 | Détecter si 3 cartes ont la même couleur | Rafia | Entrée : ["2Pi", "5Pi", "8Pi"] -> Sortie : "Même couleur" | F |            |          |       |
