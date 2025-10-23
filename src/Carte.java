@@ -10,4 +10,8 @@ public class Carte {
         return valeur;
     }
 
+    public void setValeur(int v) {
+        this.valeur = v;
+    }
+
 }
