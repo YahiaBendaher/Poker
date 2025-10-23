@@ -6,6 +6,7 @@ import fr.pns.poker.Hand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.assertEquals;
 
 
 import java.util.ArrayList;
@@ -199,14 +200,28 @@ public class PokerRulesTest {
         String result3 = PokerRules.compareWith(h_pair_ace, h_pair_king);
         assertEquals("Main 1 gagne (Paire plus haute : 14)", result3, "Paire de 14 > Paire de 13");
     }
-
     @Test
-    @DisplayName("Test compareWith (Slice 9): Paires identiques (Égalité)")
-    void testPair_IdenticalPairsShouldTie() {
-        // Test pour la Slice 9 : deux paires identiques SANS kicker doivent être égales
+    @DisplayName("Comparer les kickers de deux Paires identiques (Slice 10)")
+    void testPair_IdenticalPairsShouldSeeHigherCards() {
         Hand h1 = PokerRules.createHand(8, 8, 12, 3, 2);
         Hand h2 = PokerRules.createHand(8, 8, 10, 9, 4);
         String result = PokerRules.compareWith(h1, h2);
-        assertEquals("Égalité (Paires identiques)", result, "Slice 9: Doit retourner Égalité (kicker non implémenté)");
+        assertEquals("Main 1 gagne",result);
+        h1 = PokerRules.createHand(8, 8, 2, 3, 2);
+        h2 = PokerRules.createHand(8, 8, 1, 9, 4);
+        result = PokerRules.compareWith(h1, h2);
+        assertEquals("Main 2 gagne",result);
+        h1 = PokerRules.createHand(8, 8, 12, 3, 2);
+        h2 = PokerRules.createHand(8, 8, 12, 3, 2);
+        result = PokerRules.compareWith(h1, h2);
+        assertEquals("Égalité",result);
     }
+
+
+
+
+
+
+
+
 }

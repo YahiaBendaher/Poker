@@ -3,6 +3,8 @@ package fr.pns.rules;
 import fr.pns.poker.Card;
 import fr.pns.poker.Hand;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -143,11 +145,40 @@ public class PokerRules {
             int valPaire1 = getPair(hand1.getCards());
             int valPaire2 = getPair(hand2.getCards());
 
-            if (valPaire1 > valPaire2)
+            if (valPaire1 > valPaire2) {
                 return "Main 1 gagne (Paire plus haute : " + valPaire1 + ")";
-            if (valPaire2 > valPaire1)
+            }
+            else if (valPaire1 < valPaire2) {
                 return "Main 2 gagne (Paire plus haute : " + valPaire2 + ")";
-            return "Égalité (Paires identiques)";
+            }
+            else{
+                List<Integer> t1 = new ArrayList<>();
+                List<Integer> t2 = new ArrayList<>();
+                List<Card> cards1 = hand1.getCards();
+                List<Card> cards2 = hand2.getCards();
+                for (Card c : cards1) {
+                    t1.add(c.getValue());
+                }
+                for (Card c : cards2) {
+                    t2.add(c.getValue());
+                }
+                while (!t1.isEmpty() && !t2.isEmpty()) {
+                    int max1 = Collections.max(t1);
+                    int max2 = Collections.max(t2);
+                    if (max1 > max2) {
+                        return "Main 1 gagne";
+                    }
+                    else if (max1 < max2) {
+                        return "Main 2 gagne";
+                    }
+                    else {
+                        t1.remove(Integer.valueOf(max1));
+                        t2.remove(Integer.valueOf(max2));
+                    }
+                }
+                return "Égalité";
+            }
+
         }
         return compareHighestCards(hand1, hand2);
     }
