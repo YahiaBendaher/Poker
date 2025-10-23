@@ -1,17 +1,17 @@
-public class Carte {
-    private int valeur;
+public class Card {
+    private int value;
 
 
-    public Carte(int valeur) {
-        this.valeur = valeur;
+    public Card(int value) {
+        this.value = value;
     }
 
-    public int getValeur() {
-        return valeur;
+    public int getValue() {
+        return value;
     }
 
-    public void setValeur(int v) {
-        this.valeur = v;
+    public void setValue(int v) {
+        this.value = v;
     }
 
 }

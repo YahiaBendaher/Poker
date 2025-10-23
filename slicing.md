@@ -10,7 +10,7 @@
 | 5 | Étendre la comparaison "carte haute" à 5 cartes | Rafia | M1=[2,5,8,10,14], M2=[3,6,7,11,13] -> "Main 1 gagne" | PF | 23/10      | 23/10    | OK    |
 | **Phase 2 : Introduction progressive de la Paire** | | | | |            |          |       |
 | 6 | Détecter une paire dans une main de 2 cartes | Yahia | Entrée : [7, 7] -> Sortie : "Paire de 7" | F | 23/10      | 23/10    | OK    |
-| 7 | Détecter une paire dans une main de 5 cartes | Rafia | Entrée : [9, 4, 11, 4, 13] -> Sortie : "Paire de 4" | F |            |          |       |
+| 7 | Détecter une paire dans une main de 5 cartes | Rafia | Entrée : [9, 4, 11, 4, 13] -> Sortie : "Paire de 4" | F | 23/10      | 23/10    | OK    |
 | 8 | Une Paire bat une simple Card Haute | Amacine | M1=[5,5,2,3,4], M2=[14,12,9,6,8] -> "Main 1 gagne" | F |            |          |       |
 | 9 | Comparer deux Paires de valeurs différentes | Rafia et Amacine| M1=[8,8,2,3,5], M2=[6,6,12,9,4] -> "Main 1 gagne" | F |            |          |       |
 | 10 | Comparer les kickers de deux Paires identiques | Yahia et Elyes  | M1=[8,8,12,3,2], M2=[8,8,10,9,4] -> "Main 1 gagne" | PF |            |          |       |

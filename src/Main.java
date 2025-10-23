@@ -7,28 +7,35 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-    /*
+
         System.out.println("=== Main 1 ===");
         Hand hand1 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
             Card c = new Card(sc.nextInt());
-            hand1.ajouterCarte(c);
+            hand1.addCard(c);
         }
 
-        System.out.println("\n=== Main 2 ===");
+        /*System.out.println("\n=== Main 2 ===");
         Hand hand2 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
             Card c = new Card(sc.nextInt());
-            hand2.ajouterCarte(c);
-        }
+            hand2.addCard(c);
+        }*/
 
         System.out.print("\nMain 1 : ");
-        hand1.afficher();
+        hand1.printHand();
 
-        System.out.print("Main 2 : ");
-        hand2.afficher();
+        if(hand1.hasPair()){
+            System.out.println("Il y a une paire dans la main.");
+        }else{
+            System.out.println("Il n'y a pas de paire dans la main.");
+        }
+
+        /*System.out.print("Main 2 : ");
+        hand2.printHand();
+
 
         int resultat = 0;
 
@@ -60,15 +67,15 @@ public class Main {
                     break;
                 }
                 // égalité pour ce round, on retire une fois le max des cartes
-                for (Card c : hand1.getCartes()) {
-                    if (c.getValeur() == max1) {
-                        c.setValeur(0);
+                for (Card c : hand1.getCards()) {
+                    if (c.getValue() == max1) {
+                        c.setValue(0);
                         break;
                     }
                 }
-                for (Card c : hand2.getCartes()) {
-                    if (c.getValeur() == max2) {
-                        c.setValeur(0);
+                for (Card c : hand2.getCards()) {
+                    if (c.getValue() == max2) {
+                        c.setValue(0);
                         break;
                     }
                 }
@@ -79,9 +86,9 @@ public class Main {
             System.out.println("Égalité parfaite !");
         }
 
-     */
+
         //   Détection de Paire de 2 cartes
-        List<Card> handPaire2Cartes = new ArrayList<>();
+     /*   List<Card> handPaire2Cartes = new ArrayList<>();
 
         // On demande 2 cartes pour ce test
         for (int i = 1; i <= 2; i++) {
@@ -103,7 +110,7 @@ public class Main {
         }
 
 
-
+*/
 
         sc.close();
     }
