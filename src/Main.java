@@ -8,47 +8,30 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        List<Carte> liste1 = new ArrayList<>();
         System.out.println("=== Main 1 ===");
+        Hand hand1 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
             Carte c = new Carte(sc.nextInt());
-            liste1.add(c);
+            hand1.ajouterCarte(c);
         }
 
-        List<Carte> liste2 = new ArrayList<>();
-        System.out.println("=== Main 2 ===");
+        System.out.println("\n=== Main 2 ===");
+        Hand hand2 = new Hand();
         for (int i = 1; i <= 5; i++) {
             System.out.print("Entrez la carte " + i + " : ");
             Carte c = new Carte(sc.nextInt());
-            liste2.add(c);
+            hand2.ajouterCarte(c);
         }
 
-        System.out.println("\nMain1 : ");
-        for (Carte c : liste1) {
-            System.out.print(c.getValeur() + " ");
-        }
-        System.out.println("\n");
-        System.out.println("Main2 : ");
-        for (Carte c : liste2) {
-            System.out.print(c.getValeur() + " ");
-        }
-        System.out.println("\n");
+        System.out.print("\nMain 1 : ");
+        hand1.afficher();
 
-        int max1 = 0;
-        int max2 = 0;
+        System.out.print("Main 2 : ");
+        hand2.afficher();
 
-        for (Carte c : liste1) {
-            if (c.getValeur() > max1) {
-                max1 = c.getValeur();
-            }
-        }
-
-        for (Carte c : liste2) {
-            if (c.getValeur() > max2) {
-                max2 = c.getValeur();
-            }
-        }
+        int max1 = hand1.getMax();
+        int max2 = hand2.getMax();
 
         if (max1 > max2) {
             System.out.println("Main 1 gagne (Carte la plus haute : " + max1 + ")");
