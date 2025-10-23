@@ -17,6 +17,7 @@ public class PokerRulesTest {
 
 
 
+
     @Test
     @DisplayName("Test: Doit retourner la valeur la plus haute (8)")
     void testGetHighestValue() {
@@ -139,7 +140,7 @@ public class PokerRulesTest {
         Hand main = new Hand();
         main.addCard(new Card(7));
         main.addCard(new Card(7));
-        assertTrue(main.hasPair(), "Echec: Devrait trouver une Paire de 7");
+        assertEquals(7,PokerRules.getPair(main.getCards()));
     }
 
     @Test
@@ -149,7 +150,7 @@ public class PokerRulesTest {
         Hand main = new Hand();
         main.addCard(new Card(5));
         main.addCard(new Card(8));
-        assertFalse(main.hasPair(), "Echec: Ne devrait pas trouver de paire");
+        assertEquals(0,PokerRules.getPair(main.getCards()));
     }
 
     @Test
@@ -162,7 +163,7 @@ public class PokerRulesTest {
         main.addCard(new Card(11));
         main.addCard(new Card(4));
         main.addCard(new Card(13));
-        assertTrue(main.hasPair(), "Echec: Devrait trouver une Paire de 4 dans [9, 4, 11, 4, 13]");
+        assertEquals(4,PokerRules.getPair(main.getCards()));
     }
 
     @Test
@@ -175,7 +176,7 @@ public class PokerRulesTest {
         main.addCard(new Card(8));
         main.addCard(new Card(10));
         main.addCard(new Card(14));
-        assertFalse(main.hasPair(), "Echec: Ne devrait pas trouver de paire dans [2, 5, 8, 10, 14]");
+        assertEquals(0,PokerRules.getPair(main.getCards()));
     }
 
     // --- Tests pour PokerRules.detectPairInTwoCards (Ancienne logique Slice 6) ---
@@ -201,4 +202,9 @@ public class PokerRulesTest {
         int resultat = PokerRules.detectPairInTwoCards(main);
         assertEquals(0, resultat, "Echec: Ne devrait pas trouver de paire");
     }
+
+
+
+
+
 }

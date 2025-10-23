@@ -100,4 +100,18 @@ public class PokerRules {
             return 0;
         }
     }
+
+
+    public static  int getPair(List<Card> cards) {
+        boolean[] alreadySeen = new boolean[15]; // 0-14
+        for (Card c : cards) {
+            int val = c.getValue();
+            if (alreadySeen[val]) {
+                return val;
+            }
+            alreadySeen[val] = true;
+        }
+        return 0;
+    }
+
 }

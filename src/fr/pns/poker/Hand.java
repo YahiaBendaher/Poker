@@ -38,14 +38,4 @@ public class Hand {
         return max;
     }
 
-    public boolean hasPair() {
-        for (int i = 0; i < cards.size(); i++) {
-            for (int j = i + 1; j < cards.size(); j++) {
-                if (cards.get(i).getValue() == cards.get(j).getValue()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }

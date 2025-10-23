@@ -1,5 +1,6 @@
 import fr.pns.poker.Card;
 import fr.pns.poker.Hand;
+import fr.pns.rules.PokerRules;
 
 import java.util.Scanner;
 
@@ -27,8 +28,8 @@ public class Main {
 
         System.out.print("\nMain 1 : ");
         hand1.printHand();
-
-        if(hand1.hasPair()){
+        int res = PokerRules.getPair(hand1.getCards());
+        if(res > 0){
             System.out.println("Il y a une paire dans la main.");
         }else{
             System.out.println("Il n'y a pas de paire dans la main.");

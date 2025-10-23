@@ -16,4 +16,8 @@ public class Card {
         this.value = v;
     }
 
+    public String toString() {
+        return String.valueOf(value);
+    }
+
 }
