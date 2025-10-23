@@ -183,5 +183,30 @@ public class PokerRules {
         return compareHighestCards(hand1, hand2);
     }
 
+    public static boolean hasTwoPairs4Cards(List<Card> cards) {
+
+        if (cards.size() != 4) {
+            return false;
+        }
+
+
+        int[] counts = new int[15];
+
+
+        for (Card c : cards) {
+            counts[c.getValue()]++;
+        }
+
+
+        int pairCount = 0;
+        for (int count : counts) {
+            if (count == 2) {
+                pairCount++;
+            }
+        }
+
+
+        return pairCount == 2;
+    }
 
 }
