@@ -169,31 +169,6 @@ public class PokerRules {
 
 
 
-    /**
-     * Retourne les valeurs des deux paires présentes dans une main,
-     * triées par ordre décroissant (ex: [10,10,8,8,4] → {10,8})
-     */
-    public static int[] getDoublePairValues(List<Card> cards) {
-        int[] counts = new int[15];
-        for (Card c : cards) {
-            counts[c.getValue()]++;
-        }
-
-        List<Integer> pairs = new ArrayList<>();
-        for (int val = 14; val >= 2; val--) {
-            if (counts[val] >= 2) {
-                pairs.add(val);
-            }
-        }
-
-        if (pairs.size() >= 2) {
-            return new int[]{pairs.get(0), pairs.get(1)};
-        }
-        return null;
-    }
-
-
-
     public static String compareDoublePairs(Hand hand1, Hand hand2) {
 
         boolean twoPairs1 = hasTwoPairs(hand1.getCards());
@@ -216,7 +191,7 @@ public class PokerRules {
 
             // Compare la deuxième paire
             if (pairs1[1] > pairs2[1]) return "Main 1 gagne";
-            if (pairs2[1] > pairs1[1]) return "Maix²n 2 gagne";
+            if (pairs2[1] > pairs1[1]) return "Main 2 gagne";
 
             // Si encore égalité → égalité totale
             return "Égalité";
@@ -224,6 +199,30 @@ public class PokerRules {
 
         // aucune double paire détectée
         return "Aucune double paire détectée";
+    }
+
+
+    /**
+     * Retourne les valeurs des deux paires présentes dans une main,
+     * triées par ordre décroissant (ex: [10,10,8,8,4] → {10,8})
+     */
+    public static int[] getDoublePairValues(List<Card> cards) {
+        int[] counts = new int[15];
+        for (Card c : cards) {
+            counts[c.getValue()]++;
+        }
+
+        List<Integer> pairs = new ArrayList<>();
+        for (int val = 14; val >= 2; val--) {
+            if (counts[val] >= 2) {
+                pairs.add(val);
+            }
+        }
+
+        if (pairs.size() >= 2) {
+            return new int[]{pairs.get(0), pairs.get(1)};
+        }
+        return null;
     }
 
 
