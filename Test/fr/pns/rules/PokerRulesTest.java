@@ -134,7 +134,46 @@ public class PokerRulesTest {
         Hand h5 = Hand.createHand(5, 5, 5, 5,5);
         assertFalse(PokerRules.hasTwoPairs(h5.getCards()));
         Hand h6 = Hand.createHand(5, 5, 8, 8, 2);
-        assertFalse(PokerRules.hasTwoPairs(h6.getCards()));
+        assertTrue(PokerRules.hasTwoPairs(h6.getCards()));
     }
 
+<<<<<<< HEAD
+
+
+        @Test
+        @DisplayName("deuxBatOne : Double paire bat une simple paire (Main 1 gagne)")
+        void testDeuxBatOne_DoublePaireVsPaire() {
+            Hand main1 = Hand.createHand(10, 10, 8, 8, 3); // double paire (10 et 8)
+            Hand main2 = Hand.createHand(9, 9, 5, 6, 7);   // simple paire (9)
+
+            assertEquals(
+                    "Main 1 gagne (Double paire bat une simple paire)",
+                    PokerRules.deuxBatOne(main1, main2)
+            );
+        }
+
+        @Test
+        @DisplayName("deuxBatOne : Simple paire perd contre une double paire (Main 2 gagne)")
+        void testDeuxBatOne_PaireVsDoublePaire() {
+            Hand main1 = Hand.createHand(6, 6, 2, 3, 4);   // simple paire
+            Hand main2 = Hand.createHand(11, 11, 7, 7, 9); // double paire
+
+            assertEquals(
+                    "Main 2 gagne (Double paire bat une simple paire)",
+                    PokerRules.deuxBatOne(main1, main2)
+            );
+        }
+
+        @Test
+        @DisplayName("deuxBatOne : Aucune double paire détectée")
+        void testDeuxBatOne_AucuneDoublePaire() {
+            Hand main1 = Hand.createHand(5, 6, 7, 8, 9); // aucune paire
+            Hand main2 = Hand.createHand(2, 3, 4, 5, 6); // aucune paire
+
+            assertEquals("Aucune double paire détectée", PokerRules.deuxBatOne(main1, main2));
+        }
+    }
+
+=======
 }
+>>>>>>> b18e7ffa74ccec06ba084699b6b2aeeccac3d4ed
