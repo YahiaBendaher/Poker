@@ -141,6 +141,17 @@ public class PokerRules {
         return compareHighestCards(hand1, hand2);
     }
 
+    public static String brelanIn3Cards(Hand hand){
+        List<Card> cards = hand.getCards();
+        int valeur = cards.get(0).getValue();
+        for (Card c : cards) {
+            if (c.getValue() != valeur) {
+                return "cette main ne contient pas de brelan" ;
+            }
+        }
+        return "Brelan de " +  valeur;
+    }
+
 
     public static String deuxBatOne(Hand hand1, Hand hand2) {
 

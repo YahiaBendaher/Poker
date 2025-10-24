@@ -137,6 +137,7 @@ public class PokerRulesTest {
         assertTrue(PokerRules.hasTwoPairs(h6.getCards()));
     }
 
+<<<<<<< HEAD
 
 
         @Test
@@ -173,3 +174,6 @@ public class PokerRulesTest {
         }
     }
 
+=======
+}
+>>>>>>> b18e7ffa74ccec06ba084699b6b2aeeccac3d4ed
