@@ -160,8 +160,8 @@ public class PokerRules {
             tracker.set(index,tracker.get(index) + 1);
         }
         for (Integer i : tracker) {
-            if (i == 3) {
-                return "Brelan de " + tracker.indexOf(i) + 2;
+            if (i >= 3) {
+                return "Brelan de " + (tracker.indexOf(i) + 2);
             }
         }
         return "cette main ne contient pas de brelan" ;
