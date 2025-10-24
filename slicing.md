@@ -15,8 +15,8 @@
 | 9 | Comparer deux Paires de valeurs différentes | Rafia et Amacine| M1=[8,8,2,3,5], M2=[6,6,12,9,4] -> "Main 1 gagne" | F | 23/10      | 23/10    | OK    |
 | 10 | Comparer les kickers de deux Paires identiques | Yahia et Elyes  | M1=[8,8,12,3,2], M2=[8,8,10,9,4] -> "Main 1 gagne" | PF | 23/10      | 23/10    | OK    |
 | **Phase 3 : Introduction progressive des Deux Paires** | | | | |            |          |       |
-| 11 | Détecter deux paires dans une main de 4 cartes | Yahia | Entrée : [5, 5, 8, 8] -> Sortie : "Deux Paires" | F | 23/10      | 23/10    | OK     |
-| 12 | Détecter deux paires dans une main de 5 cartes | Rafia | Entrée : [5, 5, 8, 8, 2] -> Sortie : "Deux Paires" | F |            |          |       |
+| 11 | Détecter deux paires dans une main de 4 cartes | Yahia | Entrée : [5, 5, 8, 8] -> Sortie : "Deux Paires" | F | 23/10      | 23/10    | OK    |
+| 12 | Détecter deux paires dans une main de 5 cartes | Rafia | Entrée : [5, 5, 8, 8, 2] -> Sortie : "Deux Paires" | F | 24/10      | 24/10    | OK    |
 | 13 | Deux Paires battent une Paire | Elyes | M1=[5,5,8,8,2], M2=[14,14,10,9,4] -> "Main 1 gagne" | F |            |          |       |
 | 14 | Comparer deux "Deux Paires" sur la paire la plus élevée | Amacine | M1=[10,10,8,8,4], M2=[9,9,7,7,13] -> "Main 1 gagne" | F |            |          |       |
 | 15 | Comparer deux "Deux Paires" sur la deuxième paire | Yahia | M1=[10,10,8,8,4], M2=[10,10,7,7,13] -> "Main 1 gagne" | F |            |          |       |
