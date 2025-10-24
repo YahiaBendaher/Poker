@@ -19,8 +19,8 @@
 | 12 | Détecter deux paires dans une main de 5 cartes | Rafia            | Entrée : [5, 5, 8, 8, 2] -> Sortie : "Deux Paires" | F | 24/10      | 24/10    | OK    |
 | 13 | Deux Paires battent une Paire | Amacine          | M1=[5,5,8,8,2], M2=[14,14,10,9,4] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
 | 14 | Comparer deux "Deux Paires" sur la paire la plus élevée | Amacine          | M1=[10,10,8,8,4], M2=[9,9,7,7,13] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
-| 15 | Comparer deux "Deux Paires" sur la deuxième paire | Yahia            | M1=[10,10,8,8,4], M2=[10,10,7,7,13] -> "Main 1 gagne" | F |            |          |       |
-| 16 | Comparer deux "Deux Paires" sur le kicker | Rafia            | M1=[10,10,8,8,13], M2=[10,10,8,8,4] -> "Main 1 gagne" | F |            |          |       |
+| 15 | Comparer deux "Deux Paires" sur la deuxième paire | Rafia            | M1=[10,10,8,8,4], M2=[10,10,7,7,13] -> "Main 1 gagne" | F | 24/10      |   24/10        | OK    |
+| 16 | Comparer deux "Deux Paires" sur le kicker | Rafia            | M1=[10,10,8,8,13], M2=[10,10,8,8,4] -> "Main 1 gagne" | F |    24/10         |     24/10      | OK    |
 | **Phase 4 : Introduction progressive du Brelan** | |                  | | |            |          |       |
 | 17 | Détecter un brelan dans une main de 3 cartes | Elyes            | Entrée : [7, 7, 7] -> Sortie : "Brelan de 7" | F |            |          |       |
 | 18 | Détecter un brelan dans une main de 5 cartes | Amacine          | Entrée : [7, 7, 7, 2, 9] -> Sortie : "Brelan de 7" | F |            |          |       |

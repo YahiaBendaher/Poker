@@ -221,13 +221,23 @@
             Hand main2 = Hand.createHand(9, 9, 7, 7, 13);  // Double paire : 9 et 7
             assertEquals("Main 1 gagne", PokerRules.compareDoublePairs(main1, main2));
         }
+
         @Test
-        @DisplayName("compareDoublePairs : Mêmes doubles paires -> égalité")
-        void testCompareDoublePairs_Egalite() {
+        @DisplayName("compareDoublePairs : même double paire mais kicker différent")
+        void testCompareDoublePairs_Kicker() {
             Hand main1 = Hand.createHand(10, 10, 8, 8, 4);
             Hand main2 = Hand.createHand(10, 10, 8, 8, 2);
-            assertEquals("Égalité", PokerRules.compareDoublePairs(main1, main2));
+            assertEquals("Main 1 gagne (Kicker)", PokerRules.compareDoublePairs(main1, main2));
         }
+
+        @Test
+        @DisplayName("compareDoublePairs : parfaite égalité")
+        void testCompareDoublePairs_TrueEquality() {
+            Hand main1 = Hand.createHand(10, 10, 8, 8, 4);
+            Hand main2 = Hand.createHand(10, 10, 8, 8, 4);
+            assertEquals("Égalité parfaite (Double Paire)", PokerRules.compareDoublePairs(main1, main2));
+        }
+
 
 
 
