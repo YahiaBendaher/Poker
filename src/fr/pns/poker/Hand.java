@@ -38,6 +38,15 @@ public class Hand {
         return max;
     }
 
-
+    /**
+     * Utilitaire de test pour créer une main rapidement.
+     */
+    public static Hand createHand(int... values ) {
+        Hand hand = new Hand();
+        for (int val : values) {
+            hand.addCard(new Card(val));
+        }
+        return hand;
+    }
 
 }

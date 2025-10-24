@@ -125,19 +125,6 @@ public class PokerRules {
         return pairCount == 2;
     }
 
-    /**
-     * Utilitaire de test pour créer une main rapidement.
-     */
-    public static Hand createHand(int... values ) {
-        Hand hand = new Hand();
-        for (int val : values) {
-            hand.addCard(new Card(val));
-        }
-        return hand;
-    }
-
-
-
     public static String compareHands(Hand hand1, Hand hand2) {
         boolean hasPair1 = hasPair(hand1.getCards());
         boolean hasPair2 = hasPair(hand2.getCards());

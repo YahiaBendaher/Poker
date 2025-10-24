@@ -38,7 +38,7 @@ public class Main {
         System.out.println("Paire Main 2 : " + (paire2 > 0 ? "Oui (" + paire2 + ")" : "Non"));
 
         // Comparaison
-        String resultat = PokerRules.compareWith(main1, main2) ;
+        String resultat = PokerRules.compareHands(main1, main2) ;
         System.out.println("\n " + resultat);
         sc.close();
     }
