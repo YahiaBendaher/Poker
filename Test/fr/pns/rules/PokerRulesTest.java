@@ -1,49 +1,49 @@
-package fr.pns.rules;
+    package fr.pns.rules;
 
-import fr.pns.poker.Card;
-import fr.pns.poker.Hand;
+    import fr.pns.poker.Card;
+    import fr.pns.poker.Hand;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+    import org.junit.jupiter.api.Test;
+    import org.junit.jupiter.api.DisplayName;
+    import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
+    import java.util.ArrayList;
+    import java.util.List;
 
-public class PokerRulesTest {
+    public class PokerRulesTest {
 
 
 
     @Test
     @DisplayName("Test 5 Cartes (Main): Gagne à la carte haute (14 > 13)")
     void testHighCard_Hand1Wins() {
-        Hand h1 = Hand.createHand(2, 5, 8, 10, 14);
-        Hand h2 = Hand.createHand(3, 6, 7, 11, 13);
-        String result = PokerRules.compareHighestCards(h1, h2);
-        assertEquals("Main 1 gagne (carte la plus haute : 14)", result);
+    Hand h1 = Hand.createHand(2, 5, 8, 10, 14);
+    Hand h2 = Hand.createHand(3, 6, 7, 11, 13);
+    String result = PokerRules.compareHighestCards(h1, h2);
+    assertEquals("Main 1 gagne (carte la plus haute : 14)", result);
     }
 
     @Test
     @DisplayName("Test 5 Cartes (Main): Gagne au 3ème kicker (9 > 8)")
     void testHighCard_WinsOnThirdKicker() {
-        Hand h1 = Hand.createHand(14, 12, 10, 8, 2);
-        Hand h2 = Hand.createHand(14, 12, 10, 9, 3);
-        String result = PokerRules.compareHighestCards(h1, h2);
-        assertEquals("Main 2 gagne (Kicker : 9)", result);
+    Hand h1 = Hand.createHand(14, 12, 10, 8, 2);
+    Hand h2 = Hand.createHand(14, 12, 10, 9, 3);
+    String result = PokerRules.compareHighestCards(h1, h2);
+    assertEquals("Main 2 gagne (Kicker : 9)", result);
 
-        Hand h3 = Hand.createHand(14, 12, 10, 8, 7);
-        Hand h4 = Hand.createHand(14, 12, 10, 8, 5);
-        String result2 = PokerRules.compareHighestCards(h3, h4);
-        assertEquals("Main 1 gagne (Kicker : 7)", result2);
+    Hand h3 = Hand.createHand(14, 12, 10, 8, 7);
+    Hand h4 = Hand.createHand(14, 12, 10, 8, 5);
+    String result2 = PokerRules.compareHighestCards(h3, h4);
+    assertEquals("Main 1 gagne (Kicker : 7)", result2);
     }
 
     @Test
     @DisplayName("Test 5 Cartes (Main): Égalité parfaite (via compareHighestCards)")
     void testHighCard_PerfectTie() {
-        Hand h1 = Hand.createHand(14, 10, 8, 5, 2);
-        Hand h2 = Hand.createHand(2, 5, 8, 10, 14);
-        String result = PokerRules.compareHighestCards(h1, h2);
-        assertEquals("Égalité parfaite !", result);
+    Hand h1 = Hand.createHand(14, 10, 8, 5, 2);
+    Hand h2 = Hand.createHand(2, 5, 8, 10, 14);
+    String result = PokerRules.compareHighestCards(h1, h2);
+    assertEquals("Égalité parfaite !", result);
     }
 
 
@@ -52,69 +52,69 @@ public class PokerRulesTest {
     @DisplayName("Test getHighestPairValue: Détecter la paire la plus haute")
     void testPair_DetectHighestPairIn5Cards() {
 
-        Hand h_pair4 = Hand.createHand(9, 4, 11, 4, 13);
-        assertEquals(4, PokerRules.getPair(h_pair4.getCards()));
+    Hand h_pair4 = Hand.createHand(9, 4, 11, 4, 13);
+    assertEquals(4, PokerRules.getPair(h_pair4.getCards()));
 
-        Hand h_no_pair = Hand.createHand(2, 3, 5, 8, 14);
-        assertEquals(0, PokerRules.getPair(h_no_pair.getCards()));
+    Hand h_no_pair = Hand.createHand(2, 3, 5, 8, 14);
+    assertEquals(0, PokerRules.getPair(h_no_pair.getCards()));
 
-        Hand h_pair_ace = Hand.createHand(14, 14, 5, 8, 2);
-        assertEquals(14, PokerRules.getPair(h_pair_ace.getCards()));
+    Hand h_pair_ace = Hand.createHand(14, 14, 5, 8, 2);
+    assertEquals(14, PokerRules.getPair(h_pair_ace.getCards()));
     }
 
     @Test
     @DisplayName("Test compareHands (Slice 8): Une Paire bat une Carte Haute")
     void testCompareHands_PairBeatsHighCard() {
-        Hand h_pair = Hand.createHand(5, 5, 2, 3, 4);
-        Hand h_high = Hand.createHand(14, 12, 9, 6, 8);
-        String result1 = PokerRules.compareHands(h_pair, h_high);
+    Hand h_pair = Hand.createHand(5, 5, 2, 3, 4);
+    Hand h_high = Hand.createHand(14, 12, 9, 6, 8);
+    String result1 = PokerRules.compareHands(h_pair, h_high);
 
-        assertEquals("Main 1 gagne (Paire : 5)", result1);
+    assertEquals("Main 1 gagne (Paire : 5)", result1);
 
-        String result2 = PokerRules.compareHands(h_high, h_pair);
+    String result2 = PokerRules.compareHands(h_high, h_pair);
 
-        assertEquals("Main 2 gagne (Paire : 5)", result2);
+    assertEquals("Main 2 gagne (Paire : 5)", result2);
     }
 
     @Test
     @DisplayName("Test compareHands (Slice 9): Comparer deux Paires différentes")
     void testCompareHands_CompareDifferentPairs() {
-        Hand h_pair8 = Hand.createHand(8, 8, 2, 3, 5);
-        Hand h_pair6 = Hand.createHand(6, 6, 12, 9, 4);
-        String result1 = PokerRules.compareHands(h_pair8, h_pair6);
-        assertEquals("Main 1 gagne (Paire plus haute : 8)", result1);
+    Hand h_pair8 = Hand.createHand(8, 8, 2, 3, 5);
+    Hand h_pair6 = Hand.createHand(6, 6, 12, 9, 4);
+    String result1 = PokerRules.compareHands(h_pair8, h_pair6);
+    assertEquals("Main 1 gagne (Paire plus haute : 8)", result1);
 
-        String result2 = PokerRules.compareHands(h_pair6, h_pair8);
-        assertEquals("Main 2 gagne (Paire plus haute : 8)", result2);
+    String result2 = PokerRules.compareHands(h_pair6, h_pair8);
+    assertEquals("Main 2 gagne (Paire plus haute : 8)", result2);
     }
 
     @Test
     @DisplayName("Test compareHands (Slice 10): Comparer les kickers de deux Paires identiques")
     void testCompareHands_IdenticalPairs_Kickers() {
-        Hand h1 = Hand.createHand(8, 8, 12, 3, 2);
-        Hand h2 = Hand.createHand(8, 8, 10, 9, 4);
+    Hand h1 = Hand.createHand(8, 8, 12, 3, 2);
+    Hand h2 = Hand.createHand(8, 8, 10, 9, 4);
 
-        String result = PokerRules.compareHands(h1, h2);
+    String result = PokerRules.compareHands(h1, h2);
 
-        assertEquals("Main 1 gagne (carte la plus haute : 12)", result);
+    assertEquals("Main 1 gagne (carte la plus haute : 12)", result);
 
-        h1 = Hand.createHand(5, 5, 9, 8, 2);
-        h2 = Hand.createHand(5, 5, 9, 7, 3);
+    h1 = Hand.createHand(5, 5, 9, 8, 2);
+    h2 = Hand.createHand(5, 5, 9, 7, 3);
 
-        result = PokerRules.compareHands(h1, h2);
-        assertEquals("Main 1 gagne (Kicker : 8)", result);
+    result = PokerRules.compareHands(h1, h2);
+    assertEquals("Main 1 gagne (Kicker : 8)", result);
 
-        h1 = Hand.createHand(10, 10, 14, 9, 5);
-        h2 = Hand.createHand(10, 10, 14, 9, 3);
+    h1 = Hand.createHand(10, 10, 14, 9, 5);
+    h2 = Hand.createHand(10, 10, 14, 9, 3);
 
-        result = PokerRules.compareHands(h1, h2);
-        assertEquals("Main 1 gagne (Kicker : 5)", result);
+    result = PokerRules.compareHands(h1, h2);
+    assertEquals("Main 1 gagne (Kicker : 5)", result);
 
-        h1 = Hand.createHand(8, 8, 12, 3, 2);
-        h2 = Hand.createHand(8, 8, 12, 3, 2);
+    h1 = Hand.createHand(8, 8, 12, 3, 2);
+    h2 = Hand.createHand(8, 8, 12, 3, 2);
 
-        result = PokerRules.compareHands(h1, h2);
-        assertEquals("Égalité parfaite !", result);
+    result = PokerRules.compareHands(h1, h2);
+    assertEquals("Égalité parfaite !", result);
     }
 
 
@@ -122,58 +122,53 @@ public class PokerRulesTest {
     @Test
     @DisplayName("Test (Slice 11): Détecter deux paires dans 4 cartes")
     void testTwoPairs_DetectTwoPairsIn4Cards() {
-        Hand h1 = Hand.createHand(5, 5, 8, 8);
-        assertTrue(PokerRules.hasTwoPairs(h1.getCards()));
+    Hand h1 = Hand.createHand(5, 5, 8, 8);
+    assertTrue(PokerRules.hasTwoPairs(h1.getCards()));
 
-        Hand h2 = Hand.createHand(5, 5, 7, 8,9);
-        assertFalse(PokerRules.hasTwoPairs(h2.getCards()));
-        Hand h3 = Hand.createHand(5, 6, 7, 8,9);
-        assertFalse(PokerRules.hasTwoPairs(h3.getCards()));
-        Hand h4 = Hand.createHand(5, 5, 5, 8,9);
-        assertFalse(PokerRules.hasTwoPairs(h4.getCards()));
-        Hand h5 = Hand.createHand(5, 5, 5, 5,5);
-        assertFalse(PokerRules.hasTwoPairs(h5.getCards()));
-        Hand h6 = Hand.createHand(5, 5, 8, 8, 2);
-        assertTrue(PokerRules.hasTwoPairs(h6.getCards()));
+    Hand h2 = Hand.createHand(5, 5, 7, 8,9);
+    assertFalse(PokerRules.hasTwoPairs(h2.getCards()));
+    Hand h3 = Hand.createHand(5, 6, 7, 8,9);
+    assertFalse(PokerRules.hasTwoPairs(h3.getCards()));
+    Hand h4 = Hand.createHand(5, 5, 5, 8,9);
+    assertFalse(PokerRules.hasTwoPairs(h4.getCards()));
+    Hand h5 = Hand.createHand(5, 5, 5, 5,5);
+    assertFalse(PokerRules.hasTwoPairs(h5.getCards()));
+    Hand h6 = Hand.createHand(5, 5, 8, 8, 2);
+    assertTrue(PokerRules.hasTwoPairs(h6.getCards()));
     }
 
-<<<<<<< HEAD
+    @Test
+    @DisplayName("deuxBatOne : Double paire bat une simple paire (Main 1 gagne)")
+    void testDeuxBatOne_DoublePaireVsPaire() {
+        Hand main1 = Hand.createHand(10, 10, 8, 8, 3); // double paire (10 et 8)
+        Hand main2 = Hand.createHand(9, 9, 5, 6, 7);   // simple paire (9)
 
-
-        @Test
-        @DisplayName("deuxBatOne : Double paire bat une simple paire (Main 1 gagne)")
-        void testDeuxBatOne_DoublePaireVsPaire() {
-            Hand main1 = Hand.createHand(10, 10, 8, 8, 3); // double paire (10 et 8)
-            Hand main2 = Hand.createHand(9, 9, 5, 6, 7);   // simple paire (9)
-
-            assertEquals(
-                    "Main 1 gagne (Double paire bat une simple paire)",
-                    PokerRules.deuxBatOne(main1, main2)
-            );
-        }
-
-        @Test
-        @DisplayName("deuxBatOne : Simple paire perd contre une double paire (Main 2 gagne)")
-        void testDeuxBatOne_PaireVsDoublePaire() {
-            Hand main1 = Hand.createHand(6, 6, 2, 3, 4);   // simple paire
-            Hand main2 = Hand.createHand(11, 11, 7, 7, 9); // double paire
-
-            assertEquals(
-                    "Main 2 gagne (Double paire bat une simple paire)",
-                    PokerRules.deuxBatOne(main1, main2)
-            );
-        }
-
-        @Test
-        @DisplayName("deuxBatOne : Aucune double paire détectée")
-        void testDeuxBatOne_AucuneDoublePaire() {
-            Hand main1 = Hand.createHand(5, 6, 7, 8, 9); // aucune paire
-            Hand main2 = Hand.createHand(2, 3, 4, 5, 6); // aucune paire
-
-            assertEquals("Aucune double paire détectée", PokerRules.deuxBatOne(main1, main2));
-        }
+        assertEquals(
+                "Main 1 gagne (Double paire bat une simple paire)",
+                PokerRules.deuxBatOne(main1, main2)
+        );
     }
 
-=======
-}
->>>>>>> b18e7ffa74ccec06ba084699b6b2aeeccac3d4ed
+    @Test
+    @DisplayName("deuxBatOne : Simple paire perd contre une double paire (Main 2 gagne)")
+    void testDeuxBatOne_PaireVsDoublePaire() {
+        Hand main1 = Hand.createHand(6, 6, 2, 3, 4);   // simple paire
+        Hand main2 = Hand.createHand(11, 11, 7, 7, 9); // double paire
+
+        assertEquals(
+                "Main 2 gagne (Double paire bat une simple paire)",
+                PokerRules.deuxBatOne(main1, main2)
+        );
+    }
+
+    @Test
+    @DisplayName("deuxBatOne : Aucune double paire détectée")
+    void testDeuxBatOne_AucuneDoublePaire() {
+        Hand main1 = Hand.createHand(5, 6, 7, 8, 9); // aucune paire
+        Hand main2 = Hand.createHand(2, 3, 4, 5, 6); // aucune paire
+
+        assertEquals("Aucune double paire détectée", PokerRules.deuxBatOne(main1, main2));
+    }
+    }
+
+
