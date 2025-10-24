@@ -23,20 +23,10 @@ public class PokerRules {
             hand1Copy.addCard(new Card(c.getValue()));
         }
 
-        while (hand1Copy.getCards().size() < 5) {
-            hand1Copy.addCard(new Card(0));
-        }
-
         Hand hand2Copy = new Hand();
         for (Card c : hand2.getCards()) {
             hand2Copy.addCard(new Card(c.getValue()));
         }
-
-        while (hand2Copy.getCards().size() < 5) {
-            hand2Copy.addCard(new Card(0));
-        }
-
-
 
         for (int i = 0; i < 5; i++) {
             int max1 = hand1Copy.getMax();
