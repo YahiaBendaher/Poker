@@ -167,16 +167,78 @@ public class PokerRules {
         return "cette main ne contient pas de brelan" ;
     }
 
-
-    public static String deuxBatOne(Hand hand1, Hand hand2) {
-
-        if (hasTwoPairs(hand1.getCards()) && hasPair(hand2.getCards())) {
-            return "Main 1 gagne (Double paire bat une simple paire)";
+    public static int getDoublePairKicker(List<Card> cards, int[] pairValues) {
+        for (Card c : cards) {
+            if (c.getValue() != pairValues[0] && c.getValue() != pairValues[1]) {
+                return c.getValue();
+            }
         }
-        else if (hasPair(hand1.getCards()) && hasTwoPairs(hand2.getCards())) {
-            return "Main 2 gagne (Double paire bat une simple paire)";
+        return 0;
+    }
+
+
+    public static String compareDoublePairs(Hand hand1, Hand hand2) {
+
+        boolean twoPairs1 = hasTwoPairs(hand1.getCards());
+        boolean twoPairs2 = hasTwoPairs(hand2.getCards());
+        boolean pair1 = hasPair(hand1.getCards());
+        boolean pair2 = hasPair(hand2.getCards());
+
+        // une main a une double paire, l’autre une simple paire
+        if (twoPairs1 && pair2 && !twoPairs2) return "Main 1 gagne (Double Paire)";
+        if (twoPairs2 && pair1 && !twoPairs1) return "Main 2 gagne (Double Paire)";
+
+        // les deux mains ont des doubles paires → comparaison
+        if (twoPairs1 && twoPairs2) {
+
+            int[] pairs1 = getDoublePairValues(hand1.getCards());
+            int[] pairs2 = getDoublePairValues(hand2.getCards());
+
+            // Compare la paire la plus haute
+            if (pairs1[0] > pairs2[0]) return "Main 1 gagne (Meilleure double paire)";
+            if (pairs2[0] > pairs1[0]) return "Main 2 gagne (Meilleure double paire)";
+
+            // Compare la deuxième paire
+            if (pairs1[1] > pairs2[1]) return "Main 1 gagne (Deuxième paire plus haute)";
+            if (pairs2[1] > pairs1[1]) return "Main 2 gagne (Deuxième paire plus haute)";
+
+            // Compare le kicker
+            int kicker1 = getDoublePairKicker(hand1.getCards(), pairs1);
+            int kicker2 = getDoublePairKicker(hand2.getCards(), pairs2);
+
+            if (kicker1 > kicker2) return "Main 1 gagne (Kicker)";
+            if (kicker2 > kicker1) return "Main 2 gagne (Kicker)";
+
+            return "Égalité parfaite (Double Paire)";
         }
+
+        // aucune double paire détectée
         return "Aucune double paire détectée";
+    }
+
+
+
+    /**
+     * Retourne les valeurs des deux paires présentes dans une main,
+     * triées par ordre décroissant (ex: [10,10,8,8,4] → {10,8})
+     */
+    public static int[] getDoublePairValues(List<Card> cards) {
+        int[] counts = new int[15];
+        for (Card c : cards) {
+            counts[c.getValue()]++;
+        }
+
+        List<Integer> pairs = new ArrayList<>();
+        for (int val = 14; val >= 2; val--) {
+            if (counts[val] >= 2) {
+                pairs.add(val);
+            }
+        }
+
+        if (pairs.size() >= 2) {
+            return new int[]{pairs.get(0), pairs.get(1)};
+        }
+        return null;
     }
 
 
