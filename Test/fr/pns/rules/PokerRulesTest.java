@@ -6,7 +6,7 @@ import fr.pns.poker.Hand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testng.Assert.assertEquals;
+/*import static org.testng.Assert.assertEquals;*/
 
 
 import java.util.ArrayList;
@@ -206,15 +206,15 @@ public class PokerRulesTest {
         Hand h1 = PokerRules.createHand(8, 8, 12, 3, 2);
         Hand h2 = PokerRules.createHand(8, 8, 10, 9, 4);
         String result = PokerRules.compareWith(h1, h2);
-        assertEquals("Main 1 gagne",result);
+        assertEquals("Main 1 gagne (carte la plus haute : 12)",result);
         h1 = PokerRules.createHand(8, 8, 2, 3, 2);
         h2 = PokerRules.createHand(8, 8, 1, 9, 4);
         result = PokerRules.compareWith(h1, h2);
-        assertEquals("Main 2 gagne",result);
+        assertEquals("Main 2 gagne (carte la plus haute : 9)",result);
         h1 = PokerRules.createHand(8, 8, 12, 3, 2);
         h2 = PokerRules.createHand(8, 8, 12, 3, 2);
         result = PokerRules.compareWith(h1, h2);
-        assertEquals("Égalité",result);
+        assertEquals("Égalité parfaite !",result);
     }
 
 
