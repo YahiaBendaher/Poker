@@ -142,5 +142,20 @@ public class PokerRules {
     }
 
 
+    public static String deuxBatOne(Hand hand1, Hand hand2) {
+
+        if (hasTwoPairs(hand1.getCards()) && hasPair(hand2.getCards())) {
+            return "Main 1 gagne (Double paire bat une simple paire)";
+        }
+        else if (hasPair(hand1.getCards()) && hasTwoPairs(hand2.getCards())) {
+            return "Main 2 gagne (Double paire bat une simple paire)";
+        }
+        return "Aucune double paire détectée";
+    }
+
+
+
+
+
 
 }
