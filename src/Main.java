@@ -2,27 +2,57 @@ import fr.pns.poker.Card;
 import fr.pns.poker.Hand;
 import fr.pns.rules.PokerRules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static boolean verif(int valeur){
+        if (valeur < 2 || valeur > 14) {
+            return false;
+        }
+        return true;
+    }
 
+    public static Hand lireMain(Scanner sc , int indiceOfMain){
+        boolean ok = false ;
+        Hand main = new Hand();
+        while (!ok) {
+            System.out.println("=== Main "+indiceOfMain+" ===");
+            main =  new Hand();
+            try {
+                String line = sc.nextLine().trim();
+
+                if (line.isEmpty()){
+                    throw new Exception("Vous devez entrer 5 cartes !");
+                }
+                List<String> myList = new ArrayList<>(Arrays.asList(line.split("\\s+")));
+                if (myList.size() != 5){
+                    throw new Exception("Vous devez entrer 5 cartes !");
+                }
+                for (String s : myList){
+                    int valeur = Integer.parseInt(s);
+                    if (!verif(valeur)){
+                        throw new Exception("Les valeurs doivent être comprises entre 2 et 14 !");
+                    }
+                    main.addCard(new Card(valeur));
+                }
+
+                ok = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return main;
+    }
+
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("=== Main 1 ===");
-        Hand main1 = new Hand();
-        for (int i = 0; i < 5; i++) {
-            int valeur = sc.nextInt();
-            main1.addCard(new Card(valeur));
-        }
-
-        System.out.println("\n=== Main 2 ===");
-        Hand main2 = new Hand();
-        for (int i = 0; i < 5; i++) {
-            int valeur = sc.nextInt();
-            main2.addCard(new Card(valeur));
-        }
+        Hand main1 = lireMain(sc , 1);
+        Hand main2 = lireMain(sc , 2);
 
         System.out.println("\n=== RÉSULTAT ===");
         System.out.print("Main 1 : ");
@@ -41,5 +71,6 @@ public class Main {
         String resultat = PokerRules.compareHands(main1, main2) ;
         System.out.println("\n " + resultat);
         sc.close();
+
     }
 }

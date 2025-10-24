@@ -14,8 +14,6 @@ public class Hand {
     public void addCard(Card c) {
         if (cards.size() < 5) {
             cards.add(c);
-        } else {
-            System.out.println("Une main ne peut pas avoir plus de 5 cartes !");
         }
     }
 
