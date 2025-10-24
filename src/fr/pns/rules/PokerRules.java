@@ -92,9 +92,8 @@ public class PokerRules {
      * Détecte une paire dans une liste de 2 cartes.
      * @return La valeur de la paire si trouvée, sinon 0.
      */
-    public static int detectPairInTwoCards(List<Card> cartes) {
+    public static int getPairInTwoCards(List<Card> cartes) {
         if (cartes.size() != 2) return 0;
-        // Utilise getValue() pour correspondre à tes changements
         if (cartes.get(0).getValue() == cartes.get(1).getValue()) {
             return cartes.get(0).getValue();
         } else {
@@ -119,7 +118,6 @@ public class PokerRules {
         return getPair(cards) > 0;
     }
 
-
     public static Hand createHand(int... values ) {
         Hand hand = new Hand();
         for (int val : values) {
@@ -127,6 +125,7 @@ public class PokerRules {
         }
         return hand;
     }
+
 
     public static String compareWith(Hand hand1, Hand hand2) {
         boolean hasPair1 = hasPair(hand1.getCards());
@@ -158,5 +157,23 @@ public class PokerRules {
         return compareHighestCards(hand1, hand2);
     }
 
+    public static boolean hasTwoPairs4Cards(List<Card> cards) {
+
+        if (cards.size() != 4) {
+            return false;
+        }
+        int[] counts = new int[15];
+        for (Card c : cards) {
+            counts[c.getValue()]++;
+        }
+        int pairCount = 0;
+        for (int count : counts) {
+            if (count == 2) {
+                pairCount++;
+            }
+        }
+
+        return pairCount == 2;
+    }
 
 }
