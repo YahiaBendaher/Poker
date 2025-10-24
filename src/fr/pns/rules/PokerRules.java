@@ -168,14 +168,61 @@ public class PokerRules {
     }
 
 
-    public static String deuxBatOne(Hand hand1, Hand hand2) {
 
-        if (hasTwoPairs(hand1.getCards()) && hasPair(hand2.getCards())) {
-            return "Main 1 gagne (Double paire bat une simple paire)";
+    /**
+     * Retourne les valeurs des deux paires présentes dans une main,
+     * triées par ordre décroissant (ex: [10,10,8,8,4] → {10,8})
+     */
+    public static int[] getDoublePairValues(List<Card> cards) {
+        int[] counts = new int[15];
+        for (Card c : cards) {
+            counts[c.getValue()]++;
         }
-        else if (hasPair(hand1.getCards()) && hasTwoPairs(hand2.getCards())) {
-            return "Main 2 gagne (Double paire bat une simple paire)";
+
+        List<Integer> pairs = new ArrayList<>();
+        for (int val = 14; val >= 2; val--) {
+            if (counts[val] >= 2) {
+                pairs.add(val);
+            }
         }
+
+        if (pairs.size() >= 2) {
+            return new int[]{pairs.get(0), pairs.get(1)};
+        }
+        return null;
+    }
+
+
+
+    public static String compareDoublePairs(Hand hand1, Hand hand2) {
+
+        boolean twoPairs1 = hasTwoPairs(hand1.getCards());
+        boolean twoPairs2 = hasTwoPairs(hand2.getCards());
+        boolean pair1 = hasPair(hand1.getCards());
+        boolean pair2 = hasPair(hand2.getCards());
+
+        // une main a une double paire, l’autre une simple paire
+        if (twoPairs1 && pair2 && !twoPairs2) return "Main 1 gagne";
+        if (twoPairs2 && pair1 && !twoPairs1) return "Main 2 gagne";
+
+        // les deux mains ont des doubles paires → comparaison
+        if (twoPairs1 && twoPairs2) {
+            int[] pairs1 = getDoublePairValues(hand1.getCards());
+            int[] pairs2 = getDoublePairValues(hand2.getCards());
+
+            // Compare la paire la plus haute
+            if (pairs1[0] > pairs2[0]) return "Main 1 gagne";
+            if (pairs2[0] > pairs1[0]) return "Main 2 gagne";
+
+            // Compare la deuxième paire
+            if (pairs1[1] > pairs2[1]) return "Main 1 gagne";
+            if (pairs2[1] > pairs1[1]) return "Maix²n 2 gagne";
+
+            // Si encore égalité → égalité totale
+            return "Égalité";
+        }
+
+        // aucune double paire détectée
         return "Aucune double paire détectée";
     }
 
