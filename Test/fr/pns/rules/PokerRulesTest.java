@@ -123,18 +123,18 @@ public class PokerRulesTest {
     @DisplayName("Test (Slice 11): Détecter deux paires dans 4 cartes")
     void testTwoPairs_DetectTwoPairsIn4Cards() {
         Hand h1 = Hand.createHand(5, 5, 8, 8);
-        assertTrue(PokerRules.hasTwoPairs4Cards(h1.getCards()));
+        assertTrue(PokerRules.hasTwoPairs(h1.getCards()));
 
-        Hand h2 = Hand.createHand(5, 5, 7, 8);
-        assertFalse(PokerRules.hasTwoPairs4Cards(h2.getCards()));
-        Hand h3 = Hand.createHand(5, 6, 7, 8);
-        assertFalse(PokerRules.hasTwoPairs4Cards(h3.getCards()));
-        Hand h4 = Hand.createHand(5, 5, 5, 8);
-        assertFalse(PokerRules.hasTwoPairs4Cards(h4.getCards()));
-        Hand h5 = Hand.createHand(5, 5, 5, 5);
-        assertFalse(PokerRules.hasTwoPairs4Cards(h5.getCards()));
+        Hand h2 = Hand.createHand(5, 5, 7, 8,9);
+        assertFalse(PokerRules.hasTwoPairs(h2.getCards()));
+        Hand h3 = Hand.createHand(5, 6, 7, 8,9);
+        assertFalse(PokerRules.hasTwoPairs(h3.getCards()));
+        Hand h4 = Hand.createHand(5, 5, 5, 8,9);
+        assertFalse(PokerRules.hasTwoPairs(h4.getCards()));
+        Hand h5 = Hand.createHand(5, 5, 5, 5,5);
+        assertFalse(PokerRules.hasTwoPairs(h5.getCards()));
         Hand h6 = Hand.createHand(5, 5, 8, 8, 2);
-        assertFalse(PokerRules.hasTwoPairs4Cards(h6.getCards()));
+        assertFalse(PokerRules.hasTwoPairs(h6.getCards()));
     }
 
 }
