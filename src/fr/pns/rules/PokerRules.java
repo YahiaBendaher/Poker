@@ -152,6 +152,21 @@ public class PokerRules {
         return "Brelan de " +  valeur;
     }
 
+    public static String brelan (Hand hand){
+        List<Card> cards = hand.getCards();
+        List<Integer> tracker = new ArrayList<>(Collections.nCopies(13, 0)); // pour créer une ArrayList avec que des 0
+        for (Card c : cards) {
+            int index = c.getValue() - 2 ;
+            tracker.set(index,tracker.get(index) + 1);
+        }
+        for (Integer i : tracker) {
+            if (i == 3) {
+                return "Brelan de " + tracker.indexOf(i) + 2;
+            }
+        }
+        return "cette main ne contient pas de brelan" ;
+    }
+
 
 
 }
