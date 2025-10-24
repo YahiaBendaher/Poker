@@ -135,12 +135,12 @@ public class PokerRulesTest {
         List<Card> pair = new ArrayList<>();
         pair.add(new Card(7));
         pair.add(new Card(7));
-        assertEquals(7, PokerRules.detectPairInTwoCards(pair));
+        assertEquals(7, PokerRules.getPairInTwoCards(pair));
 
         List<Card> noPair = new ArrayList<>();
         noPair.add(new Card(5));
         noPair.add(new Card(8));
-        assertEquals(0, PokerRules.detectPairInTwoCards(noPair));
+        assertEquals(0, PokerRules.getPairInTwoCards(noPair));
     }
 
     @Test
