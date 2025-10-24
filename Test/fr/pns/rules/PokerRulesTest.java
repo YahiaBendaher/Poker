@@ -136,4 +136,5 @@ public class PokerRulesTest {
         Hand h6 = Hand.createHand(5, 5, 8, 8, 2);
         assertFalse(PokerRules.hasTwoPairs4Cards(h6.getCards()));
     }
+
 }
