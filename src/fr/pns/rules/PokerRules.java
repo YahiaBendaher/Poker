@@ -4,66 +4,27 @@ import fr.pns.poker.Card;
 import fr.pns.poker.Hand;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
 
 public class PokerRules {
 
-    /**
-     * Prend 2 valeurs et retourne la plus haute.
-     */
-    public static int getHighestValue(int val1, int val2) {
-        return Math.max(val1, val2);
-    }
-
-    /**
-     * Compare 2 valeurs et retourne la plus haute, ou "Égalité".
-     */
-    public static String compareTwoValues(int val1, int val2) {
-        if (val1 > val2) return String.valueOf(val1);
-        else if (val2 > val1) return String.valueOf(val2);
-        else return "Égalité";
-    }
-
-    /**
-     * Compare deux mains de 2 cartes (en List) sur leur MEILLEURE carte (sans kicker).
-     */
-    public static String compareTwoCardHands(List<Card> hand1, List<Card> hand2) {
-        int max1 = Math.max(hand1.get(0).getValue(), hand1.get(1).getValue());
-        int max2 = Math.max(hand2.get(0).getValue(), hand2.get(1).getValue());
-        if (max1 > max2) return "Main 1 gagne";
-        else if (max2 > max1) return "Main 2 gagne";
-        else return "Égalité";
-    }
-
-    /**
-     * Départage deux mains de 2 cartes (en List) avec le "kicker".
-     */
-    public static String compareTwoCardHandsWithKicker(List<Card> hand1, List<Card> hand2) {
-        int max1 = Math.max(hand1.get(0).getValue(), hand1.get(1).getValue());
-        int min1 = Math.min(hand1.get(0).getValue(), hand1.get(1).getValue());
-        int max2 = Math.max(hand2.get(0).getValue(), hand2.get(1).getValue());
-        int min2 = Math.min(hand2.get(0).getValue(), hand2.get(1).getValue());
-
-        if (max1 > max2) return "Main 1 gagne";
-        else if (max2 > max1) return "Main 2 gagne";
-        else {
-            if (min1 > min2) return "Main 1 gagne";
-            else if (min2 > min1) return "Main 2 gagne";
-            else return "Égalité";
-        }
-    }
 
 
     /**
-     * Compare deux mains de 5 cartes (objets Hand) sur la base de la carte la plus haute,
-     * puis des kickers.
+     * Compare deux mains de 5 cartes sur la base de la carte la plus haute,
+     * puis des kickers. (Logique de la Slice 5)
      */
     public static String compareHighestCards(Hand hand1, Hand hand2) {
+
 
         Hand hand1Copy = new Hand();
         for (Card c : hand1.getCards()) {
             hand1Copy.addCard(new Card(c.getValue()));
+        }
+
+        while (hand1Copy.getCards().size() < 5) {
+            hand1Copy.addCard(new Card(0));
         }
 
         Hand hand2Copy = new Hand();
@@ -71,53 +32,102 @@ public class PokerRules {
             hand2Copy.addCard(new Card(c.getValue()));
         }
 
+        while (hand2Copy.getCards().size() < 5) {
+            hand2Copy.addCard(new Card(0));
+        }
+
+
+
         for (int i = 0; i < 5; i++) {
             int max1 = hand1Copy.getMax();
             int max2 = hand2Copy.getMax();
 
             if (max1 > max2) {
-                return (i == 0) ? "Main 1 gagne (carte la plus haute : " + max1 + ")" : "Main 1 gagne (Kicker : " + max1 + ")";
+
+                String reason = (i == 0) ? "carte la plus haute" : "Kicker";
+                return "Main 1 gagne (" + reason + " : " + max1 + ")";
+
             } else if (max2 > max1) {
-                return (i == 0) ? "Main 2 gagne (carte la plus haute : " + max2 + ")" : "Main 2 gagne (Kicker : " + max2 + ")";
+
+                String reason = (i == 0) ? "carte la plus haute" : "Kicker";
+                return "Main 2 gagne (" + reason + " : " + max2 + ")";
+
             } else {
                 if (max1 == 0) break;
-                for (Card c : hand1Copy.getCards()) { if (c.getValue() == max1) { c.setValue(0); break; } }
-                for (Card c : hand2Copy.getCards()) { if (c.getValue() == max2) { c.setValue(0); break; } }
+
+                boolean removed1 = false;
+                for (Card c : hand1Copy.getCards()) {
+                    if (c.getValue() == max1 && !removed1) {
+                        c.setValue(0);
+                        removed1 = true;
+                    }
+                }
+                boolean removed2 = false;
+                for (Card c : hand2Copy.getCards()) {
+                    if (c.getValue() == max2 && !removed2) {
+                        c.setValue(0);
+                        removed2 = true;
+                    }
+                }
+
             }
         }
         return "Égalité parfaite !";
     }
 
+
     /**
-     * Détecte une paire dans une liste de 2 cartes.
-     * @return La valeur de la paire si trouvée, sinon 0.
+     * Détecte la paire la plus haute dans une main. (Logique de la Slice 7 améliorée)
+     * @return La valeur de la paire la plus haute si trouvée, sinon 0.
      */
-    public static int getPairInTwoCards(List<Card> cartes) {
-        if (cartes.size() != 2) return 0;
-        if (cartes.get(0).getValue() == cartes.get(1).getValue()) {
-            return cartes.get(0).getValue();
-        } else {
-            return 0;
-        }
-    }
-
-
-    public static  int getPair(List<Card> cards) {
-        boolean[] alreadySeen = new boolean[15]; // 0-14
+    public static int getPair(List<Card> cards) {
+        int[] counts = new int[15];
         for (Card c : cards) {
-            int val = c.getValue();
-            if (alreadySeen[val]) {
+            if (c.getValue() >= 0 && c.getValue() < counts.length) {
+                counts[c.getValue()]++;
+            }
+        }
+        for (int val = 14; val >= 2; val--) {
+            if (counts[val] == 2) {
                 return val;
             }
-            alreadySeen[val] = true;
         }
         return 0;
     }
 
+    /**
+     * Vérifie si une main contient au moins une paire.
+     */
     public static boolean hasPair(List<Card> cards) {
         return getPair(cards) > 0;
     }
 
+
+    /**
+     * Détecte si une main de 4 CARTES contient exactement deux paires. (Logique de la Slice 11)
+     */
+    public static boolean hasTwoPairs4Cards(List<Card> cards) {
+        if (cards.size() != 4) {
+            return false;
+        }
+        int[] counts = new int[15];
+        for (Card c : cards) {
+            if (c.getValue() >= 0 && c.getValue() < counts.length) {
+                counts[c.getValue()]++;
+            }
+        }
+        int pairCount = 0;
+        for (int count : counts) {
+            if (count == 2) {
+                pairCount++;
+            }
+        }
+        return pairCount == 2;
+    }
+
+    /**
+     * Utilitaire de test pour créer une main rapidement.
+     */
     public static Hand createHand(int... values ) {
         Hand hand = new Hand();
         for (int val : values) {
@@ -127,7 +137,8 @@ public class PokerRules {
     }
 
 
-    public static String compareWith(Hand hand1, Hand hand2) {
+
+    public static String compareHands(Hand hand1, Hand hand2) {
         boolean hasPair1 = hasPair(hand1.getCards());
         boolean hasPair2 = hasPair(hand2.getCards());
 
@@ -157,23 +168,6 @@ public class PokerRules {
         return compareHighestCards(hand1, hand2);
     }
 
-    public static boolean hasTwoPairs4Cards(List<Card> cards) {
 
-        if (cards.size() != 4) {
-            return false;
-        }
-        int[] counts = new int[15];
-        for (Card c : cards) {
-            counts[c.getValue()]++;
-        }
-        int pairCount = 0;
-        for (int count : counts) {
-            if (count == 2) {
-                pairCount++;
-            }
-        }
-
-        return pairCount == 2;
-    }
 
 }
