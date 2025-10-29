@@ -1,4 +1,4 @@
-package fr.pns.poker;
+package fr.pns.poker.model;
 
 import java.util.ArrayList;
 import java.util.List;

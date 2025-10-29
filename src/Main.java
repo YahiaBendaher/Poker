@@ -1,6 +1,7 @@
-import fr.pns.poker.Card;
-import fr.pns.poker.Hand;
-import fr.pns.rules.PokerRules;
+import fr.pns.poker.model.Card;
+import fr.pns.poker.model.Hand;
+import fr.pns.poker.rules.PairRule;
+import fr.pns.poker.evaluator.HandComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,15 +62,15 @@ public class Main {
         main2.printHand();
 
         // Vérification des paires
-        int paire1 = PokerRules.getPair(main1.getCards());
-        int paire2 = PokerRules.getPair(main2.getCards());
+        int paire1 = PairRule.getPair(main1.getCards());
+        int paire2 = PairRule.getPair(main2.getCards());
 
         System.out.println("Paire Main 1 : " + (paire1 > 0 ? "Oui (" + paire1 + ")" : "Non"));
         System.out.println("Paire Main 2 : " + (paire2 > 0 ? "Oui (" + paire2 + ")" : "Non"));
 
         // Comparaison
-        String resultat = PokerRules.compareHands(main1, main2) ;
-        System.out.println("\n " + resultat);
+        String resultat = HandComparator.compareHands(main1, main2);
+        System.out.println("\n" + resultat);
         sc.close();
 
     }

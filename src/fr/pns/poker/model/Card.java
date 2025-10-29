@@ -1,4 +1,4 @@
-package fr.pns.poker;
+package fr.pns.poker.model;
 
 public class Card {
     private int value;
@@ -21,3 +21,4 @@ public class Card {
     }
 
 }
+

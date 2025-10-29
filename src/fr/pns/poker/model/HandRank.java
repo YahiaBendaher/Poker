@@ -1,10 +1,10 @@
-package fr.pns.rules;
+package fr.pns.poker.model;
 
 public enum HandRank {
     HIGH_CARD(1),
     PAIR(2),
     TWO_PAIR(3),
-    BRELAN(4),
+    THREE_OF_A_KIND(4),
     STRAIGHT(5),          // Suite
     FLUSH(6),             // Couleur
     FULL_HOUSE(7),        // Full
@@ -22,4 +22,3 @@ public enum HandRank {
         return rankValue;
     }
 }
-

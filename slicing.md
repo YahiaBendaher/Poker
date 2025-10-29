@@ -19,13 +19,13 @@
 | 12 | Détecter deux paires dans une main de 5 cartes | Rafia            | Entrée : [5, 5, 8, 8, 2] -> Sortie : "Deux Paires" | F | 24/10      | 24/10    | OK    |
 | 13 | Deux Paires battent une Paire | Amacine          | M1=[5,5,8,8,2], M2=[14,14,10,9,4] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
 | 14 | Comparer deux "Deux Paires" sur la paire la plus élevée | Amacine          | M1=[10,10,8,8,4], M2=[9,9,7,7,13] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
-| 15 | Comparer deux "Deux Paires" sur la deuxième paire | Rafia            | M1=[10,10,8,8,4], M2=[10,10,7,7,13] -> "Main 1 gagne" | F | 24/10      |   24/10        | OK    |
-| 16 | Comparer deux "Deux Paires" sur le kicker | Rafia            | M1=[10,10,8,8,13], M2=[10,10,8,8,4] -> "Main 1 gagne" | F |    24/10         |     24/10      | OK    |
+| 15 | Comparer deux "Deux Paires" sur la deuxième paire | Rafia            | M1=[10,10,8,8,4], M2=[10,10,7,7,13] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
+| 16 | Comparer deux "Deux Paires" sur le kicker | Rafia            | M1=[10,10,8,8,13], M2=[10,10,8,8,4] -> "Main 1 gagne" | F | 24/10      | 24/10    | OK    |
 | **Phase 4 : Introduction progressive du Brelan** | |                  | | |            |          |       |
-| 17 | Détecter un brelan dans une main de 3 cartes | Elyes            | Entrée : [7, 7, 7] -> Sortie : "Brelan de 7" | F |            |          |       |
-| 18 | Détecter un brelan dans une main de 5 cartes | Amacine          | Entrée : [7, 7, 7, 2, 9] -> Sortie : "Brelan de 7" | F |            |          |       |
+| 17 | Détecter un brelan dans une main de 3 cartes | Elyes            | Entrée : [7, 7, 7] -> Sortie : "Brelan de 7" | F | 24/10      | 24/10    | OK    |
+| 18 | Détecter un brelan dans une main de 5 cartes | Elyes            | Entrée : [7, 7, 7, 2, 9] -> Sortie : "Brelan de 7" | F | 24/10      | 24/10    | OK    |
 | 19 | Un Brelan bat Deux Paires | Yahia            | M1=[4,4,4,2,3], M2=[14,14,13,13,10] -> "Main 1 gagne" | F |            |          |       |
-| 20 | Comparer deux Brelans de valeurs différentes | Rafia            | M1=[7,7,7,2,3], M2=[5,5,5,12,10] -> "Main 1 gagne" | F |            |          |       |
+| 20 | Comparer deux Brelans de valeurs différentes | Yahia            | M1=[7,7,7,2,3], M2=[5,5,5,12,10] -> "Main 1 gagne" | F |            |          |       |
 | **Phase 5 : Introduction progressive de la Suite** | |                  | | |            |          |       |
 | 21 | Détecter si 3 valeurs sont consécutives | Elyes            | Entrée : [5, 6, 7] -> Sortie : "Consécutives" | F |            |          |       |
 | 22 | Détecter si 5 valeurs sont consécutives (Suite) | Amacine          | Entrée : [5, 6, 7, 8, 9] -> Sortie : "Suite" | PF |            |          |       |
@@ -36,11 +36,11 @@
 | 26 | [Erreur] Gérer une chaîne avec un nombre incorrect de cartes | Rafia            | Entrée : "5Pi 7Co 8Tr 2D" -> Sortie : "Erreur : Une main doit contenir 5 cartes." | F |            |          |       |
 | 27 | [Erreur] Gérer une valeur de carte invalide | Elyes            | Entrée : "1Pi 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Valeur '1' invalide." | F |            |          |       |
 | 28 | [Erreur] Gérer une couleur de carte invalide | Yahia            | Entrée : "5X 7Co 8Tr 9D 2H" -> Sortie : "Erreur : Couleur 'X' invalide." | F |            |          |       |
-| 29 | [Erreur] Gérer une main avec des cartes dupliquées | Amacine          | Entrée : "5Pi 7Co 8Tr 5Pi 2D" -> Sortie : "Erreur : fr.pns.poker.Card '5Pi' en double." | PF |            |          |       |
-| 30 | Adapter la détection de Paire avec les objets fr.pns.poker.Card | Elyes            | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F |            |          |       |
-| 31 | Adapter la détection de Deux Paires avec les objets fr.pns.poker.Card | Rafia            | Entrée : "5Tr 5Co 8Pi 8Ca 2Tr" -> Sortie : "Deux Paires" | F |            |          |       |
-| 32 | Adapter la détection de Brelan avec les objets fr.pns.poker.Card | Yahia            | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F |            |          |       |
-| 33 | Adapter la détection de Suite avec les objets fr.pns.poker.Card | Amacine          | Entrée : "5Tr 6Co 7Pi 8Ca 9Tr" -> Sortie : "Suite" | PF |            |          |       |
+| 29 | [Erreur] Gérer une main avec des cartes dupliquées | Amacine          | Entrée : "5Pi 7Co 8Tr 5Pi 2D" -> Sortie : "Erreur : fr.pns.poker.model.Card '5Pi' en double." | PF |            |          |       |
+| 30 | Adapter la détection de Paire avec les objets fr.pns.poker.model.Card | Elyes            | Entrée : "5Tr 5Co 8Pi 2Ca 3Tr" -> Sortie : "Paire de 5" | F |            |          |       |
+| 31 | Adapter la détection de Deux Paires avec les objets fr.pns.poker.model.Card | Rafia            | Entrée : "5Tr 5Co 8Pi 8Ca 2Tr" -> Sortie : "Deux Paires" | F |            |          |       |
+| 32 | Adapter la détection de Brelan avec les objets fr.pns.poker.model.Card | Yahia            | Entrée : "7Tr 7Co 7Pi 2Ca 3Tr" -> Sortie : "Brelan de 7" | F |            |          |       |
+| 33 | Adapter la détection de Suite avec les objets fr.pns.poker.model.Card | Amacine          | Entrée : "5Tr 6Co 7Pi 8Ca 9Tr" -> Sortie : "Suite" | PF |            |          |       |
 | **Phase 7 : Introduction progressive de la Couleur** | |                  | | |            |          |       |
 | 34 | Détecter si 2 cartes ont la même couleur | Elyes            | Entrée : ["2Pi", "5Pi"] -> Sortie : "Même couleur" | F |            |          |       |
 | 35 | Détecter si 3 cartes ont la même couleur | Rafia            | Entrée : ["2Pi", "5Pi", "8Pi"] -> Sortie : "Même couleur" | F |            |          |       |
