@@ -61,13 +61,6 @@ public class Main {
         System.out.print("Main 2 : ");
         main2.printHand();
 
-        // Vérification des paires
-        int paire1 = PairRule.getPair(main1.getCards());
-        int paire2 = PairRule.getPair(main2.getCards());
-
-        System.out.println("Paire Main 1 : " + (paire1 > 0 ? "Oui (" + paire1 + ")" : "Non"));
-        System.out.println("Paire Main 2 : " + (paire2 > 0 ? "Oui (" + paire2 + ")" : "Non"));
-
         // Comparaison
         String resultat = HandComparator.compareHands(main1, main2);
         System.out.println("\n" + resultat);
