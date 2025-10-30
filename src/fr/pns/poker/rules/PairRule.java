@@ -3,7 +3,7 @@ package fr.pns.poker.rules;
 import fr.pns.poker.model.Card;
 import java.util.List;
 
-public final class PairRule {
+public class PairRule {
 
 
     public static int getPair(List<Card> cards) {

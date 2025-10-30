@@ -5,6 +5,7 @@ public class Card {
 
 
     public Card(int value) {
+
         this.value = value;
     }
 

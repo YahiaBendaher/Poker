@@ -11,7 +11,7 @@ public class Hand {
         this.cards = new ArrayList<>();
     }
 
-    public void addCard(Card c) {
+    public void addCard(Card c)  {
         if (cards.size() < 5) {
             cards.add(c);
         }
@@ -25,7 +25,6 @@ public class Hand {
         for (Card c : cards) {
             System.out.print(c.getValue() + " ");
         }
-        System.out.println();
     }
 
     public int getMax() {
@@ -39,7 +38,7 @@ public class Hand {
     /**
      * Utilitaire de test pour créer une main rapidement.
      */
-    public static Hand createHand(int... values ) {
+    public static Hand createHand(int... values ) throws IllegalStateException {
         Hand hand = new Hand();
         for (int val : values) {
             hand.addCard(new Card(val));

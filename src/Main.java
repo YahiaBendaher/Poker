@@ -1,59 +1,15 @@
-import fr.pns.poker.model.Card;
 import fr.pns.poker.model.Hand;
-import fr.pns.poker.rules.PairRule;
 import fr.pns.poker.evaluator.HandComparator;
+import fr.pns.poker.utils.DisplayUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-    public static boolean verif(int valeur){
-        if (valeur < 2 || valeur > 14) {
-            return false;
-        }
-        return true;
-    }
-
-    public static Hand lireMain(Scanner sc , int indiceOfMain){
-        boolean ok = false ;
-        Hand main = new Hand();
-        while (!ok) {
-            System.out.println("=== Main "+indiceOfMain+" ===");
-            main =  new Hand();
-            try {
-                String line = sc.nextLine().trim();
-
-                if (line.isEmpty()){
-                    throw new Exception("Vous devez entrer 5 cartes !");
-                }
-                List<String> myList = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-                if (myList.size() != 5){
-                    throw new Exception("Vous devez entrer 5 cartes !");
-                }
-                for (String s : myList){
-                    int valeur = Integer.parseInt(s);
-                    if (!verif(valeur)){
-                        throw new Exception("Les valeurs doivent être comprises entre 2 et 14 !");
-                    }
-                    main.addCard(new Card(valeur));
-                }
-
-                ok = true;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return main;
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Hand main1 = lireMain(sc , 1);
-        Hand main2 = lireMain(sc , 2);
+        Hand main1 = DisplayUtils.readHand(sc, 1);
+        Hand main2 = DisplayUtils.readHand(sc, 2);
 
         System.out.println("\n=== RÉSULTAT ===");
         System.out.print("Main 1 : ");

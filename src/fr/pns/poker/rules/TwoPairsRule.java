@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class TwoPairsRule {
+public class TwoPairsRule {
 
     public static boolean hasTwoPairs(List<Card> cards) {
         int[] counts = new int[15];

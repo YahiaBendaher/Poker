@@ -9,7 +9,7 @@ import fr.pns.poker.rules.ThreeOfKindRule;
 import java.util.List;
 
 
-public final class HandEvaluation {
+public class HandEvaluation {
     private HandRank rank;
     private int mainValue;  // valeur principale de la combinaison (ex: valeur de la paire, du brelan)
     private int kicker;     // carte la plus haute restante (utile en cas d'égalité)
@@ -34,9 +34,14 @@ public final class HandEvaluation {
         return rank + " (valeur: " + mainValue + ", kicker: " + kicker + ")";
     }
 
-    // ===== Logique d'évaluation (ex-HandEvaluator.evaluateHand) =====
     public static HandEvaluation evaluateHand(Hand hand) {
         List<Card> cards = hand.getCards();
+
+        // Three of a kind
+        if (ThreeOfKindRule.hasThreeOfAKind(cards)) {
+            int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards);
+            return new HandEvaluation(HandRank.THREE_OF_A_KIND, threeOfKindValue, hand.getMax());
+        }
 
         // Two Pairs
         if (TwoPairsRule.hasTwoPairs(cards)) {
@@ -58,13 +63,11 @@ public final class HandEvaluation {
             return new HandEvaluation(HandRank.PAIR, pairValue, highestKicker);
         }
 
-        // Three of a kind
-        if (ThreeOfKindRule.hasThreeOfAKind(cards)) {
-            int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards);
-            return new HandEvaluation(HandRank.THREE_OF_A_KIND, threeOfKindValue, hand.getMax());
-        }
 
         // High card (fallback)
         return new HandEvaluation(HandRank.HIGH_CARD, hand.getMax(), 0);
     }
+
+
+
 }

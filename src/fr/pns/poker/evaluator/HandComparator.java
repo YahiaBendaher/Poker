@@ -5,7 +5,7 @@ import fr.pns.poker.model.Hand;
 /**
  * Compare deux mains en s'appuyant sur HandEvaluation.evaluateHand.
  */
-public final class HandComparator {
+public class HandComparator {
 
     public static String compareHands(Hand hand1, Hand hand2) {
         HandEvaluation eval1 = HandEvaluation.evaluateHand(hand1);
