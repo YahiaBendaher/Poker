@@ -1,3 +1,5 @@
+package fr.pns.poker;
+
 import fr.pns.poker.model.Hand;
 import fr.pns.poker.evaluator.HandComparator;
 import fr.pns.poker.utils.DisplayUtils;
@@ -10,14 +12,6 @@ public class Main {
 
         Hand main1 = DisplayUtils.readHand(sc, 1);
         Hand main2 = DisplayUtils.readHand(sc, 2);
-
-        System.out.println("\n=== RÉSULTAT ===");
-        System.out.print("Main 1 : ");
-        main1.printHand();
-        System.out.print("Main 2 : ");
-        main2.printHand();
-
-        // Comparaison
         String resultat = HandComparator.compareHands(main1, main2);
         System.out.println("\n" + resultat);
         sc.close();

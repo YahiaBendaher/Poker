@@ -11,7 +11,7 @@ Développer un programme en **Java** capable de **comparer deux mains de fr.pns.
 ## Description du problème
 
 Le programme lit deux mains de fr.pns.poker depuis l’entrée standard et affiche le résultat :
-- **Main gagnante** (Main 1 ou Main 2) ;
+- **fr.pns.poker.Main gagnante** (fr.pns.poker.Main 1 ou fr.pns.poker.Main 2) ;
 - ou **égalité**, si les mains sont identiques en force.
 
 Chaque main contient 5 cartes issues d’un jeu standard de 52 cartes :
@@ -39,9 +39,9 @@ Chaque main contient 5 cartes issues d’un jeu standard de 52 cartes :
 ## Exemple d’exécution
 
 ```text
-Main 1: 2Tr 6Ca 7Ca 8Tr APi
-Main 2: 3Tr 5Ca 9Ca DCo RCo
-Résultat: Main 1 gagne avec carte la plus élevée (As)
+fr.pns.poker.Main 1: 2Tr 6Ca 7Ca 8Tr APi
+fr.pns.poker.Main 2: 3Tr 5Ca 9Ca DCo RCo
+Résultat: fr.pns.poker.Main 1 gagne avec carte la plus élevée (As)
 ```
 
 ---
@@ -57,12 +57,12 @@ cd dojo-fr.pns.poker-25-26-fise-25-26-fr.pns.poker-team-f-se
 ### 2️⃣ Compiler le code
 Depuis le dossier `src/` :
 ```bash
-javac Main.java
+javac fr.pns.poker.Main.java
 ```
 
 ### 3️⃣ Lancer le programme
 ```bash
-java Main
+java fr.pns.poker.Main
 ```
 
 ---

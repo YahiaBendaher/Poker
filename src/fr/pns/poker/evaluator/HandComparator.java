@@ -1,10 +1,10 @@
 package fr.pns.poker.evaluator;
 
 import fr.pns.poker.model.Hand;
+import fr.pns.poker.model.HandRank; // Requis pour le switch
 
-/**
- * Compare deux mains en s'appuyant sur HandEvaluation.evaluateHand.
- */
+import java.util.List;
+
 public class HandComparator {
 
     public static String compareHands(Hand hand1, Hand hand2) {
@@ -13,28 +13,48 @@ public class HandComparator {
 
         // 1) Comparer le type de main
         if (eval1.getRank().getRankValue() > eval2.getRank().getRankValue()) {
-            return "Main 1 gagne (" + eval1 + ")";
+            return buildResultString("La main 1", eval1);
         }
         if (eval2.getRank().getRankValue() > eval1.getRank().getRankValue()) {
-            return "Main 2 gagne (" + eval2 + ")";
+            return buildResultString("La main 2", eval2);
         }
 
-        // 2) Même type -> comparer la valeur principale
-        if (eval1.getMainValue() > eval2.getMainValue()) {
-            return "Main 1 gagne (" + eval1 + ")";
-        }
-        if (eval2.getMainValue() > eval1.getMainValue()) {
-            return "Main 2 gagne (" + eval2 + ")";
+        // 2) Même type -> Comparer la liste des valeurs
+        List<Integer> values1 = eval1.getValues();
+        List<Integer> values2 = eval2.getValues();
+
+        for (int i = 0; i < values1.size(); i++) {
+            if (values1.get(i) > values2.get(i)) {
+                return buildResultString("La main 1", eval1);
+            }
+            if (values2.get(i) > values1.get(i)) {
+                return buildResultString("La main 2", eval2);
+            }
         }
 
-        // 3) Égalité -> comparer le kicker
-        if (eval1.getKicker() > eval2.getKicker()) {
-            return "Main 1 gagne (kicker)";
-        }
-        if (eval2.getKicker() > eval1.getKicker()) {
-            return "Main 2 gagne (kicker)";
-        }
-
-        return "Égalité parfaite";
+        return "Egalite";
     }
+
+    private static String buildResultString(String winner, HandEvaluation eval) {
+        HandRank rank = eval.getRank();
+        List<Integer> values = eval.getValues();
+
+        int highVal = values.get(0);
+
+        switch (rank) {
+            case HIGH_CARD:
+                return winner + " gagne avec carte la plus élevée : " + highVal;
+            case PAIR:
+                return winner + " gagne avec paire de " + highVal;
+            case TWO_PAIR:
+                int lowVal = values.get(1);
+                return winner + " gagne avec double paire de " + highVal + " et " + lowVal;
+            case THREE_OF_A_KIND:
+                return winner + " gagne avec brelan de " + highVal;
+            default:
+                return winner + " gagne (" + eval + ")";
+        }
+    }
+
+
 }

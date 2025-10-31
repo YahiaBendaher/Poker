@@ -1,6 +1,5 @@
 package fr.pns.poker.evaluator;
 
-import fr.pns.poker.model.Card;
 import fr.pns.poker.model.Hand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,150 +8,124 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HandComparatorTest {
 
-    @Test
-    @DisplayName("Une paire devrait gagner contre une carte haute")
-    void pairShouldBeatHighCard() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(5));
-        hand1.addCard(new Card(4));
-        hand1.addCard(new Card(2));
 
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(14)); // As
-        hand2.addCard(new Card(13)); // Roi
-        hand2.addCard(new Card(11));
-        hand2.addCard(new Card(9));
-        hand2.addCard(new Card(7));
-
-        String result = HandComparator.compareHands(hand1, hand2);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
 
     @Test
-    @DisplayName("Deux paires devraient gagner contre une paire")
-    void twoPairsShouldBeatOnePair() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(14)); // Paire d'As
-        hand2.addCard(new Card(14));
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(9));
-        hand2.addCard(new Card(7));
-
-        String result = HandComparator.compareHands(hand1, hand2);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
-
-    @Test
-    @DisplayName("Un brelan devrait gagner contre deux paires")
+    @DisplayName("Brelan bat Double Paire")
     void threeOfAKindShouldBeatTwoPairs() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(4));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(14));
-        hand2.addCard(new Card(14));
-        hand2.addCard(new Card(13));
-        hand2.addCard(new Card(13));
-        hand2.addCard(new Card(7));
-
+        Hand hand1 = Hand.createHand(10, 10, 10, 4, 2);
+        Hand hand2 = Hand.createHand(14, 14, 13, 13, 7);
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
 
     @Test
-    @DisplayName("Entre deux paires identiques, le kicker devrait décider")
-    void kickerShouldDecideBetweenEqualPairs() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(14)); // As kicker
-        hand1.addCard(new Card(4));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(13)); // Roi kicker
-        hand2.addCard(new Card(4));
-        hand2.addCard(new Card(2));
-
+    @DisplayName("Double Paire bat Paire")
+    void twoPairsShouldBeatOnePair() {
+        Hand hand1 = Hand.createHand(7, 7, 2, 2, 10);
+        Hand hand2 = Hand.createHand(14, 14, 10, 9, 7);
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
 
     @Test
-    @DisplayName("Entre deux mains identiques, devrait être égalité")
+    @DisplayName("Paire bat Carte Haute")
+    void pairShouldBeatHighCard() {
+        Hand hand1 = Hand.createHand(2, 2, 5, 4, 7);
+        Hand hand2 = Hand.createHand(14, 13, 11, 9, 8);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Paire plus haute gagne")
+    void higherPairShouldWin() {
+        Hand hand1 = Hand.createHand(13, 13, 7, 4, 2);
+        Hand hand2 = Hand.createHand(10, 10, 14, 12, 11);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Double Paire plus haute gagne")
+    void higherTwoPairShouldWin() {
+        Hand hand1 = Hand.createHand(13, 13, 7, 7, 2);
+        Hand hand2 = Hand.createHand(12, 12, 11, 11, 14);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Brelan plus haut gagne")
+    void higherThreeOfAKindShouldWin() {
+        Hand hand1 = Hand.createHand(5, 5, 5, 14, 13);
+        Hand hand2 = Hand.createHand(4, 4, 4, 14, 13);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+
+    @Test
+    @DisplayName("Égalité parfaite")
     void shouldBeEqualWithIdenticalHands() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(10));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(4));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(7));
-        hand2.addCard(new Card(4));
-        hand2.addCard(new Card(2));
-
+        Hand hand1 = Hand.createHand(10, 10, 7, 4, 2);
+        Hand hand2 = Hand.createHand(10, 10, 7, 4, 2);
         assertEquals("Égalité parfaite", HandComparator.compareHands(hand1, hand2));
     }
 
     @Test
-    @DisplayName("Entre deux paires différentes, la plus haute devrait gagner")
-    void higherPairShouldWin() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(13)); // Paire de Rois
-        hand1.addCard(new Card(13));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(4));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(10)); // Paire de 10
-        hand2.addCard(new Card(10));
-        hand2.addCard(new Card(14)); // As kicker
-        hand2.addCard(new Card(4));
-        hand2.addCard(new Card(2));
-
+    @DisplayName("Kicker 1 (Paire): Le premier kicker décide")
+    void pairKicker1ShouldDecide() {
+        Hand hand1 = Hand.createHand(10, 10, 14, 4, 2);
+        Hand hand2 = Hand.createHand(10, 10, 13, 4, 2);
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
 
     @Test
-    @DisplayName("Entre deux doubles paires, la plus haute paire devrait décider")
-    void higherTwoPairShouldWin() {
-        Hand hand1 = new Hand();
-        hand1.addCard(new Card(13)); // Rois
-        hand1.addCard(new Card(13));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(7));
-        hand1.addCard(new Card(2));
-
-        Hand hand2 = new Hand();
-        hand2.addCard(new Card(12)); // Dames
-        hand2.addCard(new Card(12));
-        hand2.addCard(new Card(11));
-        hand2.addCard(new Card(11));
-        hand2.addCard(new Card(14)); // As kicker
-
+    @DisplayName("Kicker 3 (Paire): Le dernier kicker décide")
+    void pairKicker3ShouldDecide() {
+        Hand hand1 = Hand.createHand(10, 10, 14, 5, 3);
+        Hand hand2 = Hand.createHand(10, 10, 14, 5, 2);
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
 
+    @Test
+    @DisplayName("Kicker (Double Paire): Le 5ème kicker décide")
+    void twoPairKickerShouldDecide() {
+        Hand hand1 = Hand.createHand(10, 10, 8, 8, 14);
+        Hand hand2 = Hand.createHand(10, 10, 8, 8, 7);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Kicker 2 (Brelan): Le deuxième kicker décide")
+    void threeOfAKindKicker2ShouldDecide() {
+        Hand hand1 = Hand.createHand(9, 9, 9, 14, 10);
+        Hand hand2 = Hand.createHand(9, 9, 9, 14, 8);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Kicker (Carte Haute): Le 5ème kicker décide")
+    void highCardKicker5ShouldDecide() {
+        Hand hand1 = Hand.createHand(14, 10, 8, 7, 3);
+        Hand hand2 = Hand.createHand(14, 10, 8, 7, 2);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+
+
+    @Test
+    @DisplayName("Kicker (Paire): Main 2 devrait gagner")
+    void pairKickerShouldDecideForHand2() {
+        Hand hand1 = Hand.createHand(10, 10, 13, 4, 2);
+        Hand hand2 = Hand.createHand(10, 10, 14, 4, 2);
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 2 gagne"));
+    }
 }

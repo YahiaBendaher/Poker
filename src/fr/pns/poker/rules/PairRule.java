@@ -9,9 +9,7 @@ public class PairRule {
     public static int getPair(List<Card> cards) {
         int[] counts = new int[15];
         for (Card c : cards) {
-            if (c.getValue() >= 0 && c.getValue() < counts.length) {
-                counts[c.getValue()]++;
-            }
+            counts[c.getValue()]++;
         }
         for (int val = 14; val >= 2; val--) {
             if (counts[val] == 2) {
@@ -22,18 +20,4 @@ public class PairRule {
     }
 
 
-    public static boolean hasPair(List<Card> cards) {
-        int[] counts = new int[15];
-        for (Card c : cards) {
-            if (c.getValue() >= 0 && c.getValue() < counts.length) {
-                counts[c.getValue()]++;
-            }
-        }
-        for (int val = 2; val <= 14; val++) {
-            if (counts[val] == 2) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
