@@ -13,7 +13,7 @@ public class Main {
         Hand main1 = DisplayUtils.readHand(sc, 1);
         Hand main2 = DisplayUtils.readHand(sc, 2);
         String resultat = HandComparator.compareHands(main1, main2);
-        System.out.println("\n" + resultat);
+        System.out.println(resultat);
         sc.close();
 
     }
