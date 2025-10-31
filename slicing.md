@@ -27,8 +27,8 @@
 | 19 | Un Brelan bat Deux Paires                                             | Yahia            | M1=[4,4,4,2,3], M2=[14,14,13,13,10] -> "fr.pns.poker.Main 1 gagne" | F | 24/10      | 24/10    | OK    |
 | 20 | Comparer deux Brelans de valeurs différentes                          | Yahia            | M1=[7,7,7,2,3], M2=[5,5,5,12,10] -> "fr.pns.poker.Main 1 gagne" | F | 24/10      | 24/10    | OK    |
 | **Phase 5 : Introduction progressive de la Suite** |                                                                       |                  | | |            |          |       |
-| 21 | Détecter si 3 valeurs sont consécutives                               | Elyes            | Entrée : [5, 6, 7] -> Sortie : "Consécutives" | F |            |          |       |
-| 22 | Détecter si 5 valeurs sont consécutives (Suite)                       | Amacine          | Entrée : [5, 6, 7, 8, 9] -> Sortie : "Suite" | PF |            |          |       |
+| 21 | Détecter si 3 valeurs sont consécutives                               | Elyes            | Entrée : [5, 6, 7] -> Sortie : "Consécutives" | F | 31/10      | 31/10    | OK    |
+| 22 | Détecter si 5 valeurs sont consécutives (Suite)                       | Elyes            | Entrée : [5, 6, 7, 8, 9] -> Sortie : "Suite" | PF | 31/10      | 31/10    | OK    |
 | 23 | Une Suite bat un Brelan                                               | Yahia et Rafia   | M1=[5,6,7,8,9], M2=[14,14,14,2,3] -> "fr.pns.poker.Main 1 gagne" | F |            |          |       |
 | **Phase 6 : Intégration des cartes complètes et gestion des erreurs** |                                                                       |                  | | |            |          |       |
 | 24 | Représenter une carte (valeur et couleur) et l'afficher               | Yahia            | Créer carte valeur=A, couleur=Pi -> Afficher "APi" | F |            |          |       |
