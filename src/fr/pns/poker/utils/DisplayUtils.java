@@ -18,7 +18,7 @@ public class DisplayUtils {
         Hand hand = new Hand();
 
         while (!isValid) {
-            System.out.println("Main " + handIndex + " : ");
+            System.out.print("Main " + handIndex + " : ");
             hand = new Hand();
             try {
                 String line = scanner.nextLine().trim();
