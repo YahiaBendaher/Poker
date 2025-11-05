@@ -1,24 +1,39 @@
 package fr.pns.poker.model;
 
 public class Card {
-    private int value;
+    private Value value;
+    private Color color;
 
 
-    public Card(int value) {
-
+    public Card(Value value, Color color) {
         this.value = value;
+        this.color = color;
+
     }
 
-    public int getValue() {
+    public Value getValue() {
         return value;
     }
+    public Color getColor() {
+        return color;
+    }
 
-    public void setValue(int v) {
+    public int getValueAsInt() {
+        return value.getCardNumber();
+    }
+
+
+
+
+    public void setValue(Value v) {
         this.value = v;
+    }
+    public void setColor(Color c){
+        this.color = c;
     }
 
     public String toString() {
-        return String.valueOf(value);
+        return value.getCardNumber() + color.getCode();
     }
 
 }

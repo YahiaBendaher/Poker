@@ -12,13 +12,27 @@ public class Hand {
     }
 
     public void addCard(Card c)  {
-        if (cards.size() < 5) {
-            cards.add(c);
+        if (c == null) {
+            throw new IllegalArgumentException("Carte nulle");
         }
+        if(cards.size() >= 5){
+            throw new IllegalStateException("Une main ne peut contenir que 5 cartes");
+        }
+        cards.add(c);
     }
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+    public List<Integer> getValues() {
+        List<Integer> vals = new ArrayList<>();
+        for (Card c : cards) vals.add(c.getValueAsInt());
+        return vals;
     }
 
     public void printHand() {
@@ -27,23 +41,20 @@ public class Hand {
         }
     }
 
-    public int getMax() {
-        int max = 0;
-        for (Card c : cards) {
-            if (c.getValue() > max) max = c.getValue();
+
+
+    public static Hand createHand(String... cardsString) {
+        if (cardsString == null || cardsString.length != 5) {
+            throw new IllegalArgumentException("Une main doit être créée avec exactement 5 cartes.");
         }
-        return max;
+        Hand h = new Hand();
+        for (int i = 0; i < cardsString.length; i++) {
+            Card card = CardSeperator.seperateCard(cardsString[i]);
+            h.addCard(card);
+        }
+        return h;
     }
 
-    /**
-     * Utilitaire de test pour créer une main rapidement.
-     */
-    public static Hand createHand(int... values ) throws IllegalStateException {
-        Hand hand = new Hand();
-        for (int val : values) {
-            hand.addCard(new Card(val));
-        }
-        return hand;
-    }
+
 
 }

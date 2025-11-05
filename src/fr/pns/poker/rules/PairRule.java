@@ -9,8 +9,10 @@ public class PairRule {
     public static int getPair(List<Card> cards) {
         int[] counts = new int[15];
         for (Card c : cards) {
-            counts[c.getValue()]++;
+            int v = c.getValue().getCardNumber(); //  Value -> int (2..14)
+            counts[v]++;
         }
+        // on cherche la PAIRE la plus haute
         for (int val = 14; val >= 2; val--) {
             if (counts[val] == 2) {
                 return val;
