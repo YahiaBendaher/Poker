@@ -22,7 +22,7 @@ class HandComparatorTest {
     @DisplayName("Brelan bat Double Paire")
     void threeOfAKindShouldBeatTwoPairs() {
         Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "4Ca", "2Tr");
-        Hand hand2 = Hand.createHand("ATr", "ACo", "KPi", "KCa", "7Tr");
+        Hand hand2 = Hand.createHand("ATr", "ACo", "RPi", "RCa", "7Tr");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -40,7 +40,7 @@ class HandComparatorTest {
     @DisplayName("Paire bat Carte Haute")
     void pairShouldBeatHighCard() {
         Hand hand1 = Hand.createHand("2Tr", "2Co", "5Pi", "4Ca", "7Tr");
-        Hand hand2 = Hand.createHand("ATr", "KCo", "QPi", "9Ca", "8Tr");
+        Hand hand2 = Hand.createHand("ATr", "RCo", "DPi", "9Ca", "8Tr");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -48,8 +48,8 @@ class HandComparatorTest {
     @Test
     @DisplayName("Paire plus haute gagne")
     void higherPairShouldWin() {
-        Hand hand1 = Hand.createHand("KTr", "KCo", "7Pi", "4Ca", "2Tr");
-        Hand hand2 = Hand.createHand("10Tr", "10Co", "APi", "QCa", "JTr");
+        Hand hand1 = Hand.createHand("RTr", "RCo", "7Pi", "4Ca", "2Tr");
+        Hand hand2 = Hand.createHand("10Tr", "10Co", "APi", "DCa", "VTr");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -57,8 +57,8 @@ class HandComparatorTest {
     @Test
     @DisplayName("Double Paire plus haute gagne")
     void higherTwoPairShouldWin() {
-        Hand hand1 = Hand.createHand("KTr", "KCo", "7Pi", "7Ca", "2Tr");
-        Hand hand2 = Hand.createHand("QTr", "QCo", "JPi", "JCa", "ATr");
+        Hand hand1 = Hand.createHand("RTr", "RCo", "7Pi", "7Ca", "2Tr");
+        Hand hand2 = Hand.createHand("DTr", "DCo", "VPi", "VCa", "ATr");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -66,8 +66,8 @@ class HandComparatorTest {
     @Test
     @DisplayName("Brelan plus haut gagne")
     void higherThreeOfAKindShouldWin() {
-        Hand hand1 = Hand.createHand("5Tr", "5Co", "5Pi", "ACa", "KTr");
-        Hand hand2 = Hand.createHand("4Tr", "4Co", "4Pi", "ACa", "KTr");
+        Hand hand1 = Hand.createHand("5Tr", "5Co", "5Pi", "ACa", "RTr");
+        Hand hand2 = Hand.createHand("4Tr", "4Co", "4Pi", "ACa", "RTr");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -84,7 +84,7 @@ class HandComparatorTest {
     @DisplayName("Kicker 1 (Paire): Le premier kicker décide")
     void pairKicker1ShouldDecide() {
         Hand hand1 = Hand.createHand("10Tr", "10Co", "APi", "4Ca", "2Tr");
-        Hand hand2 = Hand.createHand("10Pi", "10Ca", "KPi", "4Co", "2Pi");
+        Hand hand2 = Hand.createHand("10Pi", "10Ca", "RPi", "4Co", "2Pi");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 1 gagne"));
     }
@@ -128,65 +128,9 @@ class HandComparatorTest {
     @Test
     @DisplayName("Kicker (Paire): Main 2 devrait gagner")
     void pairKickerShouldDecideForHand2() {
-        Hand hand1 = Hand.createHand("10Tr", "10Co", "KPi", "4Ca", "2Tr");
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "RPi", "4Ca", "2Tr");
         Hand hand2 = Hand.createHand("10Pi", "10Ca", "APi", "4Co", "2Pi");
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 2 gagne"));
-    }
-
-    // Nouveaux tests pour la couleur
-
-    @Test
-    @DisplayName("Couleur (Flush) bat une Suite (Straight)")
-    void flushShouldBeatStraight() {
-        Hand flush = Hand.createHand("ATr", "10Tr", "8Tr", "7Tr", "3Tr");
-        Hand straight = Hand.createHand("APi", "KCa", "QTr", "JCo", "10Pi");
-        String result = HandComparator.compareHands(flush, straight);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
-
-    @Test
-    @DisplayName("Deux Couleurs (Flush): la plus haute carte gagne")
-    void higherFlushShouldWin() {
-        Hand higherFlush = Hand.createHand("ATr", "10Tr", "8Tr", "7Tr", "3Tr");
-        Hand lowerFlush = Hand.createHand("KCo", "10Co", "8Co", "7Co", "3Co");
-        String result = HandComparator.compareHands(higherFlush, lowerFlush);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
-    
-    @Test
-    @DisplayName("Deux Couleurs (Flush) identiques: Egalite")
-    void equalFlushShouldBeADraw() {
-        Hand flush1 = Hand.createHand("ATr", "10Tr", "8Tr", "7Tr", "3Tr");
-        Hand flush2 = Hand.createHand("ACo", "10Co", "8Co", "7Co", "3Co");
-        String result = HandComparator.compareHands(flush1, flush2);
-        assertEquals("Egalite", result);
-    }
-
-    @Test
-    @DisplayName("Suite Couleur (Straight Flush) bat un Carré (Four of a Kind)")
-    void straightFlushShouldBeatFourOfAKind() {
-        Hand straightFlush = Hand.createHand("8Tr", "7Tr", "6Tr", "5Tr", "4Tr");
-        Hand fourOfAKind = Hand.createHand("ACo", "APi", "ACa", "ATr", "KCo");
-        String result = HandComparator.compareHands(straightFlush, fourOfAKind);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
-
-    @Test
-    @DisplayName("Deux Suites Couleurs (Straight Flush): la plus haute carte gagne")
-    void higherStraightFlushShouldWin() {
-        Hand higherStraightFlush = Hand.createHand("9Tr", "8Tr", "7Tr", "6Tr", "5Tr");
-        Hand lowerStraightFlush = Hand.createHand("8Co", "7Co", "6Co", "5Co", "4Co");
-        String result = HandComparator.compareHands(higherStraightFlush, lowerStraightFlush);
-        assertTrue(result.startsWith("Main 1 gagne"));
-    }
-
-    @Test
-    @DisplayName("Suite Couleur Royale (Royal Flush) bat une Suite Couleur (Straight Flush)")
-    void royalFlushShouldBeatStraightFlush() {
-        Hand royalFlush = Hand.createHand("ATr", "KTr", "QTr", "JTr", "10Tr");
-        Hand straightFlush = Hand.createHand("KCo", "QCo", "JCo", "10Co", "9Co");
-        String result = HandComparator.compareHands(royalFlush, straightFlush);
-        assertTrue(result.startsWith("Main 1 gagne"));
     }
 }

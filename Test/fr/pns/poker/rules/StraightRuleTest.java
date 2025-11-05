@@ -51,16 +51,13 @@ class StraightRuleTest {
     @DisplayName("Vérifie la suite basse avec l'As (As, 2, 3, 4, 5)")
     void shouldHandleAceLowStraight() {
         Hand hand = Hand.createHand("ATr", "2Co", "3Pi", "4Ca", "5Tr");
-        // The current implementation doesn't handle Ace-low straights, so this will fail.
-        // To fix this, the StraightRule logic needs to be updated.
-        // For now, we expect 0, but the correct value should be 5.
-        assertEquals(0, StraightRule.getStraight(hand.getCards()));
+        assertEquals(5, StraightRule.getStraight(hand.getCards()));
     }
 
     @Test
-    @DisplayName("Vérifie la suite haute avec l'As (10, J, Q, K, A)")
+    @DisplayName("Vérifie la suite haute avec l'As (10, V, D, R, A)")
     void shouldHandleAceHighStraight() {
-        Hand hand = Hand.createHand("10Tr", "JCo", "QPi", "KCa", "ATr");
+        Hand hand = Hand.createHand("10Tr", "VCo", "DPi", "RCa", "ATr");
         assertEquals(14, StraightRule.getStraight(hand.getCards()));
     }
 }

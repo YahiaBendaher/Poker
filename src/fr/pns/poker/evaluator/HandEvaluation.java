@@ -42,8 +42,20 @@ public class HandEvaluation {
         // Suite (Straight)
         int straightHigh = StraightRule.getStraight(cards);  // <-- maintenant un int (hauteur) ou 0
         if (straightHigh > 0) {
-            values.add(straightHigh);
-            return new HandEvaluation(HandRank.STRAIGHT, values);
+            List<Integer> straightValues = new ArrayList<>();
+            // Cas spécial pour la suite A-2-3-4-5
+            if (straightHigh == 5 && sortedValues.contains(14)) {
+                straightValues.add(5);
+                straightValues.add(4);
+                straightValues.add(3);
+                straightValues.add(2);
+                straightValues.add(1);
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    straightValues.add(straightHigh - i);
+                }
+            }
+            return new HandEvaluation(HandRank.STRAIGHT, straightValues);
         }
 
         // Brelan
