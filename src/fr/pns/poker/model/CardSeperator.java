@@ -2,11 +2,12 @@ package fr.pns.poker.model;
 
 public class CardSeperator {
     private CardSeperator(){}
-
+    private static final String INVALID_FORMAT_MSG = "Types de Cartes invalides! (Format attendu: Valeur+Couleur, ex: 2Tr, 10Ca, VCo, RPi, ATr)";
     public static Card seperateCard(String cardString){
-        if(cardString==null) throw new IllegalArgumentException("cardString null");
+
+        if(cardString==null) throw new IllegalArgumentException(INVALID_FORMAT_MSG);
         String cs = cardString.trim();
-        if(cs.isEmpty()) throw new IllegalArgumentException("cardString empty");
+        if(cs.isEmpty()) throw new IllegalArgumentException(INVALID_FORMAT_MSG);
 
         //séparer valeur et couleur
 

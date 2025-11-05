@@ -1,7 +1,7 @@
 package fr.pns.poker.utils;
 
-import fr.pns.poker.model.Card;
 import fr.pns.poker.model.Hand;
+import fr.pns.poker.model.CardSeperator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DisplayUtils {
-    public static boolean validateCardValue(int value) {
-        return value >= 2 && value <= 14;
-    }
 
     public static Hand readHand(Scanner scanner, int handIndex) {
         boolean isValid = false;
@@ -20,27 +17,35 @@ public class DisplayUtils {
         while (!isValid) {
             System.out.print("Main " + handIndex + ": ");
             hand = new Hand();
+
+            String line = scanner.nextLine().trim();
+
             try {
-                String line = scanner.nextLine().trim();
-
                 if (line.isEmpty()) {
-                    throw new Exception("You must enter 5 cards!");
-                }
-                List<String> cardValues = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-                if (cardValues.size() != 5) {
-                    throw new Exception("You must enter 5 cards!");
-                }
-                for (String value : cardValues) {
-                    int cardValue = Integer.parseInt(value);
-                    if (!validateCardValue(cardValue)) {
-                        throw new Exception("Values must be between 2 and 14!");
-                    }
-                    hand.addCard(new Card(cardValue));
+                    throw new Exception("Une Main doit contenir exactement 5 cartes!");
                 }
 
-                isValid = true;
+
+                List<String> cardValues = new ArrayList<>(Arrays.asList(line.split("\\s+")));
+
+
+                if (cardValues.size() != 5) {
+                    throw new Exception("Une Main doit contenir exactement 5 cartes!");
+                }
+
+
+                for (String value : cardValues) {
+                    hand.addCard(CardSeperator.seperateCard(value));
+                }
+
+                isValid = true; // Tout est bon → main valide
+
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                if (e.getMessage().equals("Une Main doit contenir exactement 5 cartes!")) {
+                    System.out.println(e.getMessage());
+                } else {
+                    System.out.println("Types de Cartes invalides! (Format attendu: Valeur+Couleur, ex: 2Tr, 10Ca, VCo, RPi, ATr)");
+                }
             }
         }
         return hand;

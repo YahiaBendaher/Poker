@@ -24,7 +24,7 @@ public enum Color {
             case "co": return COEUR;
             case "pi": return PIQUE;
             default:
-                throw new IllegalArgumentException(code + "Est une couleur invalide (attendu Tr, Ca, Co, Pi)");
+                throw new IllegalArgumentException(code + " est une couleur invalide (attendu Tr, Ca, Co, Pi)");
         }
     }
 }

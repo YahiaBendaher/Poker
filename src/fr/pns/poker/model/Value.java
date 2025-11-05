@@ -42,7 +42,7 @@ public enum Value {
             case "R": return ROI;
             case "A": return AS;
             default:
-                throw new IllegalArgumentException(s + "est une valeur invalide (attendu: 2..10, V, D, R, A)");
+                throw new IllegalArgumentException(s + " est une valeur invalide (attendu: 2..10, V, D, R, A)");
         }
     }
 

@@ -55,6 +55,4 @@ public class Hand {
         return h;
     }
 
-
-
 }
