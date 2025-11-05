@@ -39,6 +39,15 @@ public class HandEvaluation {
 
         List<Integer> values = new ArrayList<>();
 
+        // Suite (Straight)
+        if (fr.pns.poker.rules.StraightRule.getStraight(cards)) {
+
+            int highestCard = getSortedCardValues(cards).get(0);
+            values.add(highestCard);
+            return new HandEvaluation(HandRank.STRAIGHT, values);
+        }
+
+
         // Brelan
         int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards);
 
