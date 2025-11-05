@@ -25,7 +25,6 @@ public class TwoPairsRule {
             return new ArrayList<>();
         }
 
-
         Collections.sort(pairs);
         Collections.reverse(pairs);
 
