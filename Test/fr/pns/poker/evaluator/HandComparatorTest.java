@@ -8,6 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HandComparatorTest {
 
+    @Test
+    @DisplayName("Une suite (Straight) bat un brelan (Three of a Kind)")
+    void straightShouldBeatThreeOfAKind() {
+        Hand straight = Hand.createHand(5, 6, 7, 8, 9);   // suite
+        Hand threeKind = Hand.createHand(10, 10, 10, 3, 2); // brelan
+        String result = HandComparator.compareHands(straight, threeKind);
+
+        assertTrue(result.startsWith("Main 1 gagne")); // car la suite doit battre le brelan
+    }
 
 
     @Test
@@ -70,7 +79,7 @@ class HandComparatorTest {
     void shouldBeEqualWithIdenticalHands() {
         Hand hand1 = Hand.createHand(10, 10, 7, 4, 2);
         Hand hand2 = Hand.createHand(10, 10, 7, 4, 2);
-        assertEquals("Égalité parfaite", HandComparator.compareHands(hand1, hand2));
+        assertEquals("Egalite", HandComparator.compareHands(hand1, hand2));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package fr.pns.poker.evaluator;
 
 import fr.pns.poker.model.Hand;
-import fr.pns.poker.model.HandRank; // Requis pour le switch
+import fr.pns.poker.model.HandRank;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ public class HandComparator {
 
         // 1) Comparer le type de main
         if (eval1.getRank().getRankValue() > eval2.getRank().getRankValue()) {
-            return buildResultString("La main 1", eval1);
+            return buildResultString("Main 1", eval1);
         }
         if (eval2.getRank().getRankValue() > eval1.getRank().getRankValue()) {
-            return buildResultString("La main 2", eval2);
+            return buildResultString("Main 2", eval2);
         }
 
         // 2) Même type -> Comparer la liste des valeurs
@@ -25,10 +25,10 @@ public class HandComparator {
 
         for (int i = 0; i < values1.size(); i++) {
             if (values1.get(i) > values2.get(i)) {
-                return buildResultString("La main 1", eval1);
+                return buildResultString("Main 1", eval1);
             }
             if (values2.get(i) > values1.get(i)) {
-                return buildResultString("La main 2", eval2);
+                return buildResultString("Main 2", eval2);
             }
         }
 
@@ -51,6 +51,8 @@ public class HandComparator {
                 return winner + " gagne avec double paire de " + highVal + " et " + lowVal;
             case THREE_OF_A_KIND:
                 return winner + " gagne avec brelan de " + highVal;
+            case STRAIGHT:
+                return winner + " gagne avec une suite, carte la plus haute : " + highVal;
             default:
                 return winner + " gagne (" + eval + ")";
         }
