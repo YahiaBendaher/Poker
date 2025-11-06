@@ -29,10 +29,7 @@ public class TwoPairsRule {
         Collections.reverse(pairs);
 
         if (pairs.size() > 2) {
-            List<Integer> topPairs = new ArrayList<Integer>(2);
-            topPairs.add(pairs.get(0));
-            topPairs.add(pairs.get(1));
-            return topPairs;
+            return pairs.subList(0, 2);
         }
         return pairs;
     }

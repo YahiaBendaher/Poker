@@ -14,9 +14,7 @@ public class PairRule {
         }
         // on cherche la PAIRE la plus haute
         for (int val = 14; val >= 2; val--) {
-            if (counts[val] == 2) {
-                return val;
-            }
+            if (counts[val] == 2) return val;
         }
         return 0;
     }

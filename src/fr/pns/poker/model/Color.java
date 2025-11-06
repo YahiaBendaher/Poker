@@ -17,14 +17,15 @@ public enum Color {
         return code;
     }
     public static Color getColorFromCode(String code){
-        String lowerCaseCode = code.toLowerCase();
-        switch(lowerCaseCode){
+        String lowerCaseCode = code.trim().toLowerCase();
+        switch (lowerCaseCode){
             case "tr": return TREFLE;
             case "ca": return CARREAU;
             case "co": return COEUR;
             case "pi": return PIQUE;
             default:
-                throw new IllegalArgumentException(code + " est une couleur invalide (attendu Tr, Ca, Co, Pi)");
+                throw new IllegalArgumentException(
+                        code + " est une couleur invalide (attendu Tr, Ca, Co, Pi)");
         }
     }
 }

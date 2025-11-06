@@ -12,53 +12,37 @@ public class StraightRule {
         if (cards == null || cards.size() != 5) {
             return 0;
         }
-
+        // Extraire les valeurs numériques
         List<Integer> values = new ArrayList<>();
         for (Card card : cards) {
             values.add(card.getValue().getCardNumber());
         }
 
+        // Trier et supprimer les doublons
         Collections.sort(values);
-
         List<Integer> uniqueValues = new ArrayList<>();
-        if (!values.isEmpty()) {
-            uniqueValues.add(values.get(0));
-            for (int i = 1; i < values.size(); i++) {
-                if (!values.get(i).equals(values.get(i - 1))) {
-                    uniqueValues.add(values.get(i));
-                }
+        uniqueValues.add(values.get(0));
+        for (int i = 1; i < values.size(); i++) {
+            if (!values.get(i).equals(values.get(i - 1))) {
+                uniqueValues.add(values.get(i));
             }
         }
 
-        if (uniqueValues.size() != 5) {
-            return 0;
-        }
+        // Doit contenir 5 valeurs distinctes
+        if (uniqueValues.size() != 5) return 0;
 
-        // Check un straight standard
-        boolean isStandardStraight = true;
+
+        // Cas spécial A-2-3-4-5
+        if (uniqueValues.equals(List.of(2, 3, 4, 5, 14))) return 5;
+
+        // Vérifie si les cartes sont consécutives (ex: 5-6-7-8-9)
         for (int i = 0; i < 4; i++) {
-            if (uniqueValues.get(i + 1) != uniqueValues.get(i) + 1) {
-                isStandardStraight = false;
-                break;
+            if (uniqueValues.get(i+1) != uniqueValues.get(i) + 1 ) {
+                return 0;
             }
         }
+        // Retourne la carte la plus haute
+        return uniqueValues.get(4);
 
-        if (isStandardStraight) {
-            return uniqueValues.get(4); // Return the highest card in the straight
-        }
-
-        // Si ce n'est pas un straight standard, On regarde si c'est A-2-3-4-5
-        // Dans ce cas la valeur la plus haute est 5
-        boolean isAceLowStraight = uniqueValues.get(0) == 2 &&
-                                   uniqueValues.get(1) == 3 &&
-                                   uniqueValues.get(2) == 4 &&
-                                   uniqueValues.get(3) == 5 &&
-                                   uniqueValues.get(4) == 14;
-
-        if (isAceLowStraight) {
-            return 5;
-        }
-
-        return 0;
     }
 }

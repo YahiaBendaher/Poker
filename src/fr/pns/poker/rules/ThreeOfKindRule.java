@@ -11,12 +11,11 @@ public class ThreeOfKindRule {
     public static int getThreeOfAKind(List<Card> cards) {
         int[] counts = new int[15];
         for (Card c : cards) {
-                counts[c.getValue().getCardNumber()]++;
+            int v = c.getValue().getCardNumber();
+            counts[v]++;
         }
-        for (int i = 14; i >= 2; i--) {
-            if (counts[i] == 3) {
-                return i;
-            }
+        for (int val = 14; val >= 2; val--) {
+            if (counts[val] == 3) return val;
         }
         return 0;
     }
