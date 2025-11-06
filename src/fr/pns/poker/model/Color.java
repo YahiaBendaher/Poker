@@ -17,7 +17,12 @@ public enum Color {
         return code;
     }
     public static Color getColorFromCode(String code){
+        if (code == null || code.isEmpty()) {
+            throw new IllegalArgumentException("Couleur manquante ou invalide (attendu : Tr, Ca, Co, Pi)");
+        }
+
         String lowerCaseCode = code.trim().toLowerCase();
+
         switch (lowerCaseCode){
             case "tr": return TREFLE;
             case "ca": return CARREAU;

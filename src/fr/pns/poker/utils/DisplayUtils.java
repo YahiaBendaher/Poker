@@ -25,14 +25,11 @@ public class DisplayUtils {
                     throw new Exception("Une Main doit contenir exactement 5 cartes!");
                 }
 
-
                 List<String> cardValues = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-
 
                 if (cardValues.size() != 5) {
                     throw new Exception("Une Main doit contenir exactement 5 cartes!");
                 }
-
 
                 for (String value : cardValues) {
                     hand.addCard(CardSeperator.seperateCard(value));
@@ -41,9 +38,14 @@ public class DisplayUtils {
                 isValid = true; // Tout est bon → main valide
 
             } catch (Exception e) {
-                if (e.getMessage().equals("Une Main doit contenir exactement 5 cartes!")) {
-                    System.out.println(e.getMessage());
-                } else {
+                String msg = e.getMessage();
+                if (msg.equals("Une Main doit contenir exactement 5 cartes!")) {
+                    System.out.println(msg);
+                }
+                else if (msg.startsWith("Erreur : '")) {
+                    System.out.println(msg); // <-- affichera "Erreur : '5Pi' en double."
+                }
+                else {
                     System.out.println("Types de Cartes invalides! (Format attendu: Valeur+Couleur, ex: 2Tr, 10Ca, VCo, RPi, ATr)");
                 }
             }

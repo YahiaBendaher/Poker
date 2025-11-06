@@ -12,10 +12,15 @@ public class Hand {
     }
 
     public void addCard(Card c)  {
-        if (c == null) {
+        if (c == null){
             throw new IllegalArgumentException("Carte nulle");
         }
-        if(cards.size() >= 5){
+        for (Card existing : cards) {
+            if (existing.getValue() == c.getValue() && existing.getColor() == c.getColor()){
+                throw new IllegalArgumentException("Erreur : '" + c + "' en double.");
+            }
+        }
+        if (cards.size() >= 5) {
             throw new IllegalStateException("Une main ne peut contenir que 5 cartes");
         }
         cards.add(c);
@@ -55,4 +60,4 @@ public class Hand {
         return h;
     }
 
-}
+    }

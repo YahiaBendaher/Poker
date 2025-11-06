@@ -8,7 +8,6 @@ public class Card {
     public Card(Value value, Color color) {
         this.value = value;
         this.color = color;
-
     }
 
     public Value getValue() {
@@ -22,9 +21,6 @@ public class Card {
         return value.getCardNumber();
     }
 
-
-
-
     public void setValue(Value v) {
         this.value = v;
     }
@@ -32,9 +28,9 @@ public class Card {
         this.color = c;
     }
 
+    @Override
     public String toString() {
-        return value.getCardNumber() + color.getCode();
+        return value.getSymbol() + color.getCode();
     }
-
 }
 
