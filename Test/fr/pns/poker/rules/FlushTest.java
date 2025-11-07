@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SameColorRuleTest {
+class FlushTest {
 
     @Test
     @DisplayName("Main de 5 cartes de même couleur → Couleur (Flush)")
