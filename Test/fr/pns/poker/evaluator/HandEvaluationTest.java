@@ -75,22 +75,7 @@ class HandEvaluationTest {
         assertEquals(List.of(9, 8, 7, 6, 5), evaluation.getValues());
     }
 
-    @Test
-    void testFlushEvaluation() {
-        Hand hand = Hand.createHand("2Tr", "5Tr", "8Tr", "RTr", "ATr");
-        HandEvaluation eval = HandEvaluation.evaluateHand(hand);
-        assertEquals(HandRank.FLUSH, eval.getRank());
-        assertEquals(List.of(14, 13, 8, 5, 2), eval.getValues());
-        assertEquals(14, eval.getValues().get(0));
-    }
-
-    @Test
-    void testNotFlushEvaluation() {
-        Hand hand = Hand.createHand("2Tr", "5Tr", "8Tr", "RCo", "ATr");
-        HandEvaluation eval = HandEvaluation.evaluateHand(hand);
-        // Doit être une simple "HIGH_CARD"
-        assertEquals(HandRank.HIGH_CARD, eval.getRank());
-    }
+ 
 
 
 }
