@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class DisplayUtils {
+public class IOUtils {
 
     public static Hand readHand(Scanner scanner, int handIndex) {
         boolean isValid = false;
