@@ -21,6 +21,7 @@ public class HandEvaluation {
         this.values = values;
     }
 
+
     public HandRank getRank() { return rank; }
     public void setRank(HandRank rank) { this.rank = rank; }
 

@@ -46,6 +46,16 @@ public enum Value {
         }
     }
 
+    public static String getNameFromNumber(int number) {
+        switch (number) {
+            case 14: return "As";
+            case 13: return "Roi";
+            case 12: return "Dame";
+            case 11: return "Valet";
+            default: return String.valueOf(number); // pour 2..10
+        }
+    }
+
 
 
 }

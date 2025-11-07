@@ -2,6 +2,7 @@ package fr.pns.poker.evaluator;
 
 import fr.pns.poker.model.Hand;
 import fr.pns.poker.model.HandRank;
+import fr.pns.poker.model.Value;
 
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class HandComparator {
                 return buildResultString("Main 2", eval2);
             }
         }
-
         return "Egalite";
     }
 
@@ -40,19 +40,21 @@ public class HandComparator {
         List<Integer> values = eval.getValues();
 
         int highVal = values.get(0);
+        String symbol = Value.getNameFromNumber(highVal);
 
         switch (rank) {
             case HIGH_CARD:
-                return winner + " gagne avec carte la plus élevée : " + highVal;
+                return winner + " gagne avec carte la plus élevée : " + symbol;
             case PAIR:
-                return winner + " gagne avec paire de " + highVal;
+                return winner + " gagne avec paire de " + symbol;
             case TWO_PAIR:
                 int lowVal = values.get(1);
-                return winner + " gagne avec double paire de " + highVal + " et " + lowVal;
+                String lowSymbol = Value.getNameFromNumber(lowVal);
+                return winner + " gagne avec double paire de " + symbol + " et " + lowSymbol;
             case THREE_OF_A_KIND:
-                return winner + " gagne avec brelan de " + highVal;
+                return winner + " gagne avec brelan de " + symbol;
             case STRAIGHT:
-                return winner + " gagne avec une suite, carte la plus haute : " + highVal;
+                return winner + " gagne avec une suite, carte la plus haute : " + symbol;
             default:
                 return winner + " gagne (" + eval + ")";
         }
