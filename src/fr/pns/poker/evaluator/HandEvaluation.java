@@ -1,12 +1,10 @@
 package fr.pns.poker.evaluator;
 
+import fr.pns.poker.model.Color;
 import fr.pns.poker.model.Hand;
 import fr.pns.poker.model.HandRank;
 import fr.pns.poker.model.Card;
-import fr.pns.poker.rules.PairRule;
-import fr.pns.poker.rules.TwoPairsRule;
-import fr.pns.poker.rules.ThreeOfKindRule;
-import fr.pns.poker.rules.StraightRule;
+import fr.pns.poker.rules.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +13,15 @@ import java.util.List;
 public class HandEvaluation {
     private HandRank rank;
     private List<Integer> values;
+    private Color color;
 
     public HandEvaluation(HandRank rank, List<Integer> values) {
         this.rank = rank;
         this.values = values;
     }
 
-
+    public Color getColor() {return color;}
+    public void setColor(Color color) {this.color = color;}
     public HandRank getRank() { return rank; }
     public void setRank(HandRank rank) { this.rank = rank; }
 
@@ -39,6 +39,15 @@ public class HandEvaluation {
         List<Integer> sortedValues = getSortedCardValues(cards);
 
         List<Integer> values = new ArrayList<>();
+
+
+        //Flush
+        if (Flush.getCouleur(cards)) {
+            Color color = cards.get(0).getColor();
+            HandEvaluation eval = new HandEvaluation(HandRank.FLUSH, sortedValues);
+            eval.setColor(color);
+            return eval;
+        }
 
         // Suite (Straight)
         int straightHigh = StraightRule.getStraight(cards);  // <-- maintenant un int (hauteur) ou 0

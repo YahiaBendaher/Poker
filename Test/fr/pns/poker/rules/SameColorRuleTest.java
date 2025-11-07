@@ -20,7 +20,7 @@ class SameColorRuleTest {
                 new Card(Value.VALET, Color.PIQUE),
                 new Card(Value.ROI, Color.PIQUE)
         );
-        assertTrue(SameColorRule.getCouleur(cards));
+        assertTrue(Flush.getCouleur(cards));
     }
 
     @Test
@@ -33,6 +33,6 @@ class SameColorRuleTest {
                 new Card(Value.VALET, Color.PIQUE),
                 new Card(Value.ROI, Color.CARREAU)
         );
-        assertFalse(SameColorRule.getCouleur(cards));
+        assertFalse(Flush.getCouleur(cards));
     }
 }

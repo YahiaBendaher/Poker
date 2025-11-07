@@ -33,4 +33,14 @@ public enum Color {
                         code + " est une couleur invalide (attendu Tr, Ca, Co, Pi)");
         }
     }
+
+    public String getNomFrancais() {
+        return switch (this) {
+            case COEUR -> "Cœur";
+            case PIQUE -> "Pique";
+            case CARREAU -> "Carreau";
+            case TREFLE -> "Trèfle";
+        };
+    }
+
 }

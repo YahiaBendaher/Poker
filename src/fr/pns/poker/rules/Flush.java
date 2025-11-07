@@ -3,7 +3,7 @@ package fr.pns.poker.rules;
 import fr.pns.poker.model.Card;
 import java.util.List;
 
-public class SameColorRule {
+public class Flush {
 
     /**
      * Vérifie si une main de 5 cartes est une couleur (Flush) :

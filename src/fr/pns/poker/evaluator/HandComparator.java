@@ -1,5 +1,6 @@
 package fr.pns.poker.evaluator;
 
+import fr.pns.poker.model.Color;
 import fr.pns.poker.model.Hand;
 import fr.pns.poker.model.HandRank;
 import fr.pns.poker.model.Value;
@@ -55,6 +56,11 @@ public class HandComparator {
                 return winner + " gagne avec brelan de " + symbol;
             case STRAIGHT:
                 return winner + " gagne avec une suite, carte la plus haute : " + symbol;
+            case FLUSH:
+                Color couleur = eval.getColor();
+                return winner + " gagne avec une couleur à "
+                        + couleur.getNomFrancais()
+                        + " (carte la plus haute : " + symbol + ")";
             default:
                 return winner + " gagne (" + eval + ")";
         }
