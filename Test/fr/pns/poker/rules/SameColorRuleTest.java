@@ -49,4 +49,30 @@ class SameColorRuleTest {
         );
         assertFalse(SameColorRule.haveSameColor(cards));
     }
+    @Test
+    @DisplayName("Trois cartes de même couleur → devrait retourner true avec haveSameColor()")
+    void threeCardsSameColorShouldReturnTrue_withHaveSameColor() {
+        List<Card> cards = List.of(
+                new Card(Value.TWO, Color.PIQUE),
+                new Card(Value.FIVE, Color.PIQUE),
+                new Card(Value.ROI, Color.PIQUE)
+        );
+
+        assertTrue(SameColorRule.haveSameColor(cards),
+                "Les trois cartes sont des PIQUE, donc haveSameColor() doit retourner true");
+    }
+
+    @Test
+    @DisplayName("Trois cartes dont une couleur différente → devrait retourner false avec haveSameColor()")
+    void threeCardsDifferentColorShouldReturnFalse_withHaveSameColor() {
+        List<Card> cards = List.of(
+                new Card(Value.TWO, Color.PIQUE),
+                new Card(Value.FIVE, Color.COEUR),
+                new Card(Value.ROI, Color.PIQUE)
+        );
+
+        assertFalse(SameColorRule.haveSameColor(cards),
+                "Toutes les cartes ne sont pas de la même couleur, donc false attendu");
+    }
+
 }
