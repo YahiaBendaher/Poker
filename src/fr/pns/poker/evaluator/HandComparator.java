@@ -72,6 +72,9 @@ public class HandComparator {
                 }
                 return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
 
+            case FOUR_OF_A_KIND:
+                return winner + " gagne avec un CARRÉ de " + symbol;
+                
             case STRAIGHT_FLUSH:
                 Color couleur1 = eval.getColor();
                 return winner + " gagne avec un Quinte Flush, (Couleur de " + couleur1.getNomFrancais() + ", Carte plus haute : " + symbol + ")";

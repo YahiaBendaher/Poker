@@ -17,7 +17,7 @@ class HandComparatorTest {
         assertTrue(result.contains("Main 1"),
                 "La Quinte Flush (Main 1) doit battre le Carré (Main 2)");
     }
-    
+
     @Test
     @DisplayName("Carré bat Full")
     void fourOfKindShouldBeatFullHouse() {
