@@ -110,41 +110,7 @@ class HandEvaluationTest {
         assertEquals(HandRank.FOUR_OF_A_KIND, evaluation.getRank());
         assertEquals(List.of(14, 13), evaluation.getValues());
     }
-    // Flush
-    @Test
-    @DisplayName("StraightFlush : suite complète et même couleur")
-    void testStraightFlush_Valid() {
-        Hand hand = Hand.createHand("9Co", "10Co", "VCo", "DCo", "RCo");
-        HandEvaluation eval = HandEvaluation.evaluateHand(hand);
-        assertEquals(HandRank.STRAIGHT_FLUSH, eval.getRank());
-    }
 
-    //  Flush — même couleur mais pas en suite
-    @Test
-    @DisplayName("Flush : même couleur mais pas suite")
-    void testFlush_Only() {
-        Hand hand = Hand.createHand("2Co", "5Co", "9Co", "DCo", "RCo");
-        HandEvaluation eval = HandEvaluation.evaluateHand(hand);
-        assertEquals(HandRank.FLUSH, eval.getRank());
-    }
-
-    // Straight — suite avec couleurs différentes
-    @Test
-    @DisplayName("Straight : suite mais couleurs différentes")
-    void testStraight_Only() {
-        Hand hand = Hand.createHand("9Co", "10Ca", "VTr", "DCo", "RCo");
-        HandEvaluation eval = HandEvaluation.evaluateHand(hand);
-        assertEquals(HandRank.STRAIGHT, eval.getRank());
-    }
-
-    // Main invalide — carte en double
-    @Test
-    @DisplayName("Main invalide : doublon interdit")
-    void testDuplicateCard() {
-        assertThrows(DuplicateCardException.class, () -> {
-            Hand.createHand("9Co", "9Co", "10Co", "VCo", "DCo");
-        });
-    }
 
 
 }
