@@ -92,5 +92,23 @@ class HandEvaluationTest {
         assertEquals(HandRank.HIGH_CARD, eval.getRank());
     }
 
+    @Test
+    @DisplayName("Devrait évaluer FOUR_OF_A_KIND (Carré de 7)")
+    void shouldEvaluateFourOfAKind() {
+        Hand hand = Hand.createHand("7Pi", "7Co", "7Tr", "7Ca", "2Co");
+        HandEvaluation evaluation = HandEvaluation.evaluateHand(hand);
+        assertEquals(HandRank.FOUR_OF_A_KIND, evaluation.getRank());
+        assertEquals(List.of(7, 2), evaluation.getValues());
+    }
+
+    @Test
+    @DisplayName("Devrait évaluer FOUR_OF_A_KIND (Carré d'As)")
+    void shouldEvaluateFourOfAKindAces() {
+        Hand hand = Hand.createHand("ATr", "ACo", "APi", "ACa", "RPi");
+        HandEvaluation evaluation = HandEvaluation.evaluateHand(hand);
+        assertEquals(HandRank.FOUR_OF_A_KIND, evaluation.getRank());
+        assertEquals(List.of(14, 13), evaluation.getValues());
+    }
+
 
 }
