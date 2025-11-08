@@ -9,6 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandComparatorTest {
 
     @Test
+    @DisplayName("Full : Égalité parfaite entre deux Full identiques")
+    void fullShouldBeEqualWithIdenticalValues() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr");
+        Hand hand2 = Hand.createHand("10Pi", "10Ca", "10Tr", "8Co", "8Pi");
+        assertEquals("Egalite", HandComparator.compareHands(hand1, hand2));
+    }
+    @Test
     @DisplayName("Couleur : Main 1 gagne avec la carte la plus haute")
     void flushHighCard_Main1Wins() {
         // Main 1 : Couleur (Pi) avec As en carte haute
@@ -168,5 +175,23 @@ class HandComparatorTest {
 
         String res = HandComparator.compareHands(full, flush);
         assertEquals("Main 1 gagne avec un FULL, (Brelan de 10, Paire de 8)", res);
+    }
+
+    @Test
+    @DisplayName("Full : Brelan plus haut gagne")
+    void fullHigherThreeOfAKindShouldWin() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr"); // Full: 10 over 8
+        Hand hand2 = Hand.createHand("9Tr", "9Co", "9Pi", "ACa", "ATr");    // Full: 9 over A
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1 gagne"));
+    }
+
+    @Test
+    @DisplayName("Full : Paire plus haute décide quand les brelans sont égaux")
+    void fullHigherPairShouldWin() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "9Ca", "9Tr"); // Full: 10 over 9
+        Hand hand2 = Hand.createHand("10Pi", "10Ca", "10Tr", "ACo", "ACa"); // Full: 10 over A
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 2 gagne"));
     }
 }
