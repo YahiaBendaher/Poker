@@ -9,6 +9,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandComparatorTest {
 
     @Test
+    @DisplayName("Couleur : Main 1 gagne avec la carte la plus haute")
+    void flushHighCard_Main1Wins() {
+        // Main 1 : Couleur (Pi) avec As en carte haute
+        Hand hand1 = Hand.createHand("2Pi", "5Pi", "9Pi", "10Pi", "APi");
+        // Main 2 : Couleur (Co) avec Roi en carte haute
+        Hand hand2 = Hand.createHand("2Co", "5Co", "8Co", "9Co", "RCo");
+
+        String result = HandComparator.compareHands(hand1, hand2);
+
+        assertTrue(result.startsWith("Main 1 gagne"),
+                "La main 1 (As haut) devrait battre la main 2 (Roi haut)");
+    }
+
+    @Test
+    @DisplayName("Couleur : Égalité parfaite entre deux mains identiques")
+    void flushHighCard_PerfectTie() {
+        // Deux mains identiques : même couleur et mêmes valeurs
+        Hand hand1 = Hand.createHand("2Pi", "5Pi", "8Pi", "10Pi", "RPi");
+        Hand hand2 = Hand.createHand("2Pi", "5Pi", "8Pi", "10Pi", "RPi");
+
+        String result = HandComparator.compareHands(hand1, hand2);
+
+        assertTrue(result.toLowerCase().contains("egalite"),
+                "Deux couleurs identiques doivent donner une égalité parfaite");
+    }
+
+    @Test
     @DisplayName("Une suite (Straight) bat un brelan (Three of a Kind)")
     void straightShouldBeatThreeOfAKind() {
         Hand straight = Hand.createHand("5Tr", "6Co", "7Pi", "8Ca", "9Tr");   // suite
