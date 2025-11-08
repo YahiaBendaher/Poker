@@ -1,5 +1,7 @@
 package fr.pns.poker.utils;
 
+import fr.pns.poker.exception.InvalidCardFormatException;
+import fr.pns.poker.exception.PokerException;
 import fr.pns.poker.model.Hand;
 import fr.pns.poker.model.CardSeperator;
 
@@ -22,13 +24,13 @@ public class IOUtils {
 
             try {
                 if (line.isEmpty()) {
-                    throw new Exception("Une Main doit contenir exactement 5 cartes!");
+                    throw new InvalidCardFormatException("Une main doit contenir exactement 5 cartes !");
                 }
 
                 List<String> cardValues = new ArrayList<>(Arrays.asList(line.split("\\s+")));
 
                 if (cardValues.size() != 5) {
-                    throw new Exception("Une Main doit contenir exactement 5 cartes!");
+                    throw new InvalidCardFormatException("Une main doit contenir exactement 5 cartes !");
                 }
 
                 for (String value : cardValues) {
@@ -37,17 +39,8 @@ public class IOUtils {
 
                 isValid = true; // Tout est bon → main valide
 
-            } catch (Exception e) {
-                String msg = e.getMessage();
-                if (msg.equals("Une Main doit contenir exactement 5 cartes!")) {
-                    System.out.println(msg);
-                }
-                else if (msg.startsWith("Erreur : '")) {
-                    System.out.println(msg); // <-- affichera "Erreur : '5Pi' en double."
-                }
-                else {
-                    System.out.println("Types de Cartes invalides! (Format attendu: Valeur+Couleur, ex: 2Tr, 10Ca, VCo, RPi, ATr)");
-                }
+            } catch (PokerException e) {
+                System.out.println(e.getMessage());
             }
         }
         return hand;
