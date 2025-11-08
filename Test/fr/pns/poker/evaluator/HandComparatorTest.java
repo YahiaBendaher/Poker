@@ -160,4 +160,13 @@ class HandComparatorTest {
         String result = HandComparator.compareHands(hand1, hand2);
         assertTrue(result.startsWith("Main 2 gagne"));
     }
+    @Test
+    @DisplayName("Full House bat une Couleur")
+    void testFullHouseBeatsFlush() {
+        Hand full = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr");
+        Hand flush = Hand.createHand("10Pi", "8Pi", "APi", "5Pi", "2Pi");
+
+        String res = HandComparator.compareHands(full, flush);
+        assertEquals("Main 1 gagne avec un FULL, (Brelan de 10, Paire de 8)", res);
+    }
 }
