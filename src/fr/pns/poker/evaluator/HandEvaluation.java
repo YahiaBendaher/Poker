@@ -39,9 +39,6 @@ public class HandEvaluation {
         List<Integer> sortedValues = getSortedCardValues(cards);
 
 
-        HandEvaluation fourOfKind = evaluateFourOfAKind(cards, sortedValues);
-        if (fourOfKind != null) return fourOfKind;
-
         HandEvaluation fullHouse = evaluateFullHouse(cards);
         if(fullHouse != null) return fullHouse;
 
@@ -83,18 +80,7 @@ public class HandEvaluation {
         }
         return null;
     }
-    // Carré (Four of a Kind)
-    public static HandEvaluation evaluateFourOfAKind(List<Card> cards, List<Integer> sortedValues) {
-        int fourOfKindValue = FourOfKindRule.getFourOfAKind(cards);
-        if (fourOfKindValue > 0) {
-            List<Integer> values = new ArrayList<>();
-            values.add(fourOfKindValue);
-            List<Integer> comboCards = List.of(fourOfKindValue, fourOfKindValue, fourOfKindValue, fourOfKindValue);
-            values.addAll(getKickers(sortedValues, comboCards));
-            return new HandEvaluation(HandRank.FOUR_OF_A_KIND, values);
-        }
-        return null;
-    }
+
     // Suite (Straight)
     public static HandEvaluation evaluateStraight(List<Card> cards, List<Integer> sortedValues) {
         int straightHigh = StraightRule.getStraight(cards);

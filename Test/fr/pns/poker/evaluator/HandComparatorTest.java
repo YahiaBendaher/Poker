@@ -9,6 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandComparatorTest {
 
     @Test
+    @DisplayName("Full : Égalité parfaite entre deux Full identiques")
+    void fullShouldBeEqualWithIdenticalValues() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr");
+        Hand hand2 = Hand.createHand("10Pi", "10Ca", "10Tr", "8Co", "8Pi");
+        assertEquals("Egalite", HandComparator.compareHands(hand1, hand2));
+    }
+    @Test
     @DisplayName("Couleur : Main 1 gagne avec la carte la plus haute")
     void flushHighCard_Main1Wins() {
         // Main 1 : Couleur (Pi) avec As en carte haute
@@ -169,35 +176,22 @@ class HandComparatorTest {
         String res = HandComparator.compareHands(full, flush);
         assertEquals("Main 1 gagne avec un FULL, (Brelan de 10, Paire de 8)", res);
     }
-    @Test
-    @DisplayName("Full 9 par-dessus 2 bat Full 8 par-dessus As (brelan prioritaire)")
-    void fullWithHigherTripsWins() {
-        Hand hand1 = Hand.createHand("9Pi","9Co","9Tr","2Ca","2Co");   // 9-9-9 + 2-2
-        Hand hand2 = Hand.createHand("8Pi","8Co","8Tr","ACa","ACo");   // 8-8-8 + A-A
 
-        String result = HandComparator.compareHands(hand1, hand2);
-        assertTrue(result.startsWith("Main 1 gagne"),
-                "Le Full avec brelan de 9 doit battre le Full avec brelan de 8, quelle que soit la paire.");
-    }
     @Test
-    @DisplayName("Si les Brelans sont égaux, la Paire départage")
-    void equalTripsPairBreaksTie() {
-        Hand hand1 = Hand.createHand("7Pi","7Co","7Tr","ACa","ACo");   // 7-7-7 + A-A
-        Hand hand2 = Hand.createHand("7Pi","7Co","7Tr","RCa","RCo");   // 7-7-7 + R-R
-
+    @DisplayName("Full : Brelan plus haut gagne")
+    void fullHigherThreeOfAKindShouldWin() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr"); // Full: 10 over 8
+        Hand hand2 = Hand.createHand("9Tr", "9Co", "9Pi", "ACa", "ATr");    // Full: 9 over A
         String result = HandComparator.compareHands(hand1, hand2);
-        assertTrue(result.startsWith("Main 1 gagne"),
-                "À brelan égal (7), la paire d'As doit battre la paire de Rois.");
-    }
-    @Test
-    @DisplayName("Deux Fulls identiques: égalité")
-    void identicalFullsAreTie() {
-        Hand hand1 = Hand.createHand("10Pi","10Co","10Tr","2Ca","2Co");  // 10-10-10 + 2-2
-        Hand hand2 = Hand.createHand("10Pi","10Co","10Tr","2Ca","2Co");  // identique
-
-        String result = HandComparator.compareHands(hand1, hand2);
-        assertTrue(result.toLowerCase().contains("egalite"),
-                "Deux Fulls strictement identiques doivent donner une égalité.");
+        assertTrue(result.startsWith("Main 1 gagne"));
     }
 
+    @Test
+    @DisplayName("Full : Paire plus haute décide quand les brelans sont égaux")
+    void fullHigherPairShouldWin() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "9Ca", "9Tr"); // Full: 10 over 9
+        Hand hand2 = Hand.createHand("10Pi", "10Ca", "10Tr", "ACo", "ACa"); // Full: 10 over A
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 2 gagne"));
+    }
 }
