@@ -38,8 +38,6 @@ public class HandEvaluation {
         List<Card> cards = hand.getCards();
         List<Integer> sortedValues = getSortedCardValues(cards);
 
-        HandEvaluation straightFlush = evaluateStraightFlush(cards, sortedValues);
-        if (straightFlush != null) return straightFlush;
 
         HandEvaluation fourOfKind = evaluateFourOfAKind(cards, sortedValues);
         if (fourOfKind != null) return fourOfKind;
@@ -72,19 +70,6 @@ public class HandEvaluation {
             values.add(fullHouse[0]);
             values.add(fullHouse[1]);
             return new HandEvaluation(HandRank.FULL, values);
-        }
-        return null;
-    }
-
-    // Straight Flush
-    public static HandEvaluation evaluateStraightFlush(List<Card> cards, List<Integer> sortedValues) {
-        int straightFlushHigh  = StraightFlush.getStraightFlush(cards);
-        if (straightFlushHigh  > 0){
-            List<Integer> values = buildStraightValues(straightFlushHigh, sortedValues );
-            Color color = cards.get(0).getColor();
-            HandEvaluation eval = new HandEvaluation(HandRank.STRAIGHT_FLUSH, values);
-            eval.setColor(color);
-            return eval;
         }
         return null;
     }

@@ -61,15 +61,7 @@ public class HandComparator {
                 return winner + " gagne avec une couleur à "
                         + couleur.getNomFrancais()
                         + " (carte la plus haute : " + symbol + ")";
-            case FOUR_OF_A_KIND:
-                return winner + " gagne avec un Carré, carte la plus haute : " + symbol;
-            case STRAIGHT_FLUSH:
-                Color couleur1 = eval.getColor();
-                return winner + " gagne avec un Quinte Flush, (Couleur: " + couleur1.getNomFrancais()+ ", Carte la plus haute : " + symbol + ")";
-            case FULL:
-                int lowValFull = values.get(1);
-                String lowSymbolFull = Value.getNameFromNumber(lowValFull);
-                return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
+            
             default:
                 return winner + " gagne (" + eval + ")";
         }
