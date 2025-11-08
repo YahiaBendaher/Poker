@@ -64,7 +64,7 @@ public class HandEvaluation {
 
     private static HandEvaluation evaluateFullHouse(List<Card> cards) {
         int[] fullHouse = FullHouseRule.getFullHouse(cards);
-        if (fullHouse != null && fullHouse.length > 0){
+        if (fullHouse.length > 0){
             List<Integer> values = new ArrayList<>(fullHouse.length);
             values.add(fullHouse[0]);
             values.add(fullHouse[1]);
