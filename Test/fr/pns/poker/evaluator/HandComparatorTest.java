@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandComparatorTest {
 
     @Test
+    @DisplayName("Quinte Flush Royale bat Quinte Flush")
+    public void royalFlushShouldBeatStraightFlush() {
+        Hand royalFlush = Hand.createHand("10Pi", "VPi", "DPi", "RPi", "APi"); // Quinte Flush Royale
+        Hand straightFlush = Hand.createHand("5Co", "6Co", "7Co", "8Co", "9Co"); // Quinte Flush simple
+
+        String result = HandComparator.compareHands(royalFlush, straightFlush);
+        assertTrue(result.contains("Main 1"), "La Quinte Flush Royale doit battre la Quinte Flush simple");
+    }
+
+    @Test
     @DisplayName("Une Quinte Flush bat un Carré")
     void testStraightFlushBeatsFourOfKind() {
         Hand straightFlush = Hand.createHand("9Co", "10Co", "VCo", "DCo", "RCo"); // 9 à Roi, tout en Cœur

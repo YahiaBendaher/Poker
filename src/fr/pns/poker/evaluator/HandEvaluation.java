@@ -38,6 +38,9 @@ public class HandEvaluation {
         List<Card> cards = hand.getCards();
         List<Integer> sortedValues = getSortedCardValues(cards);
 
+        HandEvaluation royalFlush = evaluateRoyalFlush(cards);
+        if (royalFlush != null) return royalFlush;
+
         HandEvaluation straightFlush = evaluateStraightFlush(cards, sortedValues);
         if (straightFlush != null) return straightFlush;
 
@@ -63,6 +66,18 @@ public class HandEvaluation {
         if (pair != null) return pair;
 
         return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
+    }
+
+    // Quinte Flush Royale (Royal Flush)
+    public static HandEvaluation evaluateRoyalFlush(List<Card> cards) {
+        if (fr.pns.poker.rules.RoyalFlushRule.isRoyalFlush(cards)) {
+            Color color = cards.get(0).getColor();
+            List<Integer> royalValues = List.of(14, 13, 12, 11, 10);
+            HandEvaluation eval = new HandEvaluation(HandRank.ROYAL_FLUSH, royalValues);
+            eval.setColor(color);
+            return eval;
+        }
+        return null;
     }
 
     public static HandEvaluation evaluateStraightFlush(List<Card> cards, List<Integer> sortedValues) {

@@ -44,24 +44,36 @@ public class HandComparator {
         String symbol = Value.getNameFromNumber(highVal);
 
         switch (rank) {
-            case HIGH_CARD:
+            case HIGH_CARD:{
                 return winner + " gagne avec carte la plus élevée : " + symbol;
-            case PAIR:
+            }
+
+            case PAIR:{
                 return winner + " gagne avec paire de " + symbol;
-            case TWO_PAIR:
+            }
+
+            case TWO_PAIR:{
                 int lowVal = values.get(1);
                 String lowSymbol = Value.getNameFromNumber(lowVal);
                 return winner + " gagne avec double paire de " + symbol + " et " + lowSymbol;
-            case THREE_OF_A_KIND:
+            }
+
+            case THREE_OF_A_KIND:{
                 return winner + " gagne avec brelan de " + symbol;
-            case STRAIGHT:
+            }
+
+            case STRAIGHT:{
                 return winner + " gagne avec une suite, carte la plus haute : " + symbol;
-            case FLUSH:
+            }
+
+            case FLUSH:{
                 Color couleur = eval.getColor();
                 return winner + " gagne avec une couleur à "
                         + couleur.getNomFrancais()
                         + " (carte la plus haute : " + symbol + ")";
-            case FULL:
+            }
+
+            case FULL: {
                 int lowValFull = values.get(1);
                 String lowSymbolFull = Value.getNameFromNumber(lowValFull);
                 if (lowValFull > 10 && lowValFull < 14) {
@@ -70,14 +82,22 @@ public class HandComparator {
                 if (highVal > 10 && highVal < 14) {
                     symbol = symbol + "s";
                 }
-                return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
+                return winner + " gagne avec un FULL, (Brelan de " + symbol + ", Paire de " + lowSymbolFull + ")";
+            }
 
-            case FOUR_OF_A_KIND:
-                return winner + " gagne avec un CARRÉ de " + symbol;
+            case FOUR_OF_A_KIND:{
+                return winner + " gagne avec un CARRÉ de " + symbol;}
                 
-            case STRAIGHT_FLUSH:
-                Color couleur1 = eval.getColor();
-                return winner + " gagne avec un Quinte Flush, (Couleur de " + couleur1.getNomFrancais() + ", Carte plus haute : " + symbol + ")";
+            case STRAIGHT_FLUSH: {
+                Color couleur = eval.getColor();
+                return winner + " gagne avec un Quinte Flush, (Couleur de " + couleur.getNomFrancais() + ", Carte plus haute : " + symbol + ")";
+            }
+
+            case ROYAL_FLUSH: {
+                Color couleur = eval.getColor();
+                return winner + " gagne avec une Quinte Flush Royale à "
+                        + couleur.getNomFrancais();
+            }
 
             default:
                 return winner + " gagne (" + eval + ")";
