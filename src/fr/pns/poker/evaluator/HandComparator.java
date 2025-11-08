@@ -61,7 +61,10 @@ public class HandComparator {
                 return winner + " gagne avec une couleur à "
                         + couleur.getNomFrancais()
                         + " (carte la plus haute : " + symbol + ")";
-            
+            case FULL:
+                int lowValFull = values.get(1);
+                String lowSymbolFull = Value.getNameFromNumber(lowValFull);
+                return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
             default:
                 return winner + " gagne (" + eval + ")";
         }
