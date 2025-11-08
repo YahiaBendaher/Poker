@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandComparatorTest {
 
     @Test
+    @DisplayName("Carré bat Full")
+    void fourOfKindShouldBeatFullHouse() {
+        Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "10Ca", "3Tr");
+        Hand hand2 = Hand.createHand("ATr", "ACo", "APi", "RCa", "RTr"); // Full : As + Rois
+
+        String result = HandComparator.compareHands(hand1, hand2);
+        assertTrue(result.startsWith("Main 1"), "Le carré devrait battre le full");
+    }
+
+    @Test
     @DisplayName("Full : Égalité parfaite entre deux Full identiques")
     void fullShouldBeEqualWithIdenticalValues() {
         Hand hand1 = Hand.createHand("10Tr", "10Co", "10Pi", "8Ca", "8Tr");
