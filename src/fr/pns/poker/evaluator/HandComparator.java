@@ -61,6 +61,8 @@ public class HandComparator {
                 return winner + " gagne avec une couleur à "
                         + couleur.getNomFrancais()
                         + " (carte la plus haute : " + symbol + ")";
+            case FOUR_OF_A_KIND:
+                return winner + " gagne avec un Carré, carte la plus haute : " + symbol;
             default:
                 return winner + " gagne (" + eval + ")";
         }

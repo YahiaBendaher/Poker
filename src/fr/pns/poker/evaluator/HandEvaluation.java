@@ -38,6 +38,9 @@ public class HandEvaluation {
         List<Card> cards = hand.getCards();
         List<Integer> sortedValues = getSortedCardValues(cards);
 
+        HandEvaluation straightFlush = evaluateStraightFlush(cards, sortedValues);
+        if (straightFlush != null) return straightFlush;
+
         HandEvaluation fourOfKind = evaluateFourOfAKind(cards, sortedValues);
         if (fourOfKind != null) return fourOfKind;
 
@@ -59,6 +62,19 @@ public class HandEvaluation {
         return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
     }
 
+    // Straight Flush
+    public static HandEvaluation evaluateStraightFlush(List<Card> cards, List<Integer> sortedValues) {
+        int straightFlushHigh  = StraightFlush.getStraightFlush(cards);
+        if (straightFlushHigh  > 0){
+            List<Integer> values = buildStraightValues(straightFlushHigh, sortedValues );
+            Color color = cards.get(0).getColor();
+            HandEvaluation eval = new HandEvaluation(HandRank.STRAIGHT_FLUSH, values);
+            eval.setColor(color);
+            return eval;
+        }
+        return null;
+    }
+    // Couleur (Flush)
     public static HandEvaluation evaluateFlush(List<Card> cards, List<Integer> sortedValues) {
         if (FlushRule.getCouleur(cards)) {
             Color color = cards.get(0).getColor();
@@ -68,7 +84,7 @@ public class HandEvaluation {
         }
         return null;
     }
-
+    // Carré (Four of a Kind)
     public static HandEvaluation evaluateFourOfAKind(List<Card> cards, List<Integer> sortedValues) {
         int fourOfKindValue = FourOfKindRule.getFourOfAKind(cards);
         if (fourOfKindValue > 0) {
@@ -80,7 +96,7 @@ public class HandEvaluation {
         }
         return null;
     }
-
+    // Suite (Straight)
     public static HandEvaluation evaluateStraight(List<Card> cards, List<Integer> sortedValues) {
         int straightHigh = StraightRule.getStraight(cards);
         if (straightHigh > 0) {
@@ -106,7 +122,7 @@ public class HandEvaluation {
         }
         return straightValues;
     }
-
+    // Brelan (Three of a Kind)
     public static HandEvaluation evaluateThreeOfKind(List<Card> cards, List<Integer> sortedValues) {
         int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards);
         if (threeOfKindValue > 0) {
@@ -118,7 +134,7 @@ public class HandEvaluation {
         }
         return null;
     }
-
+    // Double Paire
     private static HandEvaluation evaluateTwoPair(List<Card> cards, List<Integer> sortedValues) {
         List<Integer> pairsList = TwoPairsRule.getDoublePairValues(cards);
         if (!pairsList.isEmpty()) {
@@ -133,7 +149,7 @@ public class HandEvaluation {
         }
         return null;
     }
-
+    // Paire simple
     public static HandEvaluation evaluatePair(List<Card> cards, List<Integer> sortedValues) {
         int pairValue = PairRule.getPair(cards);
         if (pairValue > 0) {
@@ -146,6 +162,7 @@ public class HandEvaluation {
         return null;
     }
 
+    //  Utilitaires
     /** Renvoie les valeurs 2..14 triées décroissantes. */
     public static List<Integer> getSortedCardValues(List<Card> cards) {
         List<Integer> values = new ArrayList<>();
