@@ -64,6 +64,12 @@ public class HandComparator {
             case FULL:
                 int lowValFull = values.get(1);
                 String lowSymbolFull = Value.getNameFromNumber(lowValFull);
+                if (lowValFull > 10 && lowValFull < 14) {
+                    lowSymbolFull = lowSymbolFull + "s";
+                }
+                if (highVal > 10 && highVal < 14) {
+                    symbol = symbol + "s";
+                }
                 return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
             default:
                 return winner + " gagne (" + eval + ")";
