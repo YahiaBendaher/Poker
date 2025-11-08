@@ -44,6 +44,9 @@ public class HandEvaluation {
         HandEvaluation fourOfKind = evaluateFourOfAKind(cards, sortedValues);
         if (fourOfKind != null) return fourOfKind;
 
+        HandEvaluation fullHouse = evaluateFullHouse(cards);
+        if(fullHouse != null) return fullHouse;
+
         HandEvaluation flush = evaluateFlush(cards, sortedValues);
         if (flush != null) return flush;
 
@@ -60,6 +63,17 @@ public class HandEvaluation {
         if (pair != null) return pair;
 
         return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
+    }
+
+    private static HandEvaluation evaluateFullHouse(List<Card> cards) {
+        int[] fullHouse = FullHouseRule.getFullHouse(cards);
+        if (fullHouse.length > 0){
+            List<Integer> values = new ArrayList<>(fullHouse.length);
+            values.add(fullHouse[0]);
+            values.add(fullHouse[1]);
+            return new HandEvaluation(HandRank.FULL, values);
+        }
+        return null;
     }
 
     // Straight Flush
