@@ -20,7 +20,7 @@ class FlushTest {
                 new Card(Value.VALET, Color.PIQUE),
                 new Card(Value.ROI, Color.PIQUE)
         );
-        assertTrue(Flush.getCouleur(cards));
+        assertTrue(FlushRule.getCouleur(cards));
     }
 
     @Test
@@ -33,6 +33,6 @@ class FlushTest {
                 new Card(Value.VALET, Color.PIQUE),
                 new Card(Value.ROI, Color.CARREAU)
         );
-        assertFalse(Flush.getCouleur(cards));
+        assertFalse(FlushRule.getCouleur(cards));
     }
 }

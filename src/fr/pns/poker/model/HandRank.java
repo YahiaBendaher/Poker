@@ -7,7 +7,7 @@ public enum HandRank {
     THREE_OF_A_KIND(4),
     STRAIGHT(5),          // Suite
     FLUSH(6),             // Couleur
-    FULL_HOUSE(7),        // Full
+    FULL(7),        // Full
     FOUR_OF_A_KIND(8),    // Carré
     STRAIGHT_FLUSH(9),    // Quinte flush
     ROYAL_FLUSH(10);      // Quinte flush royale

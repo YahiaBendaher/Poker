@@ -38,74 +38,101 @@ public class HandEvaluation {
         List<Card> cards = hand.getCards();
         List<Integer> sortedValues = getSortedCardValues(cards);
 
-        List<Integer> values = new ArrayList<>();
+        HandEvaluation flush = evaluateFlush(cards, sortedValues);
+        if (flush != null) return flush;
 
+        HandEvaluation straight = evaluateStraight(cards, sortedValues);
+        if (straight != null) return straight;
 
-        //Flush
-        if (Flush.getCouleur(cards)) {
+        HandEvaluation threeOfKind = evaluateThreeOfKind(cards, sortedValues);
+        if (threeOfKind != null) return threeOfKind;
+
+        HandEvaluation twoPair = evaluateTwoPair(cards, sortedValues);
+        if (twoPair != null) return twoPair;
+
+        HandEvaluation pair = evaluatePair(cards, sortedValues);
+        if (pair != null) return pair;
+
+        return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
+    }
+
+    public static HandEvaluation evaluateFlush(List<Card> cards, List<Integer> sortedValues) {
+        if (FlushRule.getCouleur(cards)) {
             Color color = cards.get(0).getColor();
             HandEvaluation eval = new HandEvaluation(HandRank.FLUSH, sortedValues);
             eval.setColor(color);
             return eval;
         }
+        return null;
+    }
 
-        // Suite (Straight)
-        int straightHigh = StraightRule.getStraight(cards);  // <-- maintenant un int (hauteur) ou 0
+    public static HandEvaluation evaluateStraight(List<Card> cards, List<Integer> sortedValues) {
+        int straightHigh = StraightRule.getStraight(cards);
         if (straightHigh > 0) {
-            List<Integer> straightValues = new ArrayList<>();
-            // Cas spécial pour la suite A-2-3-4-5
-            if (straightHigh == 5 && sortedValues.contains(14)) {
-                straightValues.add(5);
-                straightValues.add(4);
-                straightValues.add(3);
-                straightValues.add(2);
-                straightValues.add(1);
-            } else {
-                for (int i = 0; i < 5; i++) {
-                    straightValues.add(straightHigh - i);
-                }
-            }
+            List<Integer> straightValues = buildStraightValues(straightHigh, sortedValues);
             return new HandEvaluation(HandRank.STRAIGHT, straightValues);
         }
+        return null;
+    }
 
-        // Brelan
-        int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards); // garde ta signature
+    public static List<Integer> buildStraightValues(int straightHigh, List<Integer> sortedValues) {
+        List<Integer> straightValues = new ArrayList<>();
+        if (straightHigh == 5 && sortedValues.contains(14)) {
+            // Cas spécial pour la suite A-2-3-4-5
+            straightValues.add(5);
+            straightValues.add(4);
+            straightValues.add(3);
+            straightValues.add(2);
+            straightValues.add(1);
+        } else {
+            for (int i = 0; i < 5; i++) {
+                straightValues.add(straightHigh - i);
+            }
+        }
+        return straightValues;
+    }
+
+    public static HandEvaluation evaluateThreeOfKind(List<Card> cards, List<Integer> sortedValues) {
+        int threeOfKindValue = ThreeOfKindRule.getThreeOfAKind(cards);
         if (threeOfKindValue > 0) {
+            List<Integer> values = new ArrayList<>();
             values.add(threeOfKindValue);
             List<Integer> comboCards = List.of(threeOfKindValue, threeOfKindValue, threeOfKindValue);
             values.addAll(getKickers(sortedValues, comboCards));
             return new HandEvaluation(HandRank.THREE_OF_A_KIND, values);
         }
+        return null;
+    }
 
-        // Double Paire
-        List<Integer> pairsList = TwoPairsRule.getDoublePairValues(cards); // garde ta signature existante
+    private static HandEvaluation evaluateTwoPair(List<Card> cards, List<Integer> sortedValues) {
+        List<Integer> pairsList = TwoPairsRule.getDoublePairValues(cards);
         if (!pairsList.isEmpty()) {
+            List<Integer> values = new ArrayList<>();
             int pairHaute = pairsList.get(0);
             int pairBasse = pairsList.get(1);
-
             values.add(pairHaute);
             values.add(pairBasse);
-
             List<Integer> comboCards = List.of(pairHaute, pairHaute, pairBasse, pairBasse);
             values.addAll(getKickers(sortedValues, comboCards));
             return new HandEvaluation(HandRank.TWO_PAIR, values);
         }
+        return null;
+    }
 
-        // Paire
-        int pairValue = PairRule.getPair(cards); // garde ta signature existante
+    public static HandEvaluation evaluatePair(List<Card> cards, List<Integer> sortedValues) {
+        int pairValue = PairRule.getPair(cards);
         if (pairValue > 0) {
+            List<Integer> values = new ArrayList<>();
             values.add(pairValue);
             List<Integer> comboCards = List.of(pairValue, pairValue);
             values.addAll(getKickers(sortedValues, comboCards));
             return new HandEvaluation(HandRank.PAIR, values);
         }
-
-        // Plus haute carte
-        return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
+        return null;
     }
 
     /** Renvoie les valeurs 2..14 triées décroissantes. */
-    private static List<Integer> getSortedCardValues(List<Card> cards) {
+    public static List<Integer> getSortedCardValues(List<Card> cards) {
         List<Integer> values = new ArrayList<>();
         for (Card c : cards) {
             values.add(c.getValue().getCardNumber()); // <-- IMPORTANT
@@ -115,7 +142,7 @@ public class HandEvaluation {
     }
 
     /** Enlève des valeurs triées les cartes déjà utilisées par la combinaison, et renvoie les kickers restants. */
-    private static List<Integer> getKickers(List<Integer> allSortedValues, List<Integer> comboValues) {
+    public static List<Integer> getKickers(List<Integer> allSortedValues, List<Integer> comboValues) {
         List<Integer> kickers = new ArrayList<>(allSortedValues);
         for (Integer comboVal : comboValues) {
             kickers.remove(comboVal);
