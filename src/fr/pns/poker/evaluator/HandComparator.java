@@ -71,6 +71,11 @@ public class HandComparator {
                     symbol = symbol + "s";
                 }
                 return winner + " gagne avec un FULL, (Brelan de "+symbol+", Paire de "+lowSymbolFull+")";
+
+            case STRAIGHT_FLUSH:
+                Color couleur1 = eval.getColor();
+                return winner + " gagne avec un Quinte Flush, (Couleur de " + couleur1.getNomFrancais() + ", Carte plus haute : " + symbol + ")";
+
             default:
                 return winner + " gagne (" + eval + ")";
         }

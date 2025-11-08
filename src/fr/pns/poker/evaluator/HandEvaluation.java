@@ -38,6 +38,9 @@ public class HandEvaluation {
         List<Card> cards = hand.getCards();
         List<Integer> sortedValues = getSortedCardValues(cards);
 
+        HandEvaluation straightFlush = evaluateStraightFlush(cards, sortedValues);
+        if (straightFlush != null) return straightFlush;
+
         HandEvaluation fourOfKind = evaluateFourOfKind(cards, sortedValues);
         if (fourOfKind != null) return fourOfKind;
 
@@ -60,6 +63,18 @@ public class HandEvaluation {
         if (pair != null) return pair;
 
         return new HandEvaluation(HandRank.HIGH_CARD, sortedValues);
+    }
+
+    public static HandEvaluation evaluateStraightFlush(List<Card> cards, List<Integer> sortedValues) {
+        int straightFlushHigh = StraightFlush.getStraightFlush(cards);
+        if (straightFlushHigh > 0) {
+            List<Integer> values = buildStraightValues(straightFlushHigh, sortedValues);
+            Color color = cards.get(0).getColor();
+            HandEvaluation eval = new HandEvaluation(HandRank.STRAIGHT_FLUSH, values);
+            eval.setColor(color);
+            return eval;
+        }
+        return null;
     }
 
     // Carré (Four of a Kind)
