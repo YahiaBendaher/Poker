@@ -1,5 +1,7 @@
 package fr.pns.poker.model;
 
+import fr.pns.poker.exception.InvalidValueException;
+
 public enum Value {
     TWO("2", 2),
     THREE("3", 3),
@@ -42,7 +44,7 @@ public enum Value {
             case "R": return ROI;
             case "A": return AS;
             default:
-                throw new IllegalArgumentException(s + " est une valeur invalide (attendu: 2..10, V, D, R, A)");
+                throw new InvalidValueException(s);
         }
     }
 

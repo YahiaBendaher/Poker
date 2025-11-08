@@ -1,6 +1,8 @@
 package fr.pns.poker.model;
 
 
+import fr.pns.poker.exception.InvalidColorException;
+
 public enum Color {
     TREFLE("Tr"),
     CARREAU("Ca"),
@@ -18,7 +20,7 @@ public enum Color {
     }
     public static Color getColorFromCode(String code){
         if (code == null || code.isEmpty()) {
-            throw new IllegalArgumentException("Couleur manquante ou invalide (attendu : Tr, Ca, Co, Pi)");
+            throw new InvalidColorException(code);
         }
 
         String lowerCaseCode = code.trim().toLowerCase();
@@ -29,8 +31,7 @@ public enum Color {
             case "co": return COEUR;
             case "pi": return PIQUE;
             default:
-                throw new IllegalArgumentException(
-                        code + " est une couleur invalide (attendu Tr, Ca, Co, Pi)");
+                throw new InvalidColorException(code);
         }
     }
 
