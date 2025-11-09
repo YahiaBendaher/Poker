@@ -70,7 +70,7 @@ public class HandEvaluation {
 
     // Quinte Flush Royale (Royal Flush)
     public static HandEvaluation evaluateRoyalFlush(List<Card> cards) {
-        if (fr.pns.poker.rules.RoyalFlushRule.isRoyalFlush(cards)) {
+        if (RoyalFlushRule.isRoyalFlush(cards)) {
             Color color = cards.get(0).getColor();
             List<Integer> royalValues = List.of(14, 13, 12, 11, 10);
             HandEvaluation eval = new HandEvaluation(HandRank.ROYAL_FLUSH, royalValues);
