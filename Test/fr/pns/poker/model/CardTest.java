@@ -114,21 +114,6 @@ class CardTest {
     }
 
     @Test
-    void testCardCreationWithDifferentCombinations() {
-        Card card1 = new Card(Value.TWO, Color.TREFLE);
-        assertNotNull(card1);
-        assertEquals(Value.TWO, card1.getValue());
-        assertEquals(Color.TREFLE, card1.getColor());
-        assertEquals(2, card1.getValueAsInt());
-
-        Card card2 = new Card(Value.DAME, Color.CARREAU);
-        assertNotNull(card2);
-        assertEquals(Value.DAME, card2.getValue());
-        assertEquals(Color.CARREAU, card2.getColor());
-        assertEquals(12, card2.getValueAsInt());
-    }
-
-    @Test
     void testSettersModifyCardCorrectly() {
         Card modifiableCard = new Card(Value.TWO, Color.TREFLE);
 

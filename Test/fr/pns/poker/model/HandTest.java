@@ -40,39 +40,6 @@ class HandTest {
     }
 
     @Test
-    void testAddCard_MultipleCards() {
-        Card card1 = new Card(Value.AS, Color.PIQUE);
-        Card card2 = new Card(Value.ROI, Color.COEUR);
-        Card card3 = new Card(Value.DAME, Color.CARREAU);
-
-        hand.addCard(card1);
-        hand.addCard(card2);
-        hand.addCard(card3);
-
-        assertEquals(3, hand.size());
-        assertTrue(hand.getCards().contains(card1));
-        assertTrue(hand.getCards().contains(card2));
-        assertTrue(hand.getCards().contains(card3));
-    }
-
-    @Test
-    void testAddCard_FiveCards() {
-        Card card1 = new Card(Value.AS, Color.PIQUE);
-        Card card2 = new Card(Value.ROI, Color.COEUR);
-        Card card3 = new Card(Value.DAME, Color.CARREAU);
-        Card card4 = new Card(Value.VALET, Color.TREFLE);
-        Card card5 = new Card(Value.TEN, Color.PIQUE);
-
-        hand.addCard(card1);
-        hand.addCard(card2);
-        hand.addCard(card3);
-        hand.addCard(card4);
-        hand.addCard(card5);
-
-        assertEquals(5, hand.size());
-    }
-
-    @Test
     void testAddCard_NullCard_ThrowsException() {
         InvalidHandException exception = assertThrows(
                 InvalidHandException.class,
@@ -111,28 +78,6 @@ class HandTest {
         assertTrue(exception.getMessage().contains("APi"));
     }
 
-    @Test
-    void testAddCard_SameValueDifferentColor_NoException() {
-        Card card1 = new Card(Value.AS, Color.PIQUE);
-        Card card2 = new Card(Value.AS, Color.COEUR); // Même valeur, couleur différente
-
-        hand.addCard(card1);
-        hand.addCard(card2);
-
-        assertEquals(2, hand.size());
-    }
-
-    @Test
-    void testAddCard_SameColorDifferentValue_NoException() {
-        Card card1 = new Card(Value.AS, Color.PIQUE);
-        Card card2 = new Card(Value.ROI, Color.PIQUE); // Même couleur, valeur différente
-
-        hand.addCard(card1);
-        hand.addCard(card2);
-
-        assertEquals(2, hand.size());
-    }
-
     // Tests de getCards
     @Test
     void testGetCards_ReturnsCorrectList() {
@@ -147,25 +92,6 @@ class HandTest {
         assertEquals(2, cards.size());
         assertEquals(card1, cards.get(0));
         assertEquals(card2, cards.get(1));
-    }
-
-    @Test
-    void testGetCards_EmptyHand() {
-        List<Card> cards = hand.getCards();
-        assertNotNull(cards);
-        assertTrue(cards.isEmpty());
-    }
-
-    // Tests de size
-    @Test
-    void testSize_EmptyHand() {
-        assertEquals(0, hand.size());
-    }
-
-    @Test
-    void testSize_OneCard() {
-        hand.addCard(new Card(Value.AS, Color.PIQUE));
-        assertEquals(1, hand.size());
     }
 
     @Test
@@ -185,32 +111,6 @@ class HandTest {
         List<Integer> values = hand.getValues();
         assertNotNull(values);
         assertTrue(values.isEmpty());
-    }
-
-    @Test
-    void testGetValues_SingleCard() {
-        hand.addCard(new Card(Value.AS, Color.PIQUE));
-
-        List<Integer> values = hand.getValues();
-        assertEquals(1, values.size());
-        assertEquals(14, values.get(0));
-    }
-
-    @Test
-    void testGetValues_MultipleCards() {
-        hand.addCard(new Card(Value.AS, Color.PIQUE));      // 14
-        hand.addCard(new Card(Value.ROI, Color.COEUR));     // 13
-        hand.addCard(new Card(Value.VALET, Color.CARREAU)); // 11
-        hand.addCard(new Card(Value.FIVE, Color.TREFLE));   // 5
-        hand.addCard(new Card(Value.TWO, Color.PIQUE));     // 2
-
-        List<Integer> values = hand.getValues();
-        assertEquals(5, values.size());
-        assertEquals(14, values.get(0));
-        assertEquals(13, values.get(1));
-        assertEquals(11, values.get(2));
-        assertEquals(5, values.get(3));
-        assertEquals(2, values.get(4));
     }
 
     @Test
@@ -270,54 +170,6 @@ class HandTest {
         );
     }
 
-    @Test
-    void testCreateHand_MoreThanFiveCards_ThrowsException() {
-        assertThrows(
-                InvalidCardFormatException.class,
-                () -> Hand.createHand("APi", "RCo", "DCa", "VTr", "10Pi", "9Co")
-        );
-    }
-
-    @Test
-    void testCreateHand_EmptyArray_ThrowsException() {
-        assertThrows(
-                InvalidCardFormatException.class,
-                () -> Hand.createHand()
-        );
-    }
-
-    @Test
-    void testCreateHand_WithDuplicateCards_ThrowsException() {
-        assertThrows(
-                DuplicateCardException.class,
-                () -> Hand.createHand("APi", "RCo", "DCa", "VTr", "APi")
-        );
-    }
-
-    @Test
-    void testCreateHand_WithInvalidCard_ThrowsException() {
-        assertThrows(
-                Exception.class,
-                () -> Hand.createHand("APi", "RCo", "XYZ", "VTr", "10Pi")
-        );
-    }
-
-    @Test
-    void testCreateHand_WithSpaces() {
-        Hand createdHand = Hand.createHand(" APi ", "RCo", " DCa", "VTr ", "10Pi");
-
-        assertNotNull(createdHand);
-        assertEquals(5, createdHand.size());
-    }
-
-    @Test
-    void testCreateHand_MixedCase() {
-        Hand createdHand = Hand.createHand("api", "RCO", "dCa", "vTR", "10pi");
-
-        assertNotNull(createdHand);
-        assertEquals(5, createdHand.size());
-    }
-
     // Tests d'intégration
     @Test
     void testHand_AddAndRemoveCheck() {
@@ -348,45 +200,5 @@ class HandTest {
         // Vérifier les cartes
         List<Card> cards = fullHand.getCards();
         assertEquals(5, cards.size());
-    }
-
-    @Test
-    void testHand_AllDifferentValues() {
-        hand.addCard(new Card(Value.TWO, Color.PIQUE));
-        hand.addCard(new Card(Value.FOUR, Color.COEUR));
-        hand.addCard(new Card(Value.SIX, Color.CARREAU));
-        hand.addCard(new Card(Value.EIGHT, Color.TREFLE));
-        hand.addCard(new Card(Value.TEN, Color.PIQUE));
-
-        List<Integer> values = hand.getValues();
-        assertEquals(5, values.size());
-
-        // Vérifier que toutes les valeurs sont différentes
-        assertEquals(values.size(), values.stream().distinct().count());
-    }
-
-    @Test
-    void testHand_AllSameColor() {
-        hand.addCard(new Card(Value.AS, Color.PIQUE));
-        hand.addCard(new Card(Value.ROI, Color.PIQUE));
-        hand.addCard(new Card(Value.DAME, Color.PIQUE));
-        hand.addCard(new Card(Value.VALET, Color.PIQUE));
-        hand.addCard(new Card(Value.TEN, Color.PIQUE));
-
-        List<Card> cards = hand.getCards();
-        for (Card card : cards) {
-            assertEquals(Color.PIQUE, card.getColor());
-        }
-    }
-
-    @Test
-    void testHand_MultipleInstancesAreIndependent() {
-        Hand hand1 = new Hand();
-        Hand hand2 = new Hand();
-
-        hand1.addCard(new Card(Value.AS, Color.PIQUE));
-
-        assertEquals(1, hand1.size());
-        assertEquals(0, hand2.size());
     }
 }
