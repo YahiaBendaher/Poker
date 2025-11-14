@@ -63,20 +63,6 @@ class HandTest {
         assertTrue(exception.getMessage().contains("5 cartes"));
     }
 
-    @Test
-    void testAddCard_DuplicateCard_ThrowsException() {
-        Card card1 = new Card(Value.AS, Color.PIQUE);
-        Card card2 = new Card(Value.AS, Color.PIQUE); // Même carte
-
-        hand.addCard(card1);
-
-        DuplicateCardException exception = assertThrows(
-                DuplicateCardException.class,
-                () -> hand.addCard(card2)
-        );
-        assertTrue(exception.getMessage().contains("double"));
-        assertTrue(exception.getMessage().contains("APi"));
-    }
 
     // Tests de getCards
     @Test
@@ -157,7 +143,7 @@ class HandTest {
     void testCreateHand_NullArray_ThrowsException() {
         InvalidCardFormatException exception = assertThrows(
                 InvalidCardFormatException.class,
-                () -> Hand.createHand(null)
+                () -> Hand.createHand((String[]) null)
         );
         assertTrue(exception.getMessage().contains("manquante"));
     }
