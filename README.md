@@ -8,40 +8,30 @@ Développer un programme en **Java** capable de **comparer deux mains de fr.pns.
 
 ---
 
-## Description du problème
+## État actuel de la livraison
 
-Le programme lit deux mains de fr.pns.poker depuis l’entrée standard et affiche le résultat :
-- **fr.pns.poker.Main gagnante** (fr.pns.poker.Main 1 ou fr.pns.poker.Main 2) ;
-- ou **égalité**, si les mains sont identiques en force.
+La livraison contient une **implémentation complète** du comparateur de mains de poker.  
+Elle permet :
 
-Chaque main contient 5 cartes issues d’un jeu standard de 52 cartes :
-- **Couleurs** : Trèfle (Tr), Carreau (Ca), Cœur (Co), Pique (Pi)  
-- **Valeurs** : 2, 3, 4, 5, 6, 7, 8, 9, 10, V, D, R, A  
+- de lire deux mains depuis l’entrée standard,
+- d’évaluer chaque main selon **toutes les règles** décrites (carte haute → brelan royal),
+- de comparer les deux mains,
+- d’afficher :
 
----
+    - **Main 1 gagne**,
+    - **Main 2 gagne**,
+    - **Égalité**,
+    - ainsi que **la raison de la victoire** (ex. : paire de 5, brelan, carte la plus élevée, etc.).
 
-## Classement des mains (de la plus faible à la plus forte)
-
-1. **Carte haute**  
-2. **Paire**  
-3. **Deux paires**  
-4. **Brelan**  
-5. **Suite**  
-6. **Couleur**  
-7. **Full**  
-8. **Carré**  
-9. **Quinte flush**  
-10. **Quinte flush royale**  
-11. **Brelan royal** (3 As)
+Les slices déclinent toutes les fonctionnalités prévues, et **tous les tests unitaires présents passent avec succès**.
 
 ---
-
 ## Exemple d’exécution
 
 ```text
-fr.pns.poker.Main 1: 2Tr 6Ca 7Ca 8Tr APi
-fr.pns.poker.Main 2: 3Tr 5Ca 9Ca DCo RCo
-Résultat: fr.pns.poker.Main 1 gagne avec carte la plus élevée (As)
+Main 1: 2Tr 6Ca 7Ca 8Tr APi
+Main 2: 3Tr 5Ca 9Ca DCo RCo
+Main 1 gagne avec carte la plus élevée (As)
 ```
 
 ---
@@ -55,16 +45,32 @@ cd dojo-fr.pns.poker-25-26-fise-25-26-fr.pns.poker-team-f-se
 ```
 
 ### 2️⃣ Compiler le code
-Depuis le dossier `src/` :
+
 ```bash
-javac fr.pns.poker.Main.java
+ javac -d out $(find src -name "*.java")
 ```
 
 ### 3️⃣ Lancer le programme
 ```bash
-java fr.pns.poker.Main
+java -cp out fr.pns.poker.Main
+```
+---
+
+##  Exécution des tests unitaires
+
+Les tests se trouvent dans `Test/` et utilisent **JUnit**.
+
+### Compiler les tests :
+```bash
+javac -cp lib/junit-platform-console-standalone-1.10.0.jar -d out @((Get-ChildItem -Recurse -Filter *.java).FullName)
 ```
 
+### Lancer les tests :
+```bash
+java -jar lib/junit-platform-console-standalone-1.10.0.jar --class-path out --scan-class-path
+```
+
+(Depuis IntelliJ : clic droit sur le dossier `test` → *Run tests*.)
 ---
 
 ## Organisation du projet
