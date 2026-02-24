@@ -4,7 +4,7 @@ Projet réalisé dans le cadre du **cours PS5 – Projet de développement (Seme
 
 ## Objectif du projet
 
-Développer un programme en **Java** capable de **comparer deux mains de fr.pns.poker** et de déterminer laquelle est la plus forte selon les règles classiques du fr.pns.poker.
+Développer un programme en **Java** capable de **comparer deux mains de poker** et de déterminer laquelle est la plus forte selon les règles classiques du poker.
 
 ---
 
